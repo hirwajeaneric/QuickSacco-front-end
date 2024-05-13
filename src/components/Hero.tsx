@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 
 const Hero = () => {
     return (
-        <div className="pt-6 pb-24  bg-blue-900">
+        <div className="pt-6 pb-24  bg-blue-950">
             <div className="container mx-auto flex flex-wrap-reverse justify-between items-center">
                 <div className="w-full md:w-1/2 flex gap-10 flex-col">
                     <h1 className="text-5xl font-bold text-white w-full md:w-4/5 text-center md:text-left">The only way to apply for your SACCO Loan and get it in just days.</h1>
