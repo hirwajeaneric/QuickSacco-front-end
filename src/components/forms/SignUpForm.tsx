@@ -29,13 +29,13 @@ const SignUpForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-4/5'>
-        <div className='flex gap-4 w-full'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full md:w-4/5'>
+        <div className='flex w-full flex-wrap justify-between'>
           <FormField 
             control={form.control}
             name='firstName'
             render={({ field }) => (
-              <FormItem className='w-full'>
+              <FormItem className='w-full md:w-[49%]'>
                 <FormLabel>First name</FormLabel>
                 <FormControl>
                   <Input placeholder="First name" {...field} />
@@ -50,7 +50,7 @@ const SignUpForm = () => {
             control={form.control}
             name='lastName'
             render={({ field }) => (
-              <FormItem className='w-full'>
+              <FormItem className='w-full md:w-[49%]'>
                 <FormLabel>Last name</FormLabel>
                 <FormControl>
                   <Input placeholder="Last name" {...field} />
