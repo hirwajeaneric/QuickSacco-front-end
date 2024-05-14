@@ -8,7 +8,7 @@ const SignIn = () => {
         <img src="/Business innovation based on alternative financial services-small.png" alt="" />
       </div>
       <div className="flex flex-col mx-auto w-full md:w-1/2">
-        <h1 className="text-3xl font-bold">Sign in to your account</h1>
+        <h1 className="text-3xl text-center md:text-start my-3 font-bold">Sign in to your account</h1>
         <SignInForm />
       </div>
     </div>

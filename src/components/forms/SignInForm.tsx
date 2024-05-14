@@ -24,7 +24,7 @@ const SignInForm = () => {
     }
   });
 
-  const { register, handleSubmit, setValue } = form;
+  const { handleSubmit } = form;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
