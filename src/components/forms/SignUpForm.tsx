@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 
 const formSchema = z.object({
-  firstName: z.string().min(2, { message: "Too short" }).max(50),
+  firstName: z.string().min(2).max(50),
   lastName: z.string().min(2).max(50),
   email: z.string().email('Invalid email'),
   password: z.string().min(2, 'Too short'),
@@ -41,9 +41,7 @@ const SignUpForm = () => {
                 <FormControl>
                   <Input placeholder="First name" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Enter your first name here
-                </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -56,9 +54,7 @@ const SignUpForm = () => {
                 <FormControl>
                   <Input placeholder="Last name" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Enter your last name here
-                </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -72,9 +68,7 @@ const SignUpForm = () => {
               <FormControl>
                 <Input placeholder="Email address" {...field} />
               </FormControl>
-              <FormDescription>
-                Enter your email here
-              </FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -87,9 +81,7 @@ const SignUpForm = () => {
               <FormControl>
                 <Input placeholder="Password" {...field} />
               </FormControl>
-              <FormDescription>
-                Enter your Password here
-              </FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
