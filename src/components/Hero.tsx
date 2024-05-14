@@ -13,7 +13,7 @@ const Hero = () => {
                     </button>
                 </div>
                 <div className="w-full md:w-1/2">
-                    <img src="/public/1111.png" className="w-3/4 mx-auto mb-10" alt="Image by pch.vector on Freepik" />
+                    <img src="/1111.png" className="w-3/4 mx-auto mb-10" alt="Image by pch.vector on Freepik" />
                 </div>
             </div>
         </div>

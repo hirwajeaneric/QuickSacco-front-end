@@ -4,6 +4,7 @@ import AboutUs from './pages/AboutUs';
 import HomeLayout from './layouts/HomeLayout';
 import SignUp from './pages/SignUp';
 import Apply from './pages/Apply';
+import SignIn from './pages/SignIn';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path='/' element={<HomeLayout showHero><Home /></HomeLayout>} />
         <Route path='/about' element={<HomeLayout><AboutUs /></HomeLayout>} />
         <Route path='/signup' element={<HomeLayout><SignUp /></HomeLayout>} />
+        <Route path='/signin' element={<HomeLayout><SignIn /></HomeLayout>} />
         <Route path='/apply' element={<HomeLayout><Apply /></HomeLayout>} />
       </Routes>
     </BrowserRouter>

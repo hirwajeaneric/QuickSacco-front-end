@@ -1,6 +1,6 @@
-import SignUpForm from "@/components/forms/SignUpForm";
+import SignInForm from "@/components/forms/SignInForm";
 
-const SignUp = () => {
+const SignIn = () => {
 
   return (
     <div className="flex w-full flex-wrap items-center justify-center">
@@ -8,11 +8,11 @@ const SignUp = () => {
         <img src="/Business innovation based on alternative financial services-small.png" alt="" />
       </div>
       <div className="flex flex-col mx-auto w-full md:w-1/2">
-        <h1 className="text-3xl font-bold">Create your account now</h1>
-        <SignUpForm/>
+        <h1 className="text-3xl font-bold">Sign in to your account</h1>
+        <SignInForm />
       </div>
     </div>
   )
 }
 
-export default SignUp
+export default SignIn

@@ -13,7 +13,7 @@ const formSchema = z.object({
   password: z.string().min(2, 'Too short'),
 });
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,38 +31,6 @@ const SignUpForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full md:w-4/5'>
-        <div className='flex w-full flex-wrap justify-between'>
-          <FormField 
-            control={form.control}
-            name='firstName'
-            render={({ field }) => (
-              <FormItem className='w-full md:w-[49%]'>
-                <FormLabel>First name</FormLabel>
-                <FormControl>
-                  <Input placeholder="First name" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Enter your first name here
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='lastName'
-            render={({ field }) => (
-              <FormItem className='w-full md:w-[49%]'>
-                <FormLabel>Last name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Last name" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Enter your last name here
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-        </div>
         <FormField
           control={form.control}
           name='email'
@@ -96,11 +64,11 @@ const SignUpForm = () => {
         <Button type='submit'>Submit</Button>
       </form>
       <div className='mt-5'>
-        {`Already has an account? `} 
-        <Link to={'/signin'} className='text-blue-600'>Login</Link>
+        {`Don't have an account? `} 
+        <Link to={'/signup'} className='text-blue-600'>Create account</Link>
       </div>
     </Form>
   )
 }
 
-export default SignUpForm;
+export default SignInForm;
