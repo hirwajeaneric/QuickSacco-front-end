@@ -10,7 +10,7 @@ type Props = {
 
 const HomeLayout = ({ children, showHero }: Props) => {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-300">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
       {showHero && <Hero />}
       <div className="container mx-auto flex-1 py-10">
