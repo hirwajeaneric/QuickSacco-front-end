@@ -4,12 +4,16 @@ import { Link } from "react-router-dom"
 
 const SecondaryMenu = () => {
   return (
-    <div className="bg-white hidden md:block">
-        <div className="container flex justify-between py-1 flex-wrap gap-1">
-          <p>Contact or connect to us via: </p>
-          <div className="flex gap-3">
-            <Link to={"mailto:info@quicksacco.com"} className="flex gap-3 items-center"><Mail /> info@quicksacco.com</Link>
-            <span className="flex gap-3 items-center"><Phone /> +(250) 780 599 859</span>
+    <div className="bg-blue-600 text-white hidden md:block py-4">
+        <div className="container flex justify-end py-1 flex-wrap gap-7">
+          <p className="text-sm">Contact or connect to us:</p>
+          <div className="flex gap-3 text-sm">
+            <Link to={"mailto:info@quicksacco.com"} className="flex gap-3 items-center">
+              <Mail className="text-sm"/> info@quicksacco.com
+            </Link>
+            <span className="flex gap-3 items-center">
+              <Phone /> +(250) 780 599 859
+            </span>
           </div>
           <div className="flex gap-3 text-xl">
             <Link to={'/'}><AiOutlineInstagram /></Link>

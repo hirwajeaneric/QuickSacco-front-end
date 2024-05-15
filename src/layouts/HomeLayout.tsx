@@ -13,7 +13,7 @@ const HomeLayout = ({ children, showHero }: Props) => {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       {showHero && <Hero />}
-      <div className="container mx-auto flex-1 py-10">
+      <div className="px-5 md:container mx-auto flex-1 py-10">
         {children}
       </div>
       <Footer />

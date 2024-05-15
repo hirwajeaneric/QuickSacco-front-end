@@ -15,9 +15,9 @@ const Header = () => {
   return (
     <>
       <SecondaryMenu />
-      <div className="bg-blue-900 sticky top-0 z-50">
+      <div className="bg-blue-600 sticky top-0 z-50">
         {/* Secondary menu at the top  */}
-        <div className="py-3 md:py-6 container mx-auto flex justify-between items-center">
+        <div className="py-2 md:py-4 px-5 md:container mx-auto flex justify-between items-center">
           {/* Logo  */}
           <Link to={'/'} className="text-3xl font-bold tracking-tight text-white">QuickSacco</Link>
 
