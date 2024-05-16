@@ -5,15 +5,16 @@ import React from "react"
 
 type Props = {
   children: React.ReactNode;
-  showHero?: boolean
+  showHero?: boolean;
+  fullWidth?: boolean;
 }
 
-const HomeLayout = ({ children, showHero }: Props) => {
+const HomeLayout = ({ children, showHero, fullWidth }: Props) => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       {showHero && <Hero />}
-      <div className="px-5 md:container mx-auto flex-1 py-10">
+      <div className={`px-5 ${fullWidth ? "fullWidth" : "md:container"} mx-auto flex-1 py-10`}>
         {children}
       </div>
       <Footer />
