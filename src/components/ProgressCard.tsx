@@ -1,6 +1,6 @@
-import { ProgressInfo } from "@/pages/Home";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ProgressInfo } from "./ProcessSection";
 
 type ProgressProps = {
     process: ProgressInfo;
