@@ -13,8 +13,8 @@ const MobileMenu = ({handleClose}: Props) => {
                     <Link to={'/'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Home</Link>
                     <Link to={'/'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Services</Link>
                     <Link to={'/about'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">About Us</Link>
-                    <Link to={'/apply'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Get started</Link>
-                    <Link to={'/signin'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Sign In</Link>
+                    <Link to={'/apply'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Apply</Link>
+                    <Link to={'/signin'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Get started</Link>
                 </span>
             </div>
         </>

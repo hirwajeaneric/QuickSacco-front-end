@@ -1,6 +1,6 @@
 const FastAndEffiscient = () => {
     return (
-        <section className="px-5 mx-auto flex-1 py-16 ">
+        <section id="benefits" className="px-5 mx-auto flex-1 py-24 ">
             <div className="md:container mx-auto flex flex-wrap justify-between items-center">
                 <div className="left w-full md:w-[49%]">
                     <img src="progress2.png" className="w-3/4 mx-auto mb-10" alt="Apply here" />
@@ -16,7 +16,7 @@ const FastAndEffiscient = () => {
                         <br />
                         We shall reach you often updating you more about the progress of your application.
                         In case we need specific documents, you will be able to get more information through email updates.
-                        <br />
+                        <br /><br />
                         You can even get more about the progress of your application throught your account.
                     </p>
                 </div>

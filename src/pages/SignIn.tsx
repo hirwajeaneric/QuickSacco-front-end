@@ -1,9 +1,11 @@
+import HelmetComponent from "@/components/HelmetComponent";
 import SignInForm from "@/components/forms/SignInForm";
 
 const SignIn = () => {
-
   return (
     <div className="flex w-full flex-wrap items-center justify-center">
+      <HelmetComponent title="Sign in to your account" />
+
       <div className="flex mx-auto w-full md:w-1/2">
         <img src="/Business innovation based on alternative financial services-small.png" alt="" />
       </div>

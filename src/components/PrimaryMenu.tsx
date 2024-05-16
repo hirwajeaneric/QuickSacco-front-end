@@ -6,10 +6,10 @@ const PrimaryMenu = () => {
             {/* Desktop menu  */}
             <div className="hidden md:block">
                 <span className="flex gap-5">
-                    <Link to={'/'} className="text-white">Home</Link>
-                    <Link to={'/'} className="text-white">Services</Link>
-                    <Link to={'/about'} className="text-white">About Us</Link>
-                    <Link to={'/apply'} className=" text-white">Get started</Link>
+                    <a href={'/'} className="text-white">Home</a>
+                    <a href={'#process'} className="text-white">Process</a>
+                    <a href={'#benefits'} className="text-white">Benefits</a>
+                    <Link to={'/apply'} className=" text-white">Apply</Link>
                 </span>
             </div>
 
