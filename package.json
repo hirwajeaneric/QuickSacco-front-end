@@ -1,7 +1,8 @@
 {
   "name": "quick-sacco-frontend",
+  "description": "Online loan application system/solution braught to you to reduce the time you spend applying form loans, filling paper works, and more.",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +10,23 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "repository": {
+    "url": "https://github.com/hirwajeaneric/QuickSacco-front-end.git"
+  },
+  "keywords": [
+    "nodejs",
+    "JavaScript",
+    "TypeScript",
+    "zod",
+    "shadcn",
+    "react-hook-form",
+    "tailwindcss",
+    "radix-ui",
+    "reactjs",
+    "react-router-dom",
+    "lucide-react",
+    "react-icons"
+  ],
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -61,5 +79,6 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
-  }
+  },
+  "author":"Jean Eric Hirwa"
 }
