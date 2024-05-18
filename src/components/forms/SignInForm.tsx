@@ -6,16 +6,24 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
 import { useState } from 'react';
+import LoadingButton from '../LoadingButton';
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(2, 'Password is required'),
 });
 
-const SignInForm = () => {
+type SignInFormData = z.infer<typeof formSchema>;
+
+type Props = {
+  onSignIn: (values: SignInFormData) => void;
+  isLoading: boolean;
+}
+
+const SignInForm = ({ onSignIn, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<SignInFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -23,15 +31,9 @@ const SignInForm = () => {
     }
   });
 
-  const { handleSubmit } = form;
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-8 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onSignIn)} className='space-y-8 w-full md:w-4/5'>
         <FormField
           control={form.control}
           name='email'
@@ -52,7 +54,7 @@ const SignInForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-              <Input type={passwordVisible ? 'text' : 'password'} placeholder="Password" {...field} />
+                <Input type={passwordVisible ? 'text' : 'password'} placeholder="Password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -64,16 +66,16 @@ const SignInForm = () => {
         </div>
 
         <div className='flex justify-between items-center'>
-          <Button type='submit'>Submit</Button>
+          {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
           <div>
             {`Don't have an account? `}
             <a href={'/signup'} className='text-blue-600'>Create account</a>
           </div>
         </div>
-          <div className='mt-5'>
-            {`Forgot your password? `}
-            <a href={'/forgotpassword'} className='text-blue-600'>Recover or reset your password</a>
-          </div>
+        <div className='mt-5'>
+          {`Forgot your password? `}
+          <a href={'/forgotpassword'} className='text-blue-600'>Recover or reset your password</a>
+        </div>
       </form>
 
     </Form>

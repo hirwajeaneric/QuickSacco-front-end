@@ -14,6 +14,7 @@ import ApplicationDetails from './pages/teacher/ApplicationDetails';
 import Success from './pages/Success';
 import NotFound from './pages/NotFound';
 import { Toaster } from 'sonner';
+import AuthCallbackPage from './pages/AuthCallbackPage';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Toaster visibleToasts={3} position='top-right' richColors />
         
         <Route path='/' element={<Home />} />
+        <Route path='/auth-callback' element={<AuthCallbackPage />} />
         <Route path='/signup' element={<HomeLayout><SignUp /></HomeLayout>} />
         <Route path='/signin' element={<HomeLayout><SignIn /></HomeLayout>} />
         <Route path='/forgotpassword' element={<HomeLayout><ForgotPassword /></HomeLayout>} />

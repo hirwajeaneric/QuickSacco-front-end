@@ -20,7 +20,7 @@ export const useSignUp = () => {
         }
     };
 
-    const { mutateAsync: signUp, isLoading, isError, isSuccess } = useMutation(SignUpRequest);
+    const { mutateAsync: signUp, isLoading, isError, isSuccess,  } = useMutation(SignUpRequest);
 
     return {
         signUp,

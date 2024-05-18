@@ -6,34 +6,40 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
 import { useState } from 'react';
+import LoadingButton from '../LoadingButton';
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
   lastName: z.string().min(2).max(50),
+  phone: z.string().min(10).max(10),
   email: z.string().email('Invalid email'),
   password: z.string().min(2, 'Too short'),
 });
 
-const SignUpForm = () => {
+type SignUpFormData = z.infer<typeof formSchema>;
+
+type Props = {
+  onSignUp: (values: SignUpFormData) => void;
+  isLoading: boolean;
+}
+
+const SignUpForm = ({ onSignUp, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<SignUpFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
+      phone: ''
     }
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-8 w-full md:w-4/5'>
         <div className='flex w-full flex-wrap justify-between'>
           <FormField 
             control={form.control}
@@ -77,6 +83,19 @@ const SignUpForm = () => {
         />
         <FormField
           control={form.control}
+          name='phone'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone number</FormLabel>
+              <FormControl>
+                <Input placeholder="Your phone number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name='password'
           render={({ field }) => (
             <FormItem>
@@ -93,7 +112,7 @@ const SignUpForm = () => {
           <label htmlFor='viewpassword' className='text-sm'> View password</label>
         </div>
 
-        <Button type='submit'>Submit</Button>
+        {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
       </form>
       <div className='mt-5'>
         {`Already has an account? `} 
