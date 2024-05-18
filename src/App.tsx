@@ -13,11 +13,14 @@ import Applications from './pages/teacher/Applications';
 import ApplicationDetails from './pages/teacher/ApplicationDetails';
 import Success from './pages/Success';
 import NotFound from './pages/NotFound';
+import { Toaster } from 'sonner';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Toaster visibleToasts={3} position='top-right' richColors />
+        
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<HomeLayout><SignUp /></HomeLayout>} />
         <Route path='/signin' element={<HomeLayout><SignIn /></HomeLayout>} />
