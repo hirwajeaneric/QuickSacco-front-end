@@ -1,5 +1,5 @@
 import HelmetComponent from "@/components/HelmetComponent";
-import ValidateOTPForm from "@/components/forms/ValidateOTPForm";
+import { ValidateOTPForm } from "@/components/forms/ValidateOTPForm";
 
 const ValidateOTP = () => {
   return (
