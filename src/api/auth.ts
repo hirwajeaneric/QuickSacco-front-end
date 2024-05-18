@@ -56,10 +56,11 @@ export const useSignIn = () => {
 };
 
 export const useGetProfileData = () => {
-    const getUserProfileRequest = async (token: string): Promise<User> => {
+    const accessToken = Cookies.get('access-token');
+    const getUserProfileRequest = async (): Promise<User> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/user`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
             }
         });

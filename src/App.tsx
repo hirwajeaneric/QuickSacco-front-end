@@ -19,8 +19,8 @@ import AuthCallbackPage from './pages/AuthCallbackPage';
 const App = () => {
   return (
     <BrowserRouter>
+      <Toaster visibleToasts={3} position='top-right' richColors />
       <Routes>
-        <Toaster visibleToasts={3} position='top-right' richColors />
         
         <Route path='/' element={<Home />} />
         <Route path='/auth-callback' element={<AuthCallbackPage />} />
