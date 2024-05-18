@@ -1,4 +1,6 @@
+import CallToAction from "@/components/CallToAction";
 import FastAndEffiscient from "@/components/FastAndEffiscient";
+import FeedBack from "@/components/FeedBack";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HelmetComponent from "@/components/HelmetComponent";
@@ -14,6 +16,8 @@ const Home = () => {
       <Hero />
       <ProcessSection />
       <FastAndEffiscient />
+      <FeedBack />
+      <CallToAction />
       <Footer />
     </div>
   )
