@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { Link } from 'react-router-dom';
+import { Checkbox } from '../ui/checkbox';
+import { useState } from 'react';
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
@@ -14,6 +15,8 @@ const formSchema = z.object({
 });
 
 const SignUpForm = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,17 +82,22 @@ const SignUpForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Password" {...field} />
+              <Input type={passwordVisible ? 'text' : 'password'} placeholder="Password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <div className='flex items-center justify-start gap-2'>
+          <Checkbox id='viewpassword' className='' onClick={() => setPasswordVisible(!passwordVisible)} />
+          <label htmlFor='viewpassword' className='text-sm'> View password</label>
+        </div>
+
         <Button type='submit'>Submit</Button>
       </form>
       <div className='mt-5'>
         {`Already has an account? `} 
-        <Link to={'/signin'} className='text-blue-600'>Login</Link>
+        <a href={'/signin'} className='text-blue-600'>Login</a>
       </div>
     </Form>
   )
