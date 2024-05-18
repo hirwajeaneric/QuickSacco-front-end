@@ -25,3 +25,7 @@ export type SignInTypes = {
     email: string;
     password: string;
 }
+
+export type OPTTypes = {
+    otp: string;
+}

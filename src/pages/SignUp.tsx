@@ -8,7 +8,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   if (isSuccess) {
-    navigate('/signin');
+    navigate('/verifyotp');
   }
 
   return (

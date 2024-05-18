@@ -18,39 +18,35 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { toast } from "@/components/ui/use-toast"
+import LoadingButton from "../LoadingButton"
 
-const FormSchema = z.object({
-  pin: z.string().min(6, {
+const formSchema = z.object({
+  otp: z.string().min(6, {
     message: "Your one-time password must be 6 characters.",
   }),
 })
 
-export function ValidateOTPForm() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+type ValidateOTPFormData = z.infer<typeof formSchema>
+
+type Props = {
+  onValidateOTP: (values: ValidateOTPFormData) => void;
+  isLoading: boolean;
+}
+
+export function ValidateOTPForm({ onValidateOTP, isLoading }: Props) {
+  const form = useForm<ValidateOTPFormData>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
-      pin: "",
+      otp: "",
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onValidateOTP)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="pin"
+          name="otp"
           render={({ field }) => (
             <FormItem>
               <FormLabel>One-Time Password</FormLabel>
@@ -76,9 +72,12 @@ export function ValidateOTPForm() {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Submit</Button>
+        {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
       </form>
+      {/* <form {...form}>
+        <p>Cick on the link to get another code</p>
+        <button type="submit">Get new token</button> 
+      </form> */}
     </Form>
   )
 }

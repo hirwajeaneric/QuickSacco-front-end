@@ -88,7 +88,7 @@ const SignUpForm = ({ onSignUp, isLoading }: Props) => {
             <FormItem>
               <FormLabel>Phone number</FormLabel>
               <FormControl>
-                <Input placeholder="Your phone number" {...field} />
+                <Input type='tel' placeholder="Your phone number" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

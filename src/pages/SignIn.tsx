@@ -4,11 +4,11 @@ import SignInForm from "@/components/forms/SignInForm";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const { signIn, isLoading, isSuccess } = useSignIn(); 
+  const { signIn, isLoading, isSuccess,  } = useSignIn(); 
   const navigate = useNavigate()
 
   if (isSuccess) {
-    navigate('/signup');
+    navigate('/');
   }
 
   return (

@@ -8,10 +8,20 @@ import {
 import { Button } from "./ui/button";
 import { File, LucideCircleUser } from "lucide-react";
 import { useGetProfileData } from "@/api/auth";
+import { useEffect } from "react";
 
 
 const PrimaryMenu = () => {
     const { currentUser, isLoading } = useGetProfileData();
+
+    useEffect(() => {
+        const getUserInfo = async() => {
+            const user = await currentUser;
+            console.log(user);
+        }
+
+        getUserInfo();
+    },[currentUser])
 
     return (
         <>
@@ -29,7 +39,7 @@ const PrimaryMenu = () => {
                 isLoading
                     ? <span>Loading...</span>
                     : <>
-                        {currentUser?._id
+                        {currentUser
                             ?
                             <Popover>
                                 <PopoverTrigger className="flex items-center gap-2">
@@ -37,7 +47,7 @@ const PrimaryMenu = () => {
                                         <AvatarImage src="https://github.com/shadcn.png" />
                                         <AvatarFallback>CN</AvatarFallback>
                                     </Avatar>
-                                    <p className="text-white">Doe</p>
+                                    <p className="text-white">{currentUser.firstName}</p>
                                 </PopoverTrigger>
                                 <PopoverContent className="flex flex-col gap-2 bg-blue-500">
                                     <Link to={'/account'} className="flex items-center justify-between px-3 py-1 rounded-sm text-white hover:bg-blue-700">
