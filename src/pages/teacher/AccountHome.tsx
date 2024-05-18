@@ -1,6 +1,10 @@
+import { Outlet } from "react-router-dom"
+
 const AccountHome = () => {
   return (
-    <div>AccountHome</div>
+    <>
+      <Outlet />
+    </>
   )
 }
 
