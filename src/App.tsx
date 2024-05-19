@@ -23,7 +23,6 @@ const App = () => {
     <BrowserRouter>
       <Toaster visibleToasts={1} position='top-right' richColors />
       <Routes>
-
         <Route path='/' element={<Home />} />
         <Route path='/auth-callback' element={<AuthCallbackPage />} />
         <Route path='/signup' element={<HomeLayout><SignUp /></HomeLayout>} />
@@ -31,7 +30,14 @@ const App = () => {
         <Route path='/forgotpassword' element={<HomeLayout><ForgotPassword /></HomeLayout>} />
         <Route path='/resetpassword' element={<HomeLayout><ResetPassword /></HomeLayout>} />
         <Route path='/verifyotp' element={<HomeLayout><ValidateOTP /></HomeLayout>} />
-        <Route path='/apply' element={<HomeLayout><Apply /></HomeLayout>} />
+        <Route 
+          path='/apply' 
+          element={
+            Cookies.get('access-token')
+              ? <HomeLayout><Apply /></HomeLayout>
+              : <Navigate replace to='/' />
+          } 
+        />
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
         <Route
           path='/account'

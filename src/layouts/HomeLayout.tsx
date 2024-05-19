@@ -6,10 +6,9 @@ import React from "react"
 type Props = {
   children: React.ReactNode;
   showHero?: boolean;
-  fullWidth?: boolean;
 }
 
-const HomeLayout = ({ children, showHero, fullWidth }: Props) => {
+const HomeLayout = ({ children, showHero }: Props) => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
