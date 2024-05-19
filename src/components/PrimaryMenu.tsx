@@ -8,19 +8,22 @@ import {
 import { Button } from "./ui/button";
 import { File, LucideCircleUser } from "lucide-react";
 import { useGetProfileData } from "@/api/auth";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { User } from "@/types";
 import Cookies from "js-cookie";
+import { Store } from "@/context/user";
 
 const PrimaryMenu = () => {
-    const [user, setUser] = useState<User>();
+    const [userInfo, setUserInfo] = useState<User>();
     const { currentUser } = useGetProfileData();
+    const { setUser } = useContext(Store);
 
     useEffect(() => {
         if (currentUser) {
-            setUser(currentUser);
+            setUser(currentUser)
+            setUserInfo(currentUser)
         }
-    }, [currentUser])
+    }, [currentUser, setUser])
 
     return (
         <>
@@ -35,7 +38,7 @@ const PrimaryMenu = () => {
             </div>
 
             <div className="hidden md:block">
-                {user?._id
+                {userInfo?._id
                     ?
                     <Popover>
                         <PopoverTrigger className="flex items-center gap-2">
@@ -43,7 +46,7 @@ const PrimaryMenu = () => {
                                 <AvatarImage src="avatar.svg" />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
-                            <p className="text-white">{user.firstName}</p>
+                            <p className="text-white">{userInfo.firstName}</p>
                         </PopoverTrigger>
                         <PopoverContent className="flex flex-col gap-2 bg-blue-500">
                             <Link to={'/account'} className="flex items-center justify-between px-3 py-1 rounded-sm text-white hover:bg-blue-700">

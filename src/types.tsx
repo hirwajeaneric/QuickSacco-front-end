@@ -15,10 +15,10 @@ export type CreateUserTypes = {
 }
 
 export type UpdateUserTypes = {
+    email?: string;
     firstName: string;
     lastName: string;
     phone: string;
-    password: string;
 }
 
 export type SignInTypes = {
