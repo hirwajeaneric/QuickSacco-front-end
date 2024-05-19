@@ -29,3 +29,70 @@ export type SignInTypes = {
 export type OPTTypes = {
     otp: string;
 }
+
+export type Application = {
+    _id: string;
+    firstName: string;   
+    lastName: string;
+    nationalId: string;
+    email: string;
+    teacherId: string;
+    phone: string;
+    dateOfBirth: Date;
+    gender: "Male" | "Female" | "Other";
+    maritalStatus: "Single" | "Married" | "Divorced" | "Widowed";
+    numberOfDependencies: number;
+    workSchool: string;
+    position: string;
+    monthlySalary: number;
+    amountRequested: number;
+    repaymentReriod: number;
+    bankAccountNumber: string;
+    proofOffEmployment: string;
+    copyOfNationalId: string;
+    loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+};
+
+export type CreateApplicationTypes = {
+    firstName: string;   
+    lastName: string;
+    nationalId: string;
+    email: string;
+    teacherId: string;
+    phone: string;
+    dateOfBirth: Date;
+    gender: "Male" | "Female" | "Other";
+    maritalStatus: "Single" | "Married" | "Divorced" | "Widowed";
+    numberOfDependencies: number;
+    workSchool: string;
+    position: string;
+    monthlySalary: number;
+    amountRequested: number;
+    repaymentReriod: number;
+    bankAccountNumber: string;
+    proofOffEmployment: string;
+    copyOfNationalId: string;
+    loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+};
+
+export type UpdateApplicationTypes = {
+    firstName: string;   
+    lastName: string;
+    nationalId: string;
+    email: string;
+    teacherId: string;
+    phone: string;
+    dateOfBirth: Date;
+    gender: "Male" | "Female" | "Other";
+    maritalStatus: "Single" | "Married" | "Divorced" | "Widowed";
+    numberOfDependencies: number;
+    workSchool: string;
+    position: string;
+    monthlySalary: number;
+    amountRequested: number;
+    repaymentReriod: number;
+    bankAccountNumber: string;
+    proofOffEmployment: string;
+    copyOfNationalId: string;
+    loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+};
