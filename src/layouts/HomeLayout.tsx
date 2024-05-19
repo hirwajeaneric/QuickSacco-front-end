@@ -14,7 +14,7 @@ const HomeLayout = ({ children, showHero, fullWidth }: Props) => {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       {showHero && <Hero />}
-      <div className={`px-5 ${fullWidth ? "fullWidth" : "md:container"} mx-auto flex-1 py-10`}>
+      <div className={`fullWidth md:container mx-auto flex-1 py-10`}>
         {children}
       </div>
       <Footer />

@@ -1,14 +1,12 @@
 import { useSignIn } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
 import SignInForm from "@/components/forms/SignInForm";
-import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { signIn, isLoading, isSuccess,  } = useSignIn(); 
-  const navigate = useNavigate()
 
   if (isSuccess) {
-    navigate('/');
+    window.location.replace('/');
   }
 
   return (
