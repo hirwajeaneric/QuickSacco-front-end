@@ -17,6 +17,7 @@ import { Toaster } from 'sonner';
 import AuthCallbackPage from './pages/AuthCallbackPage';
 
 const App = () => {
+  
   return (
     <BrowserRouter>
       <Toaster visibleToasts={1} position='top-right' richColors />
@@ -31,12 +32,12 @@ const App = () => {
         <Route path='/verifyotp' element={<HomeLayout><ValidateOTP /></HomeLayout>} />
         <Route path='/apply' element={<HomeLayout><Apply /></HomeLayout>} />
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
-        <Route path='/notfound' element={<HomeLayout><NotFound /></HomeLayout>} />
         <Route path='/account' element={<HomeLayout><AccountHome /></HomeLayout>}>
           <Route path='' element={<Profile />} />
           <Route path='applications' element={<Applications />} />
           <Route path='application/:id' element={<ApplicationDetails />} />
         </Route>
+        <Route path='*' element={<HomeLayout><NotFound /></HomeLayout>} />
       </Routes>
     </BrowserRouter>
   )

@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import Cookies from "js-cookie";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const environment = import.meta.VITE_ENVIRONMENT;
+const environment = import.meta.env.VITE_ENVIRONMENT;
 
 export const useSignUp = () => {
     const SignUpRequest = async (user: CreateUserTypes) => {
@@ -137,28 +137,24 @@ export const useRegenerateOTP = () => {
 
 export const useGetProfileData = () => {
     const accessToken = Cookies.get('access-token');
+    
     const getUserProfileRequest = async (): Promise<User> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/user`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
             }
         });
 
         const responseData = await response.json();
-
+        
         if (!response.ok) {
             throw new Error(responseData.message);
         }
 
-        return response.json();
+        return responseData;
     };
 
-    const { data: currentUser, isLoading, error } = useQuery("userInfo", () => getUserProfileRequest);
-
-    if (error) {
-        toast.error(error.toString());
-    }
+    const { data: currentUser, isLoading } = useQuery("userInfo", () => getUserProfileRequest());
 
     return { currentUser, isLoading }
 };

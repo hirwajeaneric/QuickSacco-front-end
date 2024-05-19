@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 type Props = {
     handleClose: () => void
@@ -14,8 +15,16 @@ const MobileMenu = ({ handleClose }: Props) => {
                     <a href={'#process'} onClick={handleClose} className="text-white">Process</a>
                     <a href={'#benefits'} onClick={handleClose} className="text-white">Benefits</a>
                     <Link to={'/apply'} onClick={handleClose} className=" text-white">Get Started</Link>
-                    
-                    <Link to={'/signin'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Sign In</Link>
+
+                    {Cookies.get('access-token')
+                        ?
+                        <>
+                            <a href={'/account'} onClick={handleClose} className="text-white">Profile</a>
+                            <a href={'/account/applications'} onClick={handleClose} className="text-white">Applications</a>
+                        </>
+                        :
+                        <Link to={'/signin'} onClick={handleClose} className="text-white py-2 hover:bg-blue-500 focus:bg-blue-500">Sign In</Link>
+                    }
                 </span>
             </div>
         </>
