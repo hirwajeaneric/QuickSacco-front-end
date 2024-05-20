@@ -1,8 +1,14 @@
+import { useForgotPassword } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
 import ForgotPasswordForm from "@/components/forms/ForgotPasswordForm";
 
 const ForgotPassword = () => {
-  // const {} = 
+  const { forgotPassword, isLoading, isSuccess } = useForgotPassword();
+
+  if (isSuccess) {
+    window.location.replace('/signin');
+  }
+
   return (
     <div className="flex w-full flex-wrap items-center justify-center">
       <HelmetComponent title="Forgot Password" />
@@ -12,7 +18,11 @@ const ForgotPassword = () => {
       </div>
       <div className="flex flex-col mx-auto w-full md:w-1/2">
         <h1 className="text-3xl text-center md:text-start my-3 font-bold">Forgot your password?</h1>
-        <ForgotPasswordForm />
+        
+        <ForgotPasswordForm 
+          onForgotPassword={forgotPassword} 
+          isLoading={isLoading} 
+        />
       </div>
     </div>
   )

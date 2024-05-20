@@ -6,30 +6,32 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { Checkbox } from '../ui/checkbox';
+import LoadingButton from '../LoadingButton';
 
 const formSchema = z.object({
-  password: z.string().min(2, 'Too short'),
+  password: z.string().min(2, 'Invalid password')
 });
 
-const ResetPasswordForm = () => {
+export type ResetPasswordFormData = z.infer<typeof formSchema>;
+
+type Props = {
+  onResetPassword: (values: ResetPasswordFormData) => void;
+  isLoading: boolean;
+}
+
+const ResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ResetPasswordFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       password: '',
     }
   });
 
-  const { handleSubmit } = form;
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-8 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onResetPassword)} className='space-y-8 w-full md:w-4/5'>
         <FormField
           control={form.control}
           name='password'
@@ -49,7 +51,7 @@ const ResetPasswordForm = () => {
         </div>
 
 
-        <Button type='submit'>Submit</Button>
+        {isLoading ? <LoadingButton /> : <Button type='submit' className='bg-orange-500'>Submit</Button>}
       </form>
       <div className='mt-5'>
         <a href={'/'} className='text-blue-600'>Go back to home</a>

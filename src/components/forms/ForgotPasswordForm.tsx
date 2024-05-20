@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import LoadingButton from '../LoadingButton';
 
 const formSchema = z.object({
   email: z.string().email()

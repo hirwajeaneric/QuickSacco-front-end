@@ -8,6 +8,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useSubmitApplication = () => {
     const submitApplicationRequest = async (application: ApplicationFormData) => {
+        console.log(application);
+        
         const response = await fetch(`${API_BASE_URL}/api/v1/application/add`, {
             method: 'POST',
             headers: {

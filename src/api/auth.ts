@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import Cookies from "js-cookie";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const environment = import.meta.env.VITE_ENVIRONMENT;
+const environment = import.meta.env. VITE_ENVIRONMENT;
 
 export const useSignUp = () => {
     const SignUpRequest = async (user: CreateUserTypes) => {
@@ -105,7 +105,7 @@ export const useForgotPassword = () => {
 };
 
 export const useResetPassword = () => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = Cookies.get("reset-token");
 
     const ResetPasswordRequest = async (user: { password: string }) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/resetPassword`, {
