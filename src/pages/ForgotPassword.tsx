@@ -2,6 +2,7 @@ import HelmetComponent from "@/components/HelmetComponent";
 import ForgotPasswordForm from "@/components/forms/ForgotPasswordForm";
 
 const ForgotPassword = () => {
+  // const {} = 
   return (
     <div className="flex w-full flex-wrap items-center justify-center">
       <HelmetComponent title="Forgot Password" />

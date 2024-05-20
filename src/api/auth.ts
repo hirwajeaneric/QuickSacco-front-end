@@ -73,6 +73,71 @@ export const useSignIn = () => {
     }
 };
 
+export const useForgotPassword = () => {
+    const ForgotPasswordRequest = async (user: { email: string }) => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/forgotPassword`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user),
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+    };
+
+    const { mutateAsync: forgotPassword, isLoading, isError, isSuccess, error } = useMutation(ForgotPasswordRequest);
+
+    if (error) {
+        toast.error(error.toString());
+    }
+
+    return {
+        forgotPassword,
+        isLoading,
+        isError,
+        isSuccess
+    }
+};
+
+export const useResetPassword = () => {
+    const accessToken = Cookies.get('access-token');
+
+    const ResetPasswordRequest = async (user: { password: string }) => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/resetPassword`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(user),
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+    };
+
+    const { mutateAsync: resetPassword, isLoading, isError, isSuccess, error } = useMutation(ResetPasswordRequest);
+
+    if (error) {
+        toast.error(error.toString());
+    }
+
+    return {
+        resetPassword,
+        isLoading,
+        isError,
+        isSuccess
+    }
+};
+
 export const useValidateOTP = () => {
     const SignInRequest = async (data: OPTTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/verify`, {

@@ -5,6 +5,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import LoadingButton from '../LoadingButton';
+import { Application } from '@/types';
 
 const formSchema =  z.object({
     firstName: z.string().trim().min(1, 'First name is required').max(255, 'First name is too long'),
@@ -31,34 +32,20 @@ const formSchema =  z.object({
 export type ApplicationFormData = z.infer<typeof formSchema>;
 
 type Props = {
+    currentApplication: Application;
     onSave: (ApplicationData: ApplicationFormData) => void;
     isLoading: boolean;
 };
 
-const AddApplicationForm = ({ onSave, isLoading }: Props) => {
+const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props) => {
     const form = useForm<ApplicationFormData>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            firstName: '',
-            lastName: '',
-            nationalId: '',
-            email: '',
-            teacherId: '',
-            phone: '',
-            dateOfBirth: new Date(),
-            gender: 'Other',
-            maritalStatus: 'Single',
-            numberOfDependencies: 0,
-            workSchool: '',
-            position: '',
-            monthlySalary: 0,
-            amountRequested: 0,
-            repaymentReriod: 0,
-            bankAccountNumber: '',
-            proofOffEmployment: '',
-            copyOfNationalId: '',
-        },
+        defaultValues: currentApplication,
     });
+
+    // useEffect(() => {
+    //     form.reset(currentApplication);
+    // }, [currentApplication, form])
 
     return (
         <Form {...form}>
@@ -127,4 +114,4 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
     )
 }
 
-export default AddApplicationForm
+export default UpdateApplicationForm

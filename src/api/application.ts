@@ -1,12 +1,13 @@
 import { useMutation, useQuery } from 'react-query';
-import { CreateApplicationTypes, UpdateApplicationTypes, Application } from "@/types";
+import { UpdateApplicationTypes, Application } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
+import { ApplicationFormData } from '@/components/forms/AddApplicationForm';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const useSignUp = () => {
-    const SignUpRequest = async (application: CreateApplicationTypes) => {
+export const useSubmitApplication = () => {
+    const submitApplicationRequest = async (application: ApplicationFormData) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/add`, {
             method: 'POST',
             headers: {
@@ -22,16 +23,15 @@ export const useSignUp = () => {
         }
     };
 
-    const { mutateAsync: signUp, isLoading, isError, isSuccess, error } = useMutation(SignUpRequest);
+    const { mutateAsync: submitApplication, isLoading, isSuccess, error } = useMutation(submitApplicationRequest);
 
     if (error) {
         toast.error(error.toString());
     }
 
     return {
-        signUp,
+        submitApplication,
         isLoading,
-        isError,
         isSuccess
     }
 };
@@ -39,7 +39,7 @@ export const useSignUp = () => {
 export const useGetApplicationsData = () => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationProfileRequest = async (): Promise<Application> => {
+    const getApplicationRequest = async (): Promise<Application> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findByUser`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -55,13 +55,13 @@ export const useGetApplicationsData = () => {
         return responseData;
     };
 
-    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationProfileRequest());
+    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest());
 
     return { currentApplication, isLoading }
 };
 
 export const useUpdateApplication = () => {
-    const updateApplicationApplicationRequest = async (application: UpdateApplicationTypes) => {
+    const updateApplicationRequest = async (application: UpdateApplicationTypes) => {
         const accessToken = Cookies.get('access-token');
         const response = await fetch(`${API_BASE_URL}/api/v1/application/update`, {
             method: 'PUT',
@@ -79,7 +79,7 @@ export const useUpdateApplication = () => {
         }
     }
 
-    const { mutateAsync: updateApplication, isLoading, isSuccess, error, reset } = useMutation(updateApplicationApplicationRequest);
+    const { mutateAsync: updateApplication, isLoading, isSuccess, error, reset } = useMutation(updateApplicationRequest);
 
     if (isSuccess) {
         toast.success("Application profile updated!");

@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <section className="flex flex-col gap-4">
       <div>
-        <h2 className='text-2xl font-bold'> User Profile Form</h2>
+        <h2 className='text-2xl font-bold'>Profile</h2>
         <UserProfileForm 
           currentUser={userContext.user}
           onSave={updateAccount}

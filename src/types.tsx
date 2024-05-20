@@ -72,7 +72,6 @@ export type CreateApplicationTypes = {
     bankAccountNumber: string;
     proofOffEmployment: string;
     copyOfNationalId: string;
-    loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
 };
 
 export type UpdateApplicationTypes = {
