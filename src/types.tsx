@@ -46,6 +46,7 @@ export type Application = {
     position: string;
     monthlySalary: number;
     amountRequested: number;
+    amountToPayPerMonth: number;
     repaymentReriod: number;
     bankAccountNumber: string;
     proofOffEmployment: string;
@@ -68,6 +69,7 @@ export type CreateApplicationTypes = {
     position: string;
     monthlySalary: number;
     amountRequested: number;
+    amountToPayPerMonth: number;
     repaymentReriod: number;
     bankAccountNumber: string;
     proofOffEmployment: string;
@@ -91,6 +93,7 @@ export type UpdateApplicationTypes = {
     amountRequested: number;
     repaymentReriod: number;
     bankAccountNumber: string;
+    amountToPayPerMonth: string;
     proofOffEmployment: string;
     copyOfNationalId: string;
     loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";

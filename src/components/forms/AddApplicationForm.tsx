@@ -39,6 +39,7 @@ const formSchema = z.object({
         required_error: "Position is required"
     }).trim(),
     monthlySalary: z.number().positive('Monthly salary must be a positive number'),
+    amountToPayPerMonth: z.number().positive('Monthly payment must be a positive number'),
     amountRequested: z.number().positive('Amount requested must be a positive number'),
     repaymentPeriod: z.number().positive('Repayment period must be a positive number'),
     bankAccountNumber: z.string({
@@ -78,6 +79,7 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
             position: '',
             monthlySalary: 0,
             amountRequested: 0,
+            amountToPayPerMonth: 0,
             repaymentPeriod: 2,
             bankAccountNumber: '',
             proofOfEmployment: '',
