@@ -16,16 +16,16 @@ const formSchema = z.object({
 });
 
 // Determining the type of our form data by infering it from the zod schema 
-type UserFormData = z.infer<typeof formSchema>;
+type AdminFormData = z.infer<typeof formSchema>;
 
 type Props = {
     currentUser: User;
-    onSave: (UserProfileData: UserFormData) => void;
+    onSave: (AdminProfileData: AdminFormData) => void;
     isLoading: boolean;
 };
 
-const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
-    const form = useForm<UserFormData>({
+const AdminProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
+    const form = useForm<AdminFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: currentUser,
     });
@@ -36,7 +36,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSave)} className='space-y-4 bg-gray-50 rounded-lg md:p-10'>
+            <form onSubmit={form.handleSubmit(onSave)} className='space-y-4 bg-white rounded-lg md:p-10'>
                 <FormDescription>
                     View and change your profile information here
                 </FormDescription>
@@ -105,4 +105,4 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
     )
 }
 
-export default UserProfileForm
+export default AdminProfileForm

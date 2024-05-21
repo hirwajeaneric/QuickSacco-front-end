@@ -31,6 +31,8 @@ import AdminSignUp from './pages/admin/auth/SignUp';
 import AdminForgotPassword from './pages/admin/auth/ForgotPassword';
 import AdminResetPassword from './pages/admin/auth/ResetPassword';
 import AdminVerifyOTP from './pages/admin/auth/ValidateOTP';
+import AdminDashboardHome from './pages/admin/dashboard/Home';
+import AdminProfile from './pages/admin/dashboard/Profile';
 
 const App = () => {
 
@@ -79,10 +81,13 @@ const App = () => {
             <Route path='forgotpassword' element={<AdminForgotPassword />} />
           </Route>
           <Route path='' element={<AdminDashboard />}>
+            <Route path='' element={<AdminDashboardHome />} />
+            <Route path='home' element={<AdminDashboardHome />} />
             <Route path='teachers' element={<Teachers />} />
             <Route path='managers' element={<Managers />} />
             <Route path='managers/add' element={<AddManager />} />
             <Route path='managers/:managerId' element={<ManagerDetails />} />
+            <Route path='profile' element={<AdminProfile />} />
           </Route>
         </Route>
         <Route path='*' element={<HomeLayout><NotFound /></HomeLayout>} />
