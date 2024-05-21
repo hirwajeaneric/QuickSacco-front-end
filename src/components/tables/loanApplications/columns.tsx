@@ -39,16 +39,14 @@ export const columns: ColumnDef<Application>[] = [
     },
     {
         accessorKey: "loanStatus",
+        header: "Status",
+    },
+    {
+        accessorKey: "email",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Loan Status" />
+            <DataTableColumnHeader column={column} title="Email" />
         )
     },
-    // {
-    //     accessorKey: "email",
-    //     header: ({ column }) => (
-    //         <DataTableColumnHeader column={column} title="Email" />
-    //     )
-    // },
     {
         accessorKey: "amountRequested",
         header: () => <div className="text-right">Amount Requested</div>,
@@ -88,47 +86,47 @@ export const columns: ColumnDef<Application>[] = [
             return <div className="text-right font-medium">{formatted}</div>
         },
     },
-    // {
-    //     accessorKey: "firstName",
-    //     header: "First Name",
-    // },
-    // {
-    //     accessorKey: "lastName",
-    //     header: "Last Name",
-    // },
-    // {
-    //     accessorKey: "nationalId",
-    //     header: "National ID",
-    // },
-    // {
-    //     accessorKey: "teacherId",
-    //     header: "Teacher ID",
-    // },
-    // {
-    //     accessorKey: "phone",
-    //     header: "Phone",
-    // },
+    {
+        accessorKey: "firstName",
+        header: "First Name",
+    },
+    {
+        accessorKey: "lastName",
+        header: "Last Name",
+    },
+    {
+        accessorKey: "nationalId",
+        header: "National ID",
+    },
+    {
+        accessorKey: "teacherId",
+        header: "Teacher ID",
+    },
+    {
+        accessorKey: "phone",
+        header: "Phone",
+    },
     // {
     //   accessorKey: "dateOfBirth",
     //   header: "Date of Birth",
     //   cell: info => new Date(info.getValue()).toLocaleDateString(), // Format the date
     // },
-    // {
-    //     accessorKey: "gender",
-    //     header: "Gender",
-    // },
-    // {
-    //     accessorKey: "maritalStatus",
-    //     header: "Marital Status",
-    // },
-    // {
-    //     accessorKey: "numberOfDependencies",
-    //     header: "Number of Dependencies",
-    // },
-    // {
-    //     accessorKey: "workSchool",
-    //     header: "Work School",
-    // },
+    {
+        accessorKey: "gender",
+        header: "Gender",
+    },
+    {
+        accessorKey: "maritalStatus",
+        header: "Marital Status",
+    },
+    {
+        accessorKey: "numberOfDependencies",
+        header: "Number of Dependencies",
+    },
+    {
+        accessorKey: "workSchool",
+        header: "Work School",
+    },
     {
         accessorKey: "position",
         header: "Position",
