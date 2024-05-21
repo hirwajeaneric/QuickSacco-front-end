@@ -16,6 +16,7 @@ import NotFound from './pages/NotFound';
 import { Toaster } from 'sonner';
 import AuthCallbackPage from './pages/AuthCallbackPage';
 import Cookies from 'js-cookie';
+import UpdateApplication from './pages/teacher/UpdateApplication';
 
 const App = () => {
 
@@ -50,6 +51,7 @@ const App = () => {
           <Route path='' element={<Profile />} />
           <Route path='applications' element={<Applications />} />
           <Route path='application/:id' element={<ApplicationDetails />} />
+          <Route path='application/update/:id' element={<UpdateApplication />} />
         </Route>
         <Route path='*' element={<HomeLayout><NotFound /></HomeLayout>} />
       </Routes>
