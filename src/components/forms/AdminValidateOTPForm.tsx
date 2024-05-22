@@ -43,7 +43,7 @@ export function AdminValidateOTPForm({ onValidateOTP, isLoading }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onValidateOTP)} className="space-y-6 w-full">
+      <form onSubmit={form.handleSubmit(onValidateOTP)} className="space-y-2 w-full">
         <FormField
           control={form.control}
           name="otp"

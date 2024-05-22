@@ -28,7 +28,7 @@ const AdminForgotPasswordForm = ({ onForgotPassword, isLoading }: Props ) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onForgotPassword)} className='space-y-8 w-full'>
+      <form onSubmit={form.handleSubmit(onForgotPassword)} className='space-y-2 w-full'>
         <FormField
           control={form.control}
           name='email'

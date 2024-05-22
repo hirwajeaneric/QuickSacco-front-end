@@ -98,7 +98,7 @@ const DashBoardSideMenuBar = () => {
                 </div>
             </div>
 
-            <div className={`${isVisible ? 'flex' : 'hidden'} h-screen flex-1 flex-col justify-between border-e bg-blue-950`}>
+            <div className={` hidden md:${isVisible ? 'flex' : 'hidden'} h-screen flex-1 flex-col justify-between border-e bg-blue-950`}>
                 <div className="px-4 py-4">
                     <Link to={'/'} className="text-3xl font-bold tracking-tight text-white">QuickSacco</Link>
                     <ul className="mt-6 space-y-1">

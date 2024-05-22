@@ -31,7 +31,7 @@ const AdminResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onResetPassword)} className='space-y-8 w-full'>
+      <form onSubmit={form.handleSubmit(onResetPassword)} className='space-y-2 w-full'>
         <FormField
           control={form.control}
           name='password'

@@ -39,7 +39,7 @@ const AdminSignUpForm = ({ onSignUp, isLoading }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-8 w-full'>
+      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-2 w-full'>
         <div className='flex w-full flex-wrap justify-between'>
           <FormField 
             control={form.control}

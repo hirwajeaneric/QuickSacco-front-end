@@ -89,7 +89,7 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSave)} className='space-y-4 bg-gray-50 rounded-lg p-5 md:p-10'>
+            <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-10'>
                 <FormDescription>
                     View and change your profile information here
                 </FormDescription>

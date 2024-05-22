@@ -36,7 +36,7 @@ const AdminProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSave)} className='space-y-4 bg-white rounded-lg md:p-10'>
+            <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-white rounded-lg md:p-10'>
                 <FormDescription>
                     View and change your profile information here
                 </FormDescription>

@@ -39,7 +39,7 @@ const SignUpForm = ({ onSignUp, isLoading }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-8 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-2 w-full md:w-4/5'>
         <div className='flex w-full flex-wrap justify-between'>
           <FormField 
             control={form.control}

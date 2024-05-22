@@ -4,9 +4,8 @@ import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { Checkbox } from '../ui/checkbox';
-import { useState } from 'react';
 import LoadingButton from '../LoadingButton';
+import { generateRandomPassword } from '@/utils/generateRandomPassword';
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
@@ -24,24 +23,26 @@ type Props = {
   isLoading: boolean;
 }
 
-const AddManagerForm = ({ onSignUp, isLoading }: Props) => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
+
+const AddManagerForm = ({ onSignUp, isLoading }: Props) => {
   const form = useForm<SignUpFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
+      password: generateRandomPassword(),
       phone: '',
       role: 'Manager'
     }
   });
 
+
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-8 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onSignUp)} className='space-y-2 w-full'>
         <div className='flex w-full flex-wrap justify-between'>
           <FormField
             control={form.control}
@@ -70,44 +71,37 @@ const AddManagerForm = ({ onSignUp, isLoading }: Props) => {
             )}
           />
         </div>
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email name</FormLabel>
-              <FormControl>
-                <Input placeholder="Email address" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='phone'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone number</FormLabel>
-              <FormControl>
-                <Input type='tel' placeholder="Your phone number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <div className='flex items-center justify-start gap-2'>
-          <Checkbox id='viewpassword' className='' onClick={() => setPasswordVisible(!passwordVisible)} />
-          <label htmlFor='viewpassword' className='text-sm'> View password</label>
+        <div className='flex w-full flex-wrap justify-between'>
+          <FormField
+            control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem  className='w-full md:w-[49%]'>
+                <FormLabel>Email name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='phone'
+            render={({ field }) => (
+              <FormItem className='w-full md:w-[49%]'>
+                <FormLabel>Phone number</FormLabel>
+                <FormControl>
+                  <Input type='tel' placeholder="Your phone number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
       </form>
-      <div className='mt-5'>
-        {`Already has an account? `}
-        <a href={'/signin'} className='text-blue-600'>Login</a>
-      </div>
     </Form>
   )
 }
