@@ -12,6 +12,7 @@ export type CreateUserTypes = {
     lastName: string;
     phone: string;
     password: string;
+    role: string;
 }
 
 export type UpdateUserTypes = {

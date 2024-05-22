@@ -34,11 +34,31 @@ import AdminVerifyOTP from './pages/admin/auth/ValidateOTP';
 import AdminDashboardHome from './pages/admin/dashboard/Home';
 import AdminProfile from './pages/admin/dashboard/Profile';
 
+// Manager pages
+import Manager from './pages/manager/Manager';
+import ManagerAuth from './pages/manager/Auth';
+import Loans from './pages/manager/dashboard/Loans';
+import LoanDetails from './pages/manager/dashboard/LoanDetails';
+import ManagerSignIn from './pages/manager/auth/SignIn';
+import ManagerSignUp from './pages/manager/auth/SignUp';
+import ManagerForgotPassword from './pages/manager/auth/ForgotPassword';
+import ManagerResetPassword from './pages/manager/auth/ResetPassword';
+import ManagerVerifyOTP from './pages/manager/auth/ValidateOTP';
+import ManagerDashboardHome from './pages/manager/dashboard/Home';
+import ManagerProfile from './pages/manager/dashboard/Profile';
+import ManagerDashboard from './pages/manager/ManagerDashboard';
+
 const App = () => {
 
   return (
     <BrowserRouter>
       <Toaster visibleToasts={1} position='top-right' richColors />
+
+      {/**
+       * 
+       *  Teacher  
+       * 
+       * */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/auth-callback' element={<AuthCallbackPage />} />
@@ -70,7 +90,35 @@ const App = () => {
           <Route path='application/update/:id' element={<UpdateApplication />} />
         </Route>
 
-        {/* Admin routes  */}
+        {/** 
+         * 
+         * Admin routes  
+         * 
+         * */}
+        <Route path='/manager' element={<Manager />}>
+          <Route path='auth' element={<ManagerAuth />}>
+            <Route path='' element={<ManagerSignIn />} />
+            <Route path='signin' element={<ManagerSignIn />} />
+            <Route path='signup' element={<ManagerSignUp />} />
+            <Route path='verifyotp' element={<ManagerVerifyOTP />} />
+            <Route path='resetpassword' element={<ManagerResetPassword />} />
+            <Route path='forgotpassword' element={<ManagerForgotPassword />} />
+          </Route>
+          <Route path='' element={<ManagerDashboard />}>
+            <Route path='' element={<ManagerDashboardHome />} />
+            <Route path='home' element={<ManagerDashboardHome />} />
+            <Route path='teachers' element={<Teachers />} />
+            <Route path='loans' element={<Loans />} />
+            <Route path='loan/:id' element={<LoanDetails />} />
+            <Route path='profile' element={<ManagerProfile />} />
+          </Route>
+        </Route>
+
+        {/**
+         * 
+         * Admin routes  
+         * 
+         * */}
         <Route path='/admin' element={<Admin />}>
           <Route path='auth' element={<Auth />}>
             <Route path='' element={<AdminSignIn />} />

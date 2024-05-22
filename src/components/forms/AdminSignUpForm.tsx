@@ -14,6 +14,7 @@ const formSchema = z.object({
   phone: z.string().min(10).max(10),
   email: z.string().email('Invalid email'),
   password: z.string().min(2, 'Too short'),
+  role: z.string()
 });
 
 type SignUpFormData = z.infer<typeof formSchema>;
@@ -33,7 +34,8 @@ const AdminSignUpForm = ({ onSignUp, isLoading }: Props) => {
       lastName: '',
       email: '',
       password: '',
-      phone: ''
+      phone: '',
+      role: 'Admin'
     }
   });
 
