@@ -2,13 +2,19 @@ import { LogOut, Menu, Users } from "lucide-react"
 import GeneralIcon from "./GeneralIcon"
 import ManagersIcon from "./Managers"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import React, { useState } from "react"
 
 const DashBoardSideMenuBar = () => {
     const [isVisible, setIsVisible] = useState(true);
 
     const toggleSideBar = () => {
         setIsVisible(!isVisible);
+    }
+
+    const logout = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("Logged out");
+
     }
 
     return (
@@ -24,56 +30,37 @@ const DashBoardSideMenuBar = () => {
                     <div className="">
                         <div className="px-2">
                             <div className="py-4">
-                                <a
-                                    href="/admin"
-                                    className="t group relative flex justify-center rounded bg-blue-50 px-2 py-1.5 text-blue-700"
-                                >
+                                <Link to="/admin" className="t group relative flex justify-center rounded bg-blue-50 px-2 py-1.5 text-blue-700">
                                     <GeneralIcon />
-                                    <span
-                                        className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-                                    >
+                                    <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                         General
                                     </span>
-                                </a>
+                                </Link>
                             </div>
 
                             <ul className="space-y-1 pt-4">
                                 <li>
-                                    <a
-                                        href="/admin/managers"
-                                        className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700"
-                                    >
+                                    <Link to="/admin/managers" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                                         <ManagersIcon />
-                                        <span
-                                            className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-                                        >
+                                        <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                             Managers
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li>
-                                    <a
-                                        href="/admin/teachers"
-                                        className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700"
-                                    >
+                                    <Link to="/admin/teachers" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                                         <Users color="whitesmoke" size={18} />
-
-                                        <span
-                                            className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-                                        >
+                                        <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                             Teachers
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
 
 
 
                                 <li>
-                                    <a
-                                        href="/admin/profile"
-                                        className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700"
-                                    >
+                                    <Link to="/admin/profile" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="size-5 opacity-75"
@@ -89,12 +76,10 @@ const DashBoardSideMenuBar = () => {
                                             />
                                         </svg>
 
-                                        <span
-                                            className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-                                        >
+                                        <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                             Account
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -102,15 +87,10 @@ const DashBoardSideMenuBar = () => {
                 </div>
 
                 <div className="sticky inset-x-0 bottom-0 bg-blue-950 p-2">
-                    <form action="#">
-                        <button
-                            type="submit"
-                            className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-slate-200 hover:bg-gray-50 hover:text-gray-700"
-                        >
+                    <form onSubmit={logout}>
+                        <button type="button" className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                             <LogOut />
-                            <span
-                                className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-                            >
+                            <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                 Logout
                             </span>
                         </button>
@@ -123,9 +103,9 @@ const DashBoardSideMenuBar = () => {
                     <Link to={'/'} className="text-3xl font-bold tracking-tight text-white">QuickSacco</Link>
                     <ul className="mt-6 space-y-1">
                         <li>
-                            <a href="/admin" className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                            <Link to="/admin" className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
                                 General
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
@@ -153,40 +133,29 @@ const DashBoardSideMenuBar = () => {
 
                                 <ul className="mt-2 space-y-1 px-4">
                                     <li>
-                                        <a
-                                            href="/admin/managers"
-                                            className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700"
-                                        >
+                                        <Link to="/admin/managers" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                             All
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     <li>
-                                        <a
-                                            href="/admin/managers/add"
-                                            className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700"
-                                        >
+                                        <Link to="/admin/managers/add" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                             New
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </details>
                         </li>
 
                         <li>
-                            <a
-                                href="/admin/teachers"
-                                className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700"
-                            >
+                            <Link to="/admin/teachers" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                 Teachers
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
                             <details className="group [&_summary::-webkit-details-marker]:hidden">
-                                <summary
-                                    className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-slate-200 hover:bg-gray-100 hover:text-gray-700"
-                                >
+                                <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                     <span className="text-sm font-medium"> Account </span>
 
                                     <span className="shrink-0 transition duration-300 group-open:-rotate-180">
@@ -207,20 +176,14 @@ const DashBoardSideMenuBar = () => {
 
                                 <ul className="mt-2 space-y-1 px-4">
                                     <li>
-                                        <a
-                                            href="/admin/profile"
-                                            className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700"
-                                        >
+                                        <Link to="/admin/profile" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                             Profile
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     <li>
-                                        <form action="#">
-                                            <button
-                                                type="submit"
-                                                className="w-full rounded-lg px-4 py-2 text-sm font-medium text-slate-200 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                                            >
+                                        <form onSubmit={logout}>
+                                            <button type="submit" className="w-full rounded-lg px-4 py-2 text-sm font-medium text-slate-200 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700">
                                                 Logout
                                             </button>
                                         </form>

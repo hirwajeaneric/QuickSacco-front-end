@@ -103,10 +103,10 @@ export const columns: ColumnDef<User>[] = [
     //     accessorKey: "teacherId",
     //     header: "Teacher ID",
     // },
-    // {
-    //     accessorKey: "phone",
-    //     header: "Phone",
-    // },
+    {
+        accessorKey: "phone",
+        header: "Phone",
+    },
     // {
     //   accessorKey: "dateOfBirth",
     //   header: "Date of Birth",
@@ -128,10 +128,10 @@ export const columns: ColumnDef<User>[] = [
     //     accessorKey: "workSchool",
     //     header: "Work School",
     // },
-    {
-        accessorKey: "role",
-        header: "Manager",
-    },
+    // {
+    //     accessorKey: "role",
+    //     header: "Manager",
+    // },
     // {
     //     accessorKey: "repaymentReriod",
     //     header: "Repayment Period (months)",
