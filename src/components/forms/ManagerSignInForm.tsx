@@ -67,14 +67,10 @@ const ManagerSignInForm = ({ onSignIn, isLoading }: Props) => {
 
         <div className='flex justify-between items-center'>
           {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
-          <div>
-            {`Don't have an account? `}
-            <a href={'/admin/auth/signup'} className='text-blue-600'>Create account</a>
-          </div>
         </div>
         <div className='mt-5'>
           {`Forgot your password? `}
-          <a href={'/admin/auth/forgotpassword'} className='text-blue-600'>Recover or reset your password</a>
+          <a href={'/manager/auth/forgotpassword'} className='text-blue-600'>Recover or reset your password</a>
         </div>
       </form>
 

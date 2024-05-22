@@ -20,7 +20,7 @@ type ManagerFormData = z.infer<typeof formSchema>;
 
 type Props = {
     currentUser: User;
-    onSave: (AdminProfileData: ManagerFormData) => void;
+    onSave: (ManagerProfileData: ManagerFormData) => void;
     isLoading: boolean;
 };
 

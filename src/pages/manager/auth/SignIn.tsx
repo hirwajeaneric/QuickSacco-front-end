@@ -1,13 +1,13 @@
 import { useSignIn } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import AdminSignInForm from "@/components/forms/AdminSignInForm";
+import ManagerSignInForm from "@/components/forms/ManagerSignInForm";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const { signIn, isLoading, isSuccess, } = useSignIn();
 
   if (isSuccess) {
-    window.location.replace('/admin');
+    window.location.replace('/manager');
   }
 
   return (
@@ -17,7 +17,7 @@ const SignIn = () => {
       <div className="flex flex-col mx-auto w-full items-center">
         <Link to={'/'} className="text-3xl font-bold tracking-tight text-blue-800 text-center">QuickSacco</Link>
         <h1 className="text-xl text-center md:text-start my-3 font-bold">Sign in to your account</h1>
-        <AdminSignInForm onSignIn={signIn} isLoading={isLoading} />
+        <ManagerSignInForm onSignIn={signIn} isLoading={isLoading} />
       </div>
     </div>
   )

@@ -40,10 +40,8 @@ import ManagerAuth from './pages/manager/Auth';
 import Loans from './pages/manager/dashboard/Loans';
 import LoanDetails from './pages/manager/dashboard/LoanDetails';
 import ManagerSignIn from './pages/manager/auth/SignIn';
-import ManagerSignUp from './pages/manager/auth/SignUp';
 import ManagerForgotPassword from './pages/manager/auth/ForgotPassword';
 import ManagerResetPassword from './pages/manager/auth/ResetPassword';
-import ManagerVerifyOTP from './pages/manager/auth/ValidateOTP';
 import ManagerDashboardHome from './pages/manager/dashboard/Home';
 import ManagerProfile from './pages/manager/dashboard/Profile';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
@@ -99,8 +97,6 @@ const App = () => {
           <Route path='auth' element={<ManagerAuth />}>
             <Route path='' element={<ManagerSignIn />} />
             <Route path='signin' element={<ManagerSignIn />} />
-            <Route path='signup' element={<ManagerSignUp />} />
-            <Route path='verifyotp' element={<ManagerVerifyOTP />} />
             <Route path='resetpassword' element={<ManagerResetPassword />} />
             <Route path='forgotpassword' element={<ManagerForgotPassword />} />
           </Route>

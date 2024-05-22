@@ -46,7 +46,7 @@ const ManagerForgotPasswordForm = ({ onForgotPassword, isLoading }: Props ) => {
       </form>
       <div className='mt-5'>
         {`Do you remember your password? `} 
-        <a href={'/admin/auth/signin'} className='text-blue-600'>Go back to sign in</a>
+        <a href={'/manager/auth/signin'} className='text-blue-600'>Go back to sign in</a>
       </div>
     </Form>
   )

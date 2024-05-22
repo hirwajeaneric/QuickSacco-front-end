@@ -54,7 +54,7 @@ const ManagerResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
         {isLoading ? <LoadingButton /> : <Button type='submit' className='bg-orange-500'>Submit</Button>}
       </form>
       <div className='mt-5'>
-        <a href={'/admin/auth'} className='text-blue-600'>Go back to home</a>
+        <a href={'/manager/auth'} className='text-blue-600'>Go back to home</a>
       </div>
     </Form>
   )
