@@ -73,7 +73,7 @@ const SignUpForm = ({ onSignUp, isLoading }: Props) => {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email name</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="Email address" {...field} />
               </FormControl>

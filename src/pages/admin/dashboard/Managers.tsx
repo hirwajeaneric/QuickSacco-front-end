@@ -1,5 +1,5 @@
 import { listOfManager } from "@/fakes/users";
-import ManagersTable from "@/components/tables/managers/pages"
+import ManagersTable from "@/components/tables/teacherApplications/pages"
 
 const Managers = () => {
   return (

@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const application: Application = {
   _id: "1",
-  firstName: "John",
-  lastName: "Doe",
+  firstName: "Aline",
+  lastName: "Uwera",
   nationalId: "1234567890123456",
-  email: "john.doe@example.com",
+  email: "alineuwera@gmail.com",
   teacherId: "T1001",
   phone: "0712345678",
   dateOfBirth: new Date("1980-05-15"),
-  gender: "Male",
+  gender: "Female",
   maritalStatus: "Married",
   numberOfDependencies: 2,
   workSchool: "Greenwood High",

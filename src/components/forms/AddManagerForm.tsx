@@ -77,7 +77,7 @@ const AddManagerForm = ({ onSignUp, isLoading }: Props) => {
             name='email'
             render={({ field }) => (
               <FormItem  className='w-full md:w-[49%]'>
-                <FormLabel>Email name</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="Email address" {...field} />
                 </FormControl>

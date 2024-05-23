@@ -1,13 +1,13 @@
-import { User } from "@/types"
+import { Application } from "@/types"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
 type Props = {
-    data: User[];
+    data: Application[];
 }
-export default function UsersTable({ data }: Props) {
+export default function UserApplicationPage({ data }: Props) {
     return (
-      <div className="mx-auto p-4 w-full bg-white">
+      <div className="mx-auto py-10 w-full">
         <DataTable columns={columns} data={data} />
       </div>
     )

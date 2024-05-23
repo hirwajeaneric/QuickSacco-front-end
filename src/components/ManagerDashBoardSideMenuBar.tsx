@@ -19,8 +19,8 @@ const ManagerDashBoardSideMenuBar = () => {
     }
 
     return (
-        <div className="flex">
-            <div className="flex h-screen w-16 flex-col justify-between border-e bg-blue-950">
+        <div className="flex min-h-screen">
+            <div className="flex min-h-screen w-16 flex-col justify-between border-e bg-blue-950">
                 <div>
                     <div className="inline-flex size-16 items-center justify-center">
                         <span className="grid size-10 place-content-center rounded-lg text-xs text-gray-600 cursor-pointer">
@@ -109,7 +109,7 @@ const ManagerDashBoardSideMenuBar = () => {
             </div>
 
             {isVisible &&
-                <div className={`hidden md:flex h-screen flex-1 flex-col justify-between border-e bg-blue-950 cursor-pointer`}>
+                <div className={`hidden md:flex min-h-screen flex-1 flex-col justify-between border-e bg-blue-950 cursor-pointer`}>
                     <div className="px-4 py-4">
                         <Link to={'/'} className="text-3xl font-bold tracking-tight text-white">QuickSacco</Link>
                         <ul className="mt-6 space-y-1">

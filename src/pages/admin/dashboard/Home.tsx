@@ -1,5 +1,5 @@
 import AdminStats from "@/components/AdminStats"
-import ManagersTable from "@/components/tables/managers/pages"
+import ManagersTable from "@/components/tables/teacherApplications/pages"
 import { listOfManager } from "@/fakes/users"
 import { Link } from "react-router-dom"
 

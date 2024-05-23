@@ -47,8 +47,8 @@ export type Application = {
     position: string;
     monthlySalary: number;
     amountRequested: number;
-    amountToPayPerMonth: number;
     repaymentReriod: number;
+    amountToPayPerMonth: number;
     bankAccountNumber: string;
     proofOffEmployment: string;
     copyOfNationalId: string;
