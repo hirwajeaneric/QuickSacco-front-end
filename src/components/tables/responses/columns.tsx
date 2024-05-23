@@ -1,7 +1,7 @@
 import { Response } from "@/types"
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -15,28 +15,28 @@ import {
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
 export const columns: ColumnDef<Response>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
+    // {
+    //     id: "select",
+    //     header: ({ table }) => (
+    //         <Checkbox
+    //             checked={
+    //                 table.getIsAllPageRowsSelected() ||
+    //                 (table.getIsSomePageRowsSelected() && "indeterminate")
+    //             }
+    //             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+    //             aria-label="Select all"
+    //         />
+    //     ),
+    //     cell: ({ row }) => (
+    //         <Checkbox
+    //             checked={row.getIsSelected()}
+    //             onCheckedChange={(value) => row.toggleSelected(!!value)}
+    //             aria-label="Select row"
+    //         />
+    //     ),
+    //     enableSorting: false,
+    //     enableHiding: false,
+    // },
     {
         accessorKey: "status",
         header: ({ column }) => (
@@ -47,18 +47,18 @@ export const columns: ColumnDef<Response>[] = [
         accessorKey: "nameOfTeacher",
         header: "Teacher",
     },
-    {
-        accessorKey: "email",
-        header: "Email",
-    },
-    {
-        accessorKey: "message",
-        header: "Message",
-    },
-    {
-        accessorKey: "response",
-        header: "Response",
-    },
+    // {
+    //     accessorKey: "email",
+    //     header: "Email",
+    // },
+    // {
+    //     accessorKey: "message",
+    //     header: "Message",
+    // },
+    // {
+    //     accessorKey: "response",
+    //     header: "Response",
+    // },
     {
         accessorKey: "loanStatus",
         header: ({ column }) => (
