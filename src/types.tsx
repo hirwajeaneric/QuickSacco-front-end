@@ -99,3 +99,13 @@ export type UpdateApplicationTypes = {
     copyOfNationalId: string;
     loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
 };
+
+export type Response = {
+    _id: string;
+    loanId: string;
+    loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+    message: string;
+    response: string;
+    status: "Resolved" | "Denied" | "In progress";
+
+};

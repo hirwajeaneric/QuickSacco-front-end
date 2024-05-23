@@ -36,57 +36,12 @@ export const columns: ColumnDef<User>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-    // {
-    //     accessorKey: "loanStatus",
-    //     header: ({ column }) => (
-    //         <DataTableColumnHeader column={column} title="Loan Status" />
-    //     )
-    // },
     {
         accessorKey: "email",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Email" />
         )
     },
-    // {
-    //     accessorKey: "amountRequested",
-    //     header: () => <div className="text-right">Amount Requested</div>,
-    //     cell: ({ row }) => {
-    //         const amount = parseFloat(row.getValue("amountRequested"))
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "RWF",
-    //         }).format(amount)
-
-    //         return <div className="text-right font-medium">{formatted}</div>
-    //     },
-    // },
-    // {
-    //     accessorKey: "monthlySalary",
-    //     header: () => <div className="text-right">Monthly Salary</div>,
-    //     cell: ({ row }) => {
-    //         const amount = parseFloat(row.getValue("monthlySalary"))
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "RWF",
-    //         }).format(amount)
-
-    //         return <div className="text-right font-medium">{formatted}</div>
-    //     },
-    // },
-    // {
-    //     accessorKey: "amountToPayPerMonth",
-    //     header: () => <div className="text-right">Payment per month</div>,
-    //     cell: ({ row }) => {
-    //         const amount = parseFloat(row.getValue("amountToPayPerMonth"))
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "RWF",
-    //         }).format(amount)
-
-    //         return <div className="text-right font-medium">{formatted}</div>
-    //     },
-    // },
     {
         accessorKey: "firstName",
         header: "First Name",
@@ -95,61 +50,10 @@ export const columns: ColumnDef<User>[] = [
         accessorKey: "lastName",
         header: "Last Name",
     },
-    // {
-    //     accessorKey: "nationalId",
-    //     header: "National ID",
-    // },
-    // {
-    //     accessorKey: "teacherId",
-    //     header: "Teacher ID",
-    // },
     {
         accessorKey: "phone",
         header: "Phone",
     },
-    // {
-    //   accessorKey: "dateOfBirth",
-    //   header: "Date of Birth",
-    //   cell: info => new Date(info.getValue()).toLocaleDateString(), // Format the date
-    // },
-    // {
-    //     accessorKey: "gender",
-    //     header: "Gender",
-    // },
-    // {
-    //     accessorKey: "maritalStatus",
-    //     header: "Marital Status",
-    // },
-    // {
-    //     accessorKey: "numberOfDependencies",
-    //     header: "Number of Dependencies",
-    // },
-    // {
-    //     accessorKey: "workSchool",
-    //     header: "Work School",
-    // },
-    // {
-    //     accessorKey: "role",
-    //     header: "Manager",
-    // },
-    // {
-    //     accessorKey: "repaymentReriod",
-    //     header: "Repayment Period (months)",
-    // },
-    // {
-    //     accessorKey: "bankAccountNumber",
-    //     header: "Bank Account Number",
-    // },
-    // {
-    //   accessorKey: "proofOffEmployment",
-    //   header: "Proof of Employment",
-    //   cell: info => <a href={info.getValue()}>View Document</a>, // Render as link
-    // },
-    // {
-    //   accessorKey: "copyOfNationalId",
-    //   header: "Copy of National ID",
-    //   cell: info => <a href={info.getValue()}>View Document</a>, // Render as link
-    // },
     {
         id: "actions",
         cell: ({ row }) => {

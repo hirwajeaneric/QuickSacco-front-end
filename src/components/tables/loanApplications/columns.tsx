@@ -106,11 +106,6 @@ export const columns: ColumnDef<Application>[] = [
         accessorKey: "phone",
         header: "Phone",
     },
-    // {
-    //   accessorKey: "dateOfBirth",
-    //   header: "Date of Birth",
-    //   cell: info => new Date(info.getValue()).toLocaleDateString(), // Format the date
-    // },
     {
         accessorKey: "gender",
         header: "Gender",
@@ -139,16 +134,6 @@ export const columns: ColumnDef<Application>[] = [
         accessorKey: "bankAccountNumber",
         header: "Bank Account Number",
     },
-    // {
-    //   accessorKey: "proofOffEmployment",
-    //   header: "Proof of Employment",
-    //   cell: info => <a href={info.getValue()}>View Document</a>, // Render as link
-    // },
-    // {
-    //   accessorKey: "copyOfNationalId",
-    //   header: "Copy of National ID",
-    //   cell: info => <a href={info.getValue()}>View Document</a>, // Render as link
-    // },
     {
         id: "actions",
         cell: ({ row }) => {

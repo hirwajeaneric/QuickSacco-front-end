@@ -1,4 +1,4 @@
-import { Application } from "@/types"
+import { Response } from "@/types"
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
-export const columns: ColumnDef<Application>[] = [
+export const columns: ColumnDef<Response>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -38,73 +38,38 @@ export const columns: ColumnDef<Application>[] = [
         enableHiding: false,
     },
     {
+        accessorKey: "status",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Response Status" />
+        )
+    },
+    {
+        accessorKey: "nameOfTeacher",
+        header: "Teacher",
+    },
+    {
+        accessorKey: "email",
+        header: "Email",
+    },
+    {
+        accessorKey: "message",
+        header: "Message",
+    },
+    {
+        accessorKey: "response",
+        header: "Response",
+    },
+    {
         accessorKey: "loanStatus",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Loan Status" />
         )
     },
-    // {
-    //     accessorKey: "email",
-    //     header: ({ column }) => (
-    //         <DataTableColumnHeader column={column} title="Email" />
-    //     )
-    // },
-    {
-        accessorKey: "amountRequested",
-        header: () => <div className="text-right">Amount Requested</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amountRequested"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "RWF",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
-    {
-        accessorKey: "monthlySalary",
-        header: () => <div className="text-right">Monthly Salary</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("monthlySalary"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "RWF",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
-    {
-        accessorKey: "amountToPayPerMonth",
-        header: () => <div className="text-right">Payment per month</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amountToPayPerMonth"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "RWF",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
-    {
-        accessorKey: "position",
-        header: "Position",
-    },
-    {
-        accessorKey: "repaymentReriod",
-        header: "Repayment Period (months)",
-    },
-    {
-        accessorKey: "bankAccountNumber",
-        header: "Bank Account Number",
-    },
     {
         id: "actions",
         cell: ({ row }) => {
             const application = row.original
-
+            
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
