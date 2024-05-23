@@ -45,6 +45,7 @@ import ManagerResetPassword from './pages/manager/auth/ResetPassword';
 import ManagerDashboardHome from './pages/manager/dashboard/Home';
 import ManagerProfile from './pages/manager/dashboard/Profile';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
+import Responses from './pages/manager/dashboard/Responses';
 
 const App = () => {
 
@@ -104,6 +105,7 @@ const App = () => {
             <Route path='' element={<ManagerDashboardHome />} />
             <Route path='home' element={<ManagerDashboardHome />} />
             <Route path='teachers' element={<Teachers />} />
+            <Route path='responses' element={<Responses />} />
             <Route path='loans' element={<Loans />} />
             <Route path='loan/:id' element={<LoanDetails />} />
             <Route path='profile' element={<ManagerProfile />} />

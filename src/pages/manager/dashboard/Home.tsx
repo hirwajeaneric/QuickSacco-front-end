@@ -15,7 +15,7 @@ const Home = () => {
       <ManagerStats />
 
       <div className="flex justify-between">
-        <div className="flex flex-col w-full md:w-[49%]">
+        <div className="flex flex-col w-full md:w-[49%] bg-white rounded-md">
           <ApplicationsPerMonth />
         </div>
         <div className="flex flex-col w-full md:w-[49%]">

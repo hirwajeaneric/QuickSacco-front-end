@@ -53,6 +53,7 @@ export type Application = {
     proofOffEmployment: string;
     copyOfNationalId: string;
     loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+    createdAt: Date;
 };
 
 export type CreateApplicationTypes = {

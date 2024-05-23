@@ -42,11 +42,15 @@ export const columns: ColumnDef<Application>[] = [
         header: "Status",
     },
     {
-        accessorKey: "email",
+        accessorKey: "phone",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Email" />
+            <DataTableColumnHeader column={column} title="Phone" />
         )
     },
+    // {
+    //     accessorKey: "email",
+    //     header: "Email",
+    // },
     {
         accessorKey: "amountRequested",
         header: () => <div className="text-right">Amount Requested</div>,
@@ -87,52 +91,19 @@ export const columns: ColumnDef<Application>[] = [
         },
     },
     {
-        accessorKey: "firstName",
-        header: "First Name",
-    },
-    {
-        accessorKey: "lastName",
-        header: "Last Name",
-    },
-    {
-        accessorKey: "nationalId",
-        header: "National ID",
-    },
-    {
-        accessorKey: "teacherId",
-        header: "Teacher ID",
-    },
-    {
-        accessorKey: "phone",
-        header: "Phone",
-    },
-    {
-        accessorKey: "gender",
-        header: "Gender",
-    },
-    {
-        accessorKey: "maritalStatus",
-        header: "Marital Status",
-    },
-    {
-        accessorKey: "numberOfDependencies",
-        header: "Number of Dependencies",
-    },
-    {
-        accessorKey: "workSchool",
-        header: "Work School",
-    },
-    {
-        accessorKey: "position",
-        header: "Position",
+        accessorKey: "createdAt",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Application date" />
+        ),
+        cell: ({ row }) => {
+            const formatted = new Date(row.getValue("createdAt")).toDateString();
+
+            return <div className="text-right font-medium">{formatted}</div>
+        },
     },
     {
         accessorKey: "repaymentReriod",
         header: "Repayment Period (months)",
-    },
-    {
-        accessorKey: "bankAccountNumber",
-        header: "Bank Account Number",
     },
     {
         id: "actions",
@@ -155,9 +126,8 @@ export const columns: ColumnDef<Application>[] = [
                             Copy payment ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View teacher</DropdownMenuItem>
                         <DropdownMenuItem>
-                            <a href={`/account/application/${application._id}`}>View payment details</a>
+                            <a href={`/manager/loan/${application._id}`}>View loan details</a>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

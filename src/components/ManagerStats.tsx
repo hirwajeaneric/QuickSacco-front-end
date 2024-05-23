@@ -2,19 +2,19 @@ import StatCard from "./StatCard"
 
 const stats = [
     {
-        title: "Managers",
-        number: 3,
-        icon: "UsersIcon"
-    },
-    {
-        title: "Admins",
-        number: 2,
-        icon: "UserCog"
+        title: "Loans",
+        number: 45,
+        icon: "FileText"
     },
     {
         title: "Teachers",
-        number: 45,
-        icon: "PersonStanding"
+        number: 40,
+        icon: "UsersIcon"
+    },
+    {
+        title: "Pending Loans",
+        number: 10,
+        icon: "FileClock"
     }
 ]
 

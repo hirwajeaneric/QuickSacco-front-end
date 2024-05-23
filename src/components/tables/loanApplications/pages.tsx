@@ -7,7 +7,7 @@ type Props = {
 }
 export default function UserApplicationPage({ data }: Props) {
     return (
-      <div className="mx-auto py-10 w-full">
+      <div className="mx-auto p-4 pt-0 w-full bg-white">
         <DataTable columns={columns} data={data} />
       </div>
     )
