@@ -1,11 +1,11 @@
-import CallToAction from "@/components/CallToAction";
-import FastAndEffiscient from "@/components/FastAndEffiscient";
-import FeedBack from "@/components/FeedBack";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import CallToAction from "@/components/sections/CallToAction";
+import FastAndEffiscient from "@/components/sections/FastAndEffiscient";
+import FeedBack from "@/components/sections/FeedBack";
+import Footer from "@/components/sections/Footer";
+import Header from "@/components/sections/Header";
 import HelmetComponent from "@/components/HelmetComponent";
-import Hero from "@/components/Hero";
-import ProcessSection from "@/components/ProcessSection";
+import Hero from "@/components/sections/Hero";
+import ProcessSection from "@/components/sections/ProcessSection";
 
 const Home = () => {
   return (

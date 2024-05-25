@@ -1,4 +1,4 @@
-import ManagerStats from "@/components/ManagerStats";
+import ManagerStats from "@/components/sections/ManagerStats";
 import ApplicationsPerMonth from "@/components/charts/Applications";
 import Responses from "@/components/tables/responses/pages";
 import { listOfResponses } from "@/fakes/responses";

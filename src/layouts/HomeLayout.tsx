@@ -1,6 +1,6 @@
-import Footer from "@/components/Footer"
+import Footer from "@/components/sections/Footer"
 import Header from "@/components/Header"
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
 import React from "react"
 
 type Props = {

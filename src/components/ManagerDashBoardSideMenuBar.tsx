@@ -1,6 +1,6 @@
 import { LogOut, Mail, Menu, Users } from "lucide-react"
-import GeneralIcon from "./GeneralIcon"
-import ManagersIcon from "./Managers"
+import GeneralIcon from "./icons/GeneralIcon"
+import ManagersIcon from "./icons/Managers"
 import { Link } from "react-router-dom"
 import React, { useState } from "react"
 

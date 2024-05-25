@@ -1,4 +1,4 @@
-import ProgressCart from "./ProgressCard";
+import ProgressCart from "../ProgressCard";
 
 export type ProgressInfo = {
     picture: string;

@@ -1,4 +1,4 @@
-import StatCard from "./StatCard"
+import StatCard from "../StatCard"
 
 const stats = [
     {
