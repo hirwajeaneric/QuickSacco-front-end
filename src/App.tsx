@@ -1,20 +1,19 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/public_pages/Home';
 import HomeLayout from './layouts/HomeLayout';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/public_pages/SignUp';
 import Apply from './pages/teacher/Apply';
-import SignIn from './pages/SignIn';
-import ResetPassword from './pages/ResetPassword';
-import ForgotPassword from './pages/ForgotPassword';
-import ValidateOTP from './pages/ValidateOTP';
+import SignIn from './pages/public_pages/SignIn';
+import ResetPassword from './pages/public_pages/ResetPassword';
+import ForgotPassword from './pages/public_pages/ForgotPassword';
+import ValidateOTP from './pages/public_pages/ValidateOTP';
 import AccountHome from './pages/teacher/AccountHome';
 import Profile from './pages/teacher/Profile';
 import Applications from './pages/teacher/Applications';
 import ApplicationDetails from './pages/teacher/ApplicationDetails';
-import Success from './pages/Success';
-import NotFound from './pages/NotFound';
+import Success from './pages/public_pages/Success';
+import NotFound from './pages/public_pages/NotFound';
 import { Toaster } from 'sonner';
-import AuthCallbackPage from './pages/AuthCallbackPage';
 import Cookies from 'js-cookie';
 import UpdateApplication from './pages/teacher/UpdateApplication';
 
@@ -60,7 +59,6 @@ const App = () => {
        * */}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/auth-callback' element={<AuthCallbackPage />} />
         <Route path='/signup' element={<HomeLayout><SignUp /></HomeLayout>} />
         <Route path='/signin' element={<HomeLayout><SignIn /></HomeLayout>} />
         <Route path='/forgotpassword' element={<HomeLayout><ForgotPassword /></HomeLayout>} />
