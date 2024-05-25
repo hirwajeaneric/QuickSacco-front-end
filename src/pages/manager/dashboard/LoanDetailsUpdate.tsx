@@ -1,8 +1,10 @@
 import { useGetLoanApplicationData, useUpdateApplication } from "@/api/application";
 import UpdateApplicationForm from "@/components/forms/UpdateApplicationForm";
+import { Button } from "@/components/ui/button";
 import { Application } from "@/types";
+import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const application: Application = {
   _id: "1",
@@ -30,6 +32,7 @@ const application: Application = {
 };
 
 const LoanDetailsUpdate = () => {
+  const navigate = useNavigate();
   const [loanId, setLoanId] = useState<string>("");
   const params = useParams();
   useEffect(() => {
@@ -43,8 +46,12 @@ const LoanDetailsUpdate = () => {
   
   return (
     <div className="flex flex-col gap-5">
-      <div>
+      <div className="flex justify-between items-center">
         <h1 className="font-bold text-xl">Update loan data</h1>
+        <Button variant="default" className="mt-4" onClick={() => navigate(-1)}>
+          <ArrowLeft />
+          Go back to summary
+        </Button>
       </div>
       <UpdateApplicationForm onSave={updateApplication} isLoading={isLoadingUpdate} currentApplication={application} />
     </div>

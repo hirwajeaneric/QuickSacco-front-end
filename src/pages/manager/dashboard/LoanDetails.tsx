@@ -1,5 +1,8 @@
+import LoanStatusUpdateSheet from "@/components/sections/LoanStatusUpdateSheet";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Application } from "@/types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const application: Application = {
   _id: "1",
@@ -27,10 +30,13 @@ const application: Application = {
 };
 
 const LoanDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-5">
-      <div>
+      <div className="flex justify-between items-center">
         <h1 className="font-bold text-xl">Loans details</h1>
+        <Button variant="default" className="mt-4" onClick={() => navigate(-1)}>View all loans</Button>
       </div>
       <div className="flex flex-col gap-3 w-full">
         <h2 className="text-base font-bold mt-4">Personal info</h2>
@@ -124,7 +130,16 @@ const LoanDetails = () => {
         </div>
       </div>
 
-      <Link to={`/manager/loan/update/${application._id}`} className="bg-black rounded text-white px-3 py-2 mt-4 w-fit hover:bg-slate-600">Update data</Link>
+      <div className="flex flex-col gap-3 w-full mb-5">
+        <Button type="button" className="w-fit" onClick={() => navigate(`/manager/loan/update/${application._id}`)} >Update data</Button>
+        <Separator />
+        <p className="text-slate-700">Update loan status</p>
+        <div className="flex justify-between">
+          <LoanStatusUpdateSheet command="Approve" loanDetails={application} />
+          <LoanStatusUpdateSheet command="Request updates to" loanDetails={application} />
+          <LoanStatusUpdateSheet command="Reject" loanDetails={application} />
+        </div>
+      </div>
     </div>
   )
 }
