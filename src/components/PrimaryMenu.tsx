@@ -8,22 +8,21 @@ import {
 import { Button } from "./ui/button";
 import { File, LucideCircleUser } from "lucide-react";
 import { useGetProfileData } from "@/api/auth";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "@/types";
 import Cookies from "js-cookie";
-import { Store } from "@/context/user";
+import { iconTextGenerator } from "@/lib/iconTextGenerator";
 
 const PrimaryMenu = () => {
     const [userInfo, setUserInfo] = useState<User>();
     const { currentUser } = useGetProfileData();
-    const { setUser } = useContext(Store);
 
     useEffect(() => {
         if (currentUser) {
-            setUser(currentUser)
+            // setUser(currentUser)
             setUserInfo(currentUser)
         }
-    }, [currentUser, setUser])
+    }, [currentUser])
 
     return (
         <>
@@ -44,7 +43,7 @@ const PrimaryMenu = () => {
                         <PopoverTrigger className="flex items-center gap-2">
                             <Avatar>
                                 <AvatarImage src="avatar.svg" />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarFallback>{iconTextGenerator(userInfo.firstName, userInfo.lastName)}</AvatarFallback>
                             </Avatar>
                             <p className="text-white">{userInfo.firstName}</p>
                         </PopoverTrigger>

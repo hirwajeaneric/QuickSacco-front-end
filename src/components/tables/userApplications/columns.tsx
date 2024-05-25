@@ -9,7 +9,6 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
@@ -115,15 +114,8 @@ export const columns: ColumnDef<Application>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(application._id)}
-                        >
-                            Copy payment ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View teacher</DropdownMenuItem>
                         <DropdownMenuItem>
-                            <a href={`/account/application/${application._id}`}>View payment details</a>
+                            <a href={`/account/application/${application._id}`}>View details</a>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
