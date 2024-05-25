@@ -45,6 +45,7 @@ import ManagerDashboardHome from './pages/manager/dashboard/Home';
 import ManagerProfile from './pages/manager/dashboard/Profile';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import Responses from './pages/manager/dashboard/Responses';
+import LoanDetailsUpdate from './pages/manager/dashboard/LoanDetailsUpdate';
 
 const App = () => {
 
@@ -106,6 +107,7 @@ const App = () => {
             <Route path='responses' element={<Responses />} />
             <Route path='loans' element={<Loans />} />
             <Route path='loan/:id' element={<LoanDetails />} />
+            <Route path='loan/update/:id' element={<LoanDetailsUpdate />} />
             <Route path='profile' element={<ManagerProfile />} />
           </Route>
         </Route>

@@ -10,6 +10,7 @@ const application: Application = {
   teacherId: "T1001",
   phone: "0712345678",
   dateOfBirth: new Date("1980-05-15"),
+  createdAt: new Date(),
   gender: "Female",
   maritalStatus: "Married",
   numberOfDependencies: 2,

@@ -38,10 +38,10 @@ export const useSubmitApplication = () => {
     }
 };
 
-export const useGetApplicationsData = () => {
+export const useGetUserApplications = () => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationRequest = async (): Promise<Application> => {
+    const getAllUserApplicationsRequest = async (): Promise<Application> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findByUser`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -57,7 +57,31 @@ export const useGetApplicationsData = () => {
         return responseData;
     };
 
-    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest());
+    const { data: userApplications, isLoading } = useQuery("applicationInfo", () => getAllUserApplicationsRequest());
+
+    return { userApplications, isLoading }
+};
+
+export const useGetLoanApplicationData = (loanId: string) => {
+    const accessToken = Cookies.get('access-token');
+    
+    const getApplicationRequest = async (loanId:string): Promise<Application> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        return responseData;
+    };
+
+    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));
 
     return { currentApplication, isLoading }
 };
@@ -65,7 +89,7 @@ export const useGetApplicationsData = () => {
 export const useUpdateApplication = () => {
     const updateApplicationRequest = async (application: UpdateApplicationTypes) => {
         const accessToken = Cookies.get('access-token');
-        const response = await fetch(`${API_BASE_URL}/api/v1/application/update`, {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/update?id=${application._id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -84,7 +108,7 @@ export const useUpdateApplication = () => {
     const { mutateAsync: updateApplication, isLoading, isSuccess, error, reset } = useMutation(updateApplicationRequest);
 
     if (isSuccess) {
-        toast.success("Application profile updated!");
+        toast.success("Application updated!");
         window.location.reload();
     }
 
@@ -106,7 +130,7 @@ export const useDeleteApplication = () => {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json', 
             }
         });
 

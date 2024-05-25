@@ -19,7 +19,6 @@ const PrimaryMenu = () => {
 
     useEffect(() => {
         if (currentUser) {
-            // setUser(currentUser)
             setUserInfo(currentUser)
         }
     }, [currentUser])

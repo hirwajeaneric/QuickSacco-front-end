@@ -79,6 +79,7 @@ export type CreateApplicationTypes = {
 };
 
 export type UpdateApplicationTypes = {
+    _id: string;
     firstName: string;   
     lastName: string;
     nationalId: string;
@@ -94,11 +95,12 @@ export type UpdateApplicationTypes = {
     monthlySalary: number;
     amountRequested: number;
     repaymentReriod: number;
+    amountToPayPerMonth: number;
     bankAccountNumber: string;
-    amountToPayPerMonth: string;
-    proofOffEmployment: string;
+    proofOfEmployment: string;
     copyOfNationalId: string;
     loanStatus: "Pending" | "Update required" | "Approved" | "Rejected";
+    createdAt: Date;
 };
 
 export type Response = {

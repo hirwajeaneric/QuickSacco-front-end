@@ -91,7 +91,7 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-10'>
                 <FormDescription>
-                    View and change your profile information here
+                    Apply for loan in a few steps. Please ensure you have all the required documents ready before proceeding.
                 </FormDescription>
 
                 <div className='flex flex-wrap w-full justify-between items-start gap-3'>
