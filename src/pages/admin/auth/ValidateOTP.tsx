@@ -1,6 +1,6 @@
 import { useValidateOTP } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import { AdminValidateOTPForm } from "@/components/forms/AdminValidateOTPForm";
+import { AdminValidateOTPForm } from "@/components/forms/admin-auth/AdminValidateOTPForm";
 import { Link, useNavigate } from "react-router-dom";
 
 const ValidateOTP = () => {

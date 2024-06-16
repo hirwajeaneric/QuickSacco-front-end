@@ -1,5 +1,5 @@
 import { useSubmitApplication } from "@/api/application";
-import AddApplicationForm from "@/components/forms/AddApplicationForm";
+import AddApplicationForm from "@/components/forms/AddApplicationFormDraft";
 import { useNavigate } from "react-router-dom";
 
 const UpdateApplication = () => {

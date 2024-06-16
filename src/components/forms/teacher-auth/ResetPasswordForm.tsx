@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import { Input } from '../../ui/input';
+import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { Checkbox } from '../ui/checkbox';
-import LoadingButton from '../LoadingButton';
+import { Checkbox } from '../../ui/checkbox';
+import LoadingButton from '../../LoadingButton';
 
 const formSchema = z.object({
   password: z.string().min(2, 'Invalid password')
@@ -19,7 +19,7 @@ type Props = {
   isLoading: boolean;
 }
 
-const AdminResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
+const ResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const form = useForm<ResetPasswordFormData>({
@@ -31,7 +31,7 @@ const AdminResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onResetPassword)} className='space-y-2 w-full'>
+      <form onSubmit={form.handleSubmit(onResetPassword)} className='space-y-4 w-full md:w-4/5 p-5 md:p-0'>
         <FormField
           control={form.control}
           name='password'
@@ -54,10 +54,10 @@ const AdminResetPasswordForm = ({ onResetPassword, isLoading }: Props) => {
         {isLoading ? <LoadingButton /> : <Button type='submit' className='bg-orange-500'>Submit</Button>}
       </form>
       <div className='mt-5'>
-        <a href={'/admin/auth'} className='text-blue-600'>Go back to home</a>
+        <a href={'/'} className='text-blue-600'>Go back to home</a>
       </div>
     </Form>
   )
 }
 
-export default AdminResetPasswordForm;
+export default ResetPasswordForm;

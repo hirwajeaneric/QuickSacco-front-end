@@ -4,7 +4,7 @@ const FeedBack = () => {
             <div className="md:container mx-auto flex flex-wrap justify-between items-center">
                 <div className="right w-full md:w-[49%] flex flex-col">
                     <span className="font-bold">Feedback</span>
-                    <h1 className="text-3xl font-bold mt-3 mb-7">Quick feed back period</h1>
+                    <h1 className="text-3xl font-bold mt-3 mb-7">Short feed back period</h1>
                     <p className="text-slate-700">Fill your application form, provide all information related to your application
                         including the needed loan, add attachments such as your work contract and copy of National ID.
                         <br /><br />

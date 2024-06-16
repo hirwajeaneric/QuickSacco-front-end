@@ -1,6 +1,6 @@
 import { useForgotPassword } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import AdminForgotPasswordForm from "@/components/forms/AdminForgotPasswordForm";
+import AdminForgotPasswordForm from "@/components/forms/admin-auth/AdminForgotPasswordForm";
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {

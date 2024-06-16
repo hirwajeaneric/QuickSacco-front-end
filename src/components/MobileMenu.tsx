@@ -14,7 +14,7 @@ const MobileMenu = ({ handleClose }: Props) => {
                     <a href={'/'} onClick={handleClose} className="text-white">Home</a>
                     <a href={'#process'} onClick={handleClose} className="text-white">Process</a>
                     <a href={'#benefits'} onClick={handleClose} className="text-white">Benefits</a>
-                    <Link to={'/apply/step-1'} onClick={handleClose} className=" text-white">Get Started</Link>
+                    <Link to={'/apply/overview'} onClick={handleClose} className=" text-white">Get Started</Link>
 
                     {Cookies.get('access-token')
                         ?

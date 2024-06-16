@@ -14,7 +14,7 @@ const MultiStepFormControls = ({ currentPage, valid }: Props) => {
                 ? <></>
                 : <Button
                     type='button'
-                    onClick={() => navigate(`/${Number(currentPage) - 1}`)}>
+                    onClick={() => navigate(`/apply/step-${Number(currentPage) - 1}`)}>
                     Previous
                 </Button>
             }
@@ -23,7 +23,7 @@ const MultiStepFormControls = ({ currentPage, valid }: Props) => {
                 : <Button
                     type='button'
                     disabled={!valid}
-                    onClick={() => navigate(`/${Number(currentPage) + 1}`)}>
+                    onClick={() => navigate(`/apply/step-${Number(currentPage) + 1}`)}>
                     Next
                 </Button>
             }

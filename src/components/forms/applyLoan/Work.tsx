@@ -6,16 +6,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { storage } from "@/configs/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Separator } from "@/components/ui/separator";
 
 const Work = () => {
     const formMethods = useFormContext();
-    const currentPage = window.location.pathname.split('/step-')[1];
+    const currentPage = window.location.pathname.split('/apply/step-')[1];
     const [uploadProgress, setUploadProgress] = useState(0);
     const [valid, setValid] = useState(false);
     const { getValues, setValue } = formMethods;
 
     const areAllInputFilled = () => {
-        if (getValues("Position") !== '' && getValues("Number of dependencies") !== '' && getValues("Work school") !== '' && getValues("Work contract") !== '') {
+        if (getValues("position") !== '' && getValues("numberOfDependencies") !== '' && getValues("workSchool") !== '' && getValues("proofOfEmployment") !== '') {
             setValid(true);
         } else {
             setValid(false)
@@ -54,7 +55,7 @@ const Work = () => {
         if (e.target.files) {
             uploadToFirebase(e.target.files[0] ?? null)
                 .then((uploaded) => {
-                    setValue("Work contract", uploaded);
+                    setValue("proofOfEmployment", uploaded);
                     areAllInputFilled();
                 })
                 .catch((error) => {
@@ -68,84 +69,100 @@ const Work = () => {
     });
 
     return (
-        <div className="flex flex-col gap-3">
-            <div className="flex flex-col">
-                <h2 className='text-2xl font-bold'>Employment information</h2>
-                <FormDescription>
-                    Details about your employment status
-                </FormDescription>
+        <div className="flex flex-col gap-3 w-full">
+            <div className="flex justify-between items-start">
+                <div>
+                    <h2 className='text-2xl font-bold'>Employment information</h2>
+                    <FormDescription>
+                        Details about your employment status
+                    </FormDescription>
+                </div>
+                <span className="text-sm">
+                    Step 3/4
+                </span>
             </div>
-            <div className='flex flex-col gap-2'>
-                <FormField
-                    control={formMethods.control}
-                    name="Position"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Position</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <Separator />
+            <div className='flex gap-2 w-full justify-between items-start space-y-4 flex-wrap'>
+                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                    <FormField
+                        control={formMethods.control}
+                        name="position"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Position</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select your current position" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="Teacher">Teacher</SelectItem>
+                                        <SelectItem value="School Director">School Director</SelectItem>
+                                        <SelectItem value="Other">Other</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={formMethods.control}
+                        name="numberOfDependencies"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Number of dependencies</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select your current position" />
-                                    </SelectTrigger>
+                                    <Input type="number" min={0} {...field} />
                                 </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="Teacher">Teacher</SelectItem>
-                                    <SelectItem value="School Director">School Director</SelectItem>
-                                    <SelectItem value="Other">Other</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={formMethods.control}
-                    name="Number of dependencies"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Number of dependencies</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={formMethods.control}
-                    name="Work school"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Work school</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
+                                <FormDescription>
+                                    Number of people who depend on your income or salary
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
+                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                    <FormField
+                        control={formMethods.control}
+                        name="workSchool"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Work school</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-                <FormField
-                    control={formMethods.control}
-                    name="Work contract"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>
-                                Work contract &nbsp;
-                                {(uploadProgress > 0 && uploadProgress < 100) && <span className="text-sm text-gray-400">Uploading {uploadProgress} %</span>}&nbsp;
-                                {getValues("Work contract") && <span className="text-sm text-green-400">Uploaded (Do not upload again)</span>}
-                            </FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    onChange={(event) => {
-                                        if (event.target.files?.[0]) {
-                                            handleImageFiles(event);
-                                        }
-                                    }}
-                                />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
+                    <FormField
+                        control={formMethods.control}
+                        name="proofOfEmployment"
+                        render={() => (
+                            <FormItem>
+                                <FormLabel>
+                                    Work contract &nbsp;
+                                    {(uploadProgress > 0 && uploadProgress < 100) && <span className="text-sm text-gray-400">Uploading {uploadProgress} %</span>}&nbsp;
+                                    {getValues("proofOfEmployment") && <span className="text-sm text-green-400">Uploaded (Do not upload again)</span>}
+                                </FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="file"
+                                        onChange={(event) => {
+                                            if (event.target.files?.[0]) {
+                                                handleImageFiles(event);
+                                            }
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
             </div>
             <div className='flex justify-between items-center'>
                 <MultiStepFormControls currentPage={currentPage} valid={valid} />

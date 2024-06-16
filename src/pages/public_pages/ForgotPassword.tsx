@@ -1,6 +1,6 @@
 import { useForgotPassword } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import ForgotPasswordForm from "@/components/forms/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/forms/teacher-auth/ForgotPasswordForm";
 
 const ForgotPassword = () => {
   const { forgotPassword, isLoading, isSuccess } = useForgotPassword();

@@ -1,5 +1,5 @@
 import { useSubmitApplication } from "@/api/application";
-import AddApplicationForm from "@/components/forms/AddApplicationForm";
+import AddApplicationForm from "@/components/forms/applyLoan/AddApplicationForm";
 import { useNavigate } from "react-router-dom";
 
 const Apply = () => {
@@ -15,7 +15,7 @@ const Apply = () => {
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 p-5 md:p-0">
-        <h2 className='text-2xl font-bold'>Apply</h2>
+        <h2 className='text-2xl font-bold'>Apply for loan</h2>
         <AddApplicationForm 
           onSave={submitApplication}
           isLoading={isLoading}

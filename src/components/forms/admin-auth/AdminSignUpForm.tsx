@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { Checkbox } from '../ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import { Input } from '../../ui/input';
+import { Button } from '../../ui/button';
+import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
-import LoadingButton from '../LoadingButton';
+import LoadingButton from '../../LoadingButton';
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),

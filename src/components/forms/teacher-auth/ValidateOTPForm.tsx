@@ -18,7 +18,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import LoadingButton from "../LoadingButton"
+import LoadingButton from "../../LoadingButton"
 
 const formSchema = z.object({
   otp: z.string().min(6, {
@@ -43,7 +43,7 @@ export function ValidateOTPForm({ onValidateOTP, isLoading }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onValidateOTP)} className="w-2/3 space-y-2">
+      <form onSubmit={form.handleSubmit(onValidateOTP)} className="w-2/3 space-y-4 p-5 md:p-0">
         <FormField
           control={form.control}
           name="otp"

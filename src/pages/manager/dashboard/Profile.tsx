@@ -1,5 +1,5 @@
 import { useUpdateUserAccount } from "@/api/auth";
-import ManagerProfileForm from "@/components/forms/ManagerProfileForm";
+import ManagerProfileForm from "@/components/forms/manager-auth/ManagerProfileForm";
 import { Store } from "@/context/user";
 import { useContext } from "react";
 

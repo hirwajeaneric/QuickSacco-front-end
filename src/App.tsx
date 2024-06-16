@@ -50,6 +50,7 @@ import ManagerProfile from './pages/manager/dashboard/Profile';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import Responses from './pages/manager/dashboard/Responses';
 import LoanDetailsUpdate from './pages/manager/dashboard/LoanDetailsUpdate';
+import BeforeApplicationBreefing from './pages/teacher/BeforeApplicationBreefing';
 
 const App = () => {
 
@@ -77,6 +78,7 @@ const App = () => {
               : <Navigate replace to='/' />
           } 
         >
+          <Route path="overview" element={<BeforeApplicationBreefing />} />
           <Route path="step-1" element={<UserContactForm />} />
           <Route path="step-2" element={<PersonalInformationForm />} />
           <Route path="step-3" element={<WorkDetailsForm />} />

@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { Checkbox } from '../ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import { Input } from '../../ui/input';
+import { Button } from '../../ui/button';
+import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
-import LoadingButton from '../LoadingButton';
+import LoadingButton from '../../LoadingButton';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -33,7 +33,7 @@ const SignInForm = ({ onSignIn, isLoading }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSignIn)} className='space-y-2 w-full md:w-4/5'>
+      <form onSubmit={form.handleSubmit(onSignIn)} className='space-y-4 w-full md:w-4/5 p-5 md:p-0'>
         <FormField
           control={form.control}
           name='email'
@@ -65,13 +65,14 @@ const SignInForm = ({ onSignIn, isLoading }: Props) => {
           <label htmlFor='viewpassword' className='text-sm'> View password</label>
         </div>
 
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center flex-wrap'>
           {isLoading ? <LoadingButton /> : <Button type='submit'>Submit</Button>}
           <div>
             {`Don't have an account? `}
             <a href={'/signup'} className='text-blue-600'>Create account</a>
           </div>
         </div>
+
         <div className='mt-5'>
           {`Forgot your password? `}
           <a href={'/forgotpassword'} className='text-blue-600'>Recover or reset your password</a>

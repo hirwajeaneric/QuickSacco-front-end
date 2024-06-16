@@ -23,19 +23,29 @@ const formSchema = z.object({
     gender: z.enum(['Male', 'Female', 'Other']), // Use enum for valid gender options
     maritalStatus: z.enum(['Single', 'Married', 'Divorced', 'Widowed']), // Use enum for valid marital status options
     numberOfDependencies: z.number({
+        coerce: true,
         required_error: "Number of dependencies is required"
-    }).nonnegative('Number of dependencies must be a whole number'),
+    }),
     workSchool: z.string({
         required_error: "Work school is required"
     }).trim(),
     position: z.string({
         required_error: "Position is required"
     }).trim(),
-    monthlySalary: z.number().positive('Monthly salary must be a positive number'),
+    monthlySalary: z.number({
+        coerce: true,
+        required_error: "Monthly salary is required"
+    }).positive('Monthly salary must be a positive number'),
     amountToPayPerMonth: z.number().positive('Monthly payment must be a positive number'),
-    amountRequested: z.number().positive('Amount requested must be a positive number'),
+    amountRequested: z.number({
+        coerce: true,
+        required_error: "The requested amount is required"
+    }).positive('Amount requested must be a positive number'),
     repaymentPeriod: z.number().positive('Repayment period must be a positive number'),
-    suggestedRepaymentPeriod: z.number().positive('Repayment period must be a positive number'),
+    suggestedRepaymentPeriod: z.number({
+        coerce: true,
+        required_error: "You must provide the time you estimate to pay back is required"
+    }).positive('Repayment period must be a positive number'),
     bankAccountNumber: z.string({
         required_error: "Bank account number is required"
     }).trim(),
@@ -130,7 +140,7 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
     return (
         <FormProvider {...methods}>
             <Form {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-2'>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-2 bg-slate-50 p-5 md:px-20 md:py-10'>
                     <Outlet />
                 </form>
             </Form>

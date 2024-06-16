@@ -1,6 +1,6 @@
 import { useSignIn } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import ManagerSignInForm from "@/components/forms/ManagerSignInForm";
+import ManagerSignInForm from "@/components/forms/manager-auth/ManagerSignInForm";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {

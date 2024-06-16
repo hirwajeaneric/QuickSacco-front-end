@@ -1,19 +1,20 @@
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import MultiStepFormControls from "@/components/others/MultiStepFormControls";
 import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
 
 const LoanDetails = () => {
     const formMethods = useFormContext();
-    const currentPage = window.location.pathname.split('/step-')[1];
+    const currentPage = window.location.pathname.split('/apply/step-')[1];
 
     const [valid, setValid] = useState(false);
     const { getValues } = formMethods;
 
     const areAllInputFilled = () => {
-        if (getValues("Bank account number") !== '' && getValues("Amount requested") !== '' && getValues("Monthly salary") !== '' && getValues("Suggested repayment period") !== '') {
+        if (getValues("bankAccountNumber") !== '' && getValues("amountRequested") !== '' && getValues("monthlySalary") !== '' && getValues("suggestedRepaymentPeriod") !== '') {
             setValid(true);
         } else {
             setValid(false)
@@ -25,91 +26,99 @@ const LoanDetails = () => {
     });
 
     return (
-        <div className="flex flex-col gap-3">
-            <div className="flex flex-col">
-                <h2 className='text-2xl font-bold'>Loan details</h2>
-                <FormDescription>
-                    Provide more details about your salary and the loan you are applying for.
-                </FormDescription>
+        <div className="flex flex-col gap-3 w-full">
+            <div className="flex justify-between items-start">
+                <div className="flex flex-col">
+                    <h2 className='text-2xl font-bold'>Loan details</h2>
+                    <FormDescription>
+                        Details about your salary and the loan you are applying for.
+                    </FormDescription>
+                </div>
+                <span className="text-sm">
+                    Step 4/4
+                </span>
             </div>
-            <div className='flex flex-col gap-2'>
-                <FormField
-                    control={formMethods.control}
-                    name="Monthly salary"
-                    render={({ field }) => (
-                        <FormItem  onChange={areAllInputFilled}>
-                            <FormLabel>Monthly salary</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={formMethods.control}
-                    name="Amount requested"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Amount requested</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="number"
-                                    {...field}
-                                />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={formMethods.control}
-                    name="Suggested repayment period"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Suggested repayment period</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is the suggested repayment period based on your monthly salary or other income.
-                            </FormDescription>
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={formMethods.control}
-                    name="Bank account number"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Bank account number</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={formMethods.control}
-                    name="Comment"
-                    render={({ field }) => (
-                        <FormItem onChange={areAllInputFilled}>
-                            <FormLabel>Your comment</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Tell us a little bit about yourself"
-                                    className="resize-none"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                Do you have any suggestion or query, don't hesitate to let us know.
-                            </FormDescription>
-                        </FormItem>
-                    )}
-                />
+            <Separator />
+            <div className='flex gap-3 w-full justify-between items-start space-y-4 flex-wrap'>
+                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                    <FormField
+                        control={formMethods.control}
+                        name="monthlySalary"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Monthly salary</FormLabel>
+                                <FormControl>
+                                    <Input type="number" min={0} {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={formMethods.control}
+                        name="amountRequested"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Amount requested</FormLabel>
+                                <FormControl>
+                                    <Input type="number" min={0} {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={formMethods.control}
+                        name="suggestedRepaymentPeriod"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Suggested repayment period (Months)</FormLabel>
+                                <FormControl>
+                                    <Input type="number" min={1} max={150} {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    This is the suggested repayment period based on your monthly salary or other income.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
+                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                    <FormField
+                        control={formMethods.control}
+                        name="bankAccountNumber"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Bank account number</FormLabel>
+                                <FormControl>
+                                    <Input maxLength={16} {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={formMethods.control}
+                        name="comment"
+                        render={({ field }) => (
+                            <FormItem onChange={areAllInputFilled}>
+                                <FormLabel>Your comment</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Tell us a little bit about yourself"
+                                        className="resize-none"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Do you have any suggestion or query, don't hesitate to let us know.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
             </div>
             <div className='flex justify-between items-center'>
                 <MultiStepFormControls currentPage={currentPage} valid={valid} />

@@ -1,6 +1,6 @@
 import { useResetPassword } from "@/api/auth";
 import HelmetComponent from "@/components/HelmetComponent";
-import ManagerResetPasswordForm from "@/components/forms/ManagerResetPasswordForm";
+import ManagerResetPasswordForm from "@/components/forms/manager-auth/ManagerResetPasswordForm";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { Link, useSearchParams } from "react-router-dom";
