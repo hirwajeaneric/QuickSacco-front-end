@@ -1,17 +1,10 @@
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import LoadingButton from '../LoadingButton';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { Calendar } from '../ui/calendar';
-import { CalendarIcon } from 'lucide-react';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Form } from '@/components/ui/form';
+import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { calculatePaymentPeriod } from '@/utils/helperFunctions';
 
 const formSchema = z.object({
     firstName: z.string({
@@ -42,6 +35,7 @@ const formSchema = z.object({
     amountToPayPerMonth: z.number().positive('Monthly payment must be a positive number'),
     amountRequested: z.number().positive('Amount requested must be a positive number'),
     repaymentPeriod: z.number().positive('Repayment period must be a positive number'),
+    suggestedRepaymentPeriod: z.number().positive('Repayment period must be a positive number'),
     bankAccountNumber: z.string({
         required_error: "Bank account number is required"
     }).trim(),
@@ -51,6 +45,7 @@ const formSchema = z.object({
     copyOfNationalId: z.string({
         required_error: "Copy of national ID is required"
     }).trim(),
+    comment: z.string().trim(),
 });
 
 // Determining the type of our form data by infering it from the zod schema 
@@ -61,16 +56,51 @@ type Props = {
     isLoading: boolean;
 };
 
+type TeacherLocalData = {
+    createdAt: Date;
+    email: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    role: string;
+    updatedAt: Date;
+    __v: number;
+    _id: string;
+}
+
 const AddApplicationForm = ({ onSave, isLoading }: Props) => {
-    const form = useForm<ApplicationFormData>({
+    const [userInfo, setUserInfo] = useState<TeacherLocalData>({
+        createdAt: new Date(),
+        email: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        role: '',
+        updatedAt: new Date(),
+        __v: 0,
+        _id: '',
+    });
+
+    useEffect(() => {
+        if (localStorage.getItem("teacher") === null) {
+            window.location.href = "/signin";
+        }
+        const teacher: string | null = localStorage.getItem("teacher");
+        if (teacher !== null) {
+            const parsedTeacher = JSON.parse(teacher);
+            setUserInfo(parsedTeacher);
+        }
+    }, []);
+
+    const methods = useForm<ApplicationFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: '',
-            lastName: '',
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
             nationalId: '',
-            email: '',
-            teacherId: '',
-            phone: '',
+            email: userInfo.email,
+            teacherId: userInfo._id,
+            phone: userInfo.phone,
             dateOfBirth: new Date(),
             gender: 'Male',
             maritalStatus: 'Single',
@@ -81,392 +111,30 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
             amountRequested: 0,
             amountToPayPerMonth: 0,
             repaymentPeriod: 2,
+            suggestedRepaymentPeriod: 2,
             bankAccountNumber: '',
             proofOfEmployment: '',
             copyOfNationalId: '',
+            comment: ''
         },
     });
 
+    const onSubmit = async (data: ApplicationFormData) => {
+        const paymentPeriod = calculatePaymentPeriod(data.amountRequested, data.monthlySalary);
+        data.repaymentPeriod = paymentPeriod;
+        
+        console.log(data);
+        console.log(methods.formState.errors);
+    }
+
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-10'>
-                <FormDescription>
-                    Apply for loan in a few steps. Please ensure you have all the required documents ready before proceeding.
-                </FormDescription>
-
-                <div className='flex flex-wrap w-full justify-between items-start gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='firstName'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>First Name</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='lastName'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Last Name</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='email'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className='flex flex-wrap w-full justify-between items-start gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='phone'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Phone number</FormLabel>
-                                <FormControl>
-                                    <Input {...field} maxLength={10} minLength={10} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='nationalId'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>National Id</FormLabel>
-                                <FormControl>
-                                    <Input {...field} maxLength={16} minLength={16} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='dateOfBirth'
-                        render={({ field }) => (
-                            <FormItem className='flex flex-col w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Date of birth</FormLabel>
-                                <FormControl>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "w-full md:w-[240px] pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Pick a date</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                {...field}
-                                                disabled={(date) =>
-                                                    date > new Date() || date < new Date("1900-01-01")
-                                                }
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-
-                <div className='flex flex-wrap w-full justify-between items-start gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='gender'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Gender</FormLabel>
-                                <FormControl>
-                                    <RadioGroup
-                                        defaultValue={field.value}
-                                        className="flex flex-col md:flex-row space-y-1"
-                                    >
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Male" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Male</FormLabel>
-                                        </FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Female" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Female</FormLabel>
-                                        </FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Other" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Other</FormLabel>
-                                        </FormItem>
-                                    </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='maritalStatus'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Marital Status</FormLabel>
-                                <FormControl>
-                                    <RadioGroup
-                                        defaultValue={field.value}
-                                        className="flex flex-col space-y-1"
-                                    >
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Single" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Single</FormLabel>
-                                        </FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Married" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Married</FormLabel>
-                                        </FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Divorced" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Divorced</FormLabel>
-                                        </FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="Widowed" />
-                                            </FormControl>
-                                            <FormLabel className="font-normal">Widowed</FormLabel>
-                                        </FormItem>
-                                    </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-
-                <div className='flex flex-wrap w-full justify-between items-start  gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='numberOfDependencies'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Number of dependencies</FormLabel>
-                                <FormControl>
-                                    <Input type='number' {...field} className='bg-white' />
-                                </FormControl>
-                                <FormDescription>
-                                    The number of family members or other people who depend on your income/salary.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='workSchool'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Work school</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                                <FormDescription>
-                                    The name of the school you teach at
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='position'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Position</FormLabel>
-                                <FormControl>
-                                    <Select onValueChange={field.onChange} {...field}>
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select position or occupation" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            <SelectItem value="Teacher">Teacher</SelectItem>
-                                            <SelectItem value="School Director">School Director</SelectItem>
-                                            <SelectItem value="Other">Other</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    {/* <FormField
-                        control={form.control}
-                        name='position'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Position</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    /> */}
-                </div>
-
-                <div className='flex flex-wrap w-full justify-between items-start gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='monthlySalary'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Monthly Salary</FormLabel>
-                                <FormControl>
-                                    <Input type='number' {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='amountRequested'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Amount requested</FormLabel>
-                                <FormControl>
-                                    <Input type='number' {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='repaymentPeriod'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Repayment Period</FormLabel>
-                                <FormControl>
-                                    <Input type='number' {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className='flex flex-wrap w-full justify-between items-start gap-3'>
-                    <FormField
-                        control={form.control}
-                        name='bankAccountNumber'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Bank account number</FormLabel>
-                                <FormControl>
-                                    <Input {...field} className='bg-white' />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='proofOfEmployment'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Proof of employment</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type='file'
-                                        accept='.jpg, .jepg, .png, .gif'
-                                        onChange={(event) =>
-                                            field.onChange(event.target.files ? event.target.files[0] : null)
-                                        }
-                                        className='bg-white'
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name='copyOfNationalId'
-                        render={({ field }) => (
-                            <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                                <FormLabel>Copy of national Id</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type='file'
-                                        accept='.jpg, .jepg, .png, .gif'
-                                        onChange={(event) =>
-                                            field.onChange(event.target.files ? event.target.files[0] : null)
-                                        }
-                                        className='bg-white'
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-
-                {isLoading ? <LoadingButton /> : <Button type='submit' className='bg-orange-500'>Submit</Button>}
-            </form>
-        </Form>
+        <FormProvider {...methods}>
+            <Form {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-2'>
+                    <Outlet />
+                </form>
+            </Form>
+        </FormProvider>
     )
 }
 

@@ -16,6 +16,10 @@ import NotFound from './pages/public_pages/NotFound';
 import { Toaster } from 'sonner';
 import Cookies from 'js-cookie';
 import UpdateApplication from './pages/teacher/UpdateApplication';
+import UserContactForm from './components/forms/applyLoan/UserContact';
+import PersonalInformationForm from './components/forms/applyLoan/PersonalInformation';
+import LoanDetailsForm from './components/forms/applyLoan/LoanDetails';
+import WorkDetailsForm from './components/forms/applyLoan/Work';
 
 // Admin pages 
 import Auth from './pages/admin/Auth';
@@ -72,7 +76,12 @@ const App = () => {
               ? <HomeLayout><Apply /></HomeLayout>
               : <Navigate replace to='/' />
           } 
-        />
+        >
+          <Route path="step-1" element={<UserContactForm />} />
+          <Route path="step-2" element={<PersonalInformationForm />} />
+          <Route path="step-3" element={<WorkDetailsForm />} />
+          <Route path="step-4" element={<LoanDetailsForm />} />
+        </Route>
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
         <Route
           path='/account'

@@ -19,7 +19,8 @@ const PrimaryMenu = () => {
 
     useEffect(() => {
         if (currentUser) {
-            setUserInfo(currentUser)
+            setUserInfo(currentUser);
+            localStorage.setItem("teacher", JSON.stringify(currentUser));
         }
     }, [currentUser])
 
@@ -31,7 +32,7 @@ const PrimaryMenu = () => {
                     <a href={'/'} className="text-white">Home</a>
                     <a href={'/#process'} className="text-white">Process</a>
                     <a href={'/#benefits'} className="text-white">Benefits</a>
-                    <a href={'/apply'} className=" text-white">Get Started</a>
+                    <a href={'/apply/step-1'} className=" text-white">Get Started</a>
                 </span>
             </div>
 
