@@ -14,8 +14,8 @@ const ManagerDashBoardSideMenuBar = () => {
 
     const logout = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Logged out");
-
+        localStorage.removeItem("manager");
+        window.location.replace("/manager/auth");
     }
 
     return (

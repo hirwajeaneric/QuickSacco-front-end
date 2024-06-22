@@ -52,7 +52,7 @@ export const columns: ColumnDef<User>[] = [
     },
     {
         accessorKey: "role",
-        header: "Manager",
+        header: "Role",
     },
     {
         id: "actions",

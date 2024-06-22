@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { formSchema, updateformSchema } from "./utils/validationSchemas";
+import { addManagerFormSchema, formSchema, updateformSchema } from "./utils/validationSchemas";
 
 export type User = {
     _id: string;
@@ -47,3 +47,5 @@ export type Response = {
 export type ApplicationFormData = z.infer<typeof formSchema>;
 
 export type UpdateApplicationFormData = z.infer<typeof updateformSchema>;
+
+export type AddManagerTypes = z.infer<typeof addManagerFormSchema>;

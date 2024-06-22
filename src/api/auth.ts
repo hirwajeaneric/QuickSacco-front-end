@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from 'react-query';
-import { CreateUserTypes, OPTTypes, SignInTypes, UpdateUserTypes, User } from "@/types";
+import { AddManagerTypes, CreateUserTypes, OPTTypes, SignInTypes, UpdateUserTypes, User } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
 
@@ -7,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const environment = import.meta.env. VITE_ENVIRONMENT;
 
 export const useSignUp = () => {
-    const SignUpRequest = async (user: CreateUserTypes) => {
+    const SignUpRequest = async (user: AddManagerTypes | CreateUserTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/signup`, {
             method: 'POST',
             headers: {
@@ -57,6 +57,8 @@ export const useSignIn = () => {
             secure: environment === "production" ? true : false,
             expires: 1/24
         });
+
+        // localStorage.setItem(response.user.role, JSON.stringify(response.user));
     };
 
     const { mutateAsync: signIn, isLoading, isError, isSuccess, error } = useMutation(SignInRequest);
@@ -222,6 +224,54 @@ export const useGetProfileData = () => {
     const { data: currentUser, isLoading } = useQuery("userInfo", () => getUserProfileRequest());
 
     return { currentUser, isLoading }
+};
+
+export const useGetManagers = () => {
+    const accessToken = Cookies.get('access-token');
+    
+    const getManagersRequest = async (): Promise<User[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/managers`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        return responseData.managers;
+    };
+
+    const { data: managers, isLoading } = useQuery("managers", () => getManagersRequest());
+
+    return { managers, isLoading }
+};
+
+export const useGetTeachers = () => {
+    const accessToken = Cookies.get('access-token');
+    
+    const getManagersRequest = async (): Promise<User[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/teachers`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        return responseData.teachers;
+    };
+
+    const { data: teachers, isLoading } = useQuery("teachers", () => getManagersRequest());
+
+    return { teachers, isLoading }
 };
 
 export const useUpdateUserAccount = () => {

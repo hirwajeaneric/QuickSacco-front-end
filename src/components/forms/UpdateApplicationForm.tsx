@@ -24,16 +24,11 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
     const form = useForm<UpdateApplicationFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: currentApplication,
-    });
-
-    const onSubmit = async (data: UpdateApplicationFormData) => {
-        // data.dateOfBirth = new Date(data.dateOfBirth);
-        onSave(data);
-    }
+    }); 
 
     return (
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-5'>
+        <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-5'>
             <div className='flex flex-wrap w-full justify-between items-start gap-3'>
                 <FormField
                     control={form.control}

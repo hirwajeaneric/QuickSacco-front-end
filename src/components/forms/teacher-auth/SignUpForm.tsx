@@ -7,6 +7,7 @@ import { Button } from '../../ui/button';
 import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
 import LoadingButton from '../../LoadingButton';
+import { CreateUserTypes } from '@/types';
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
@@ -19,7 +20,7 @@ const formSchema = z.object({
 type SignUpFormData = z.infer<typeof formSchema>;
 
 type Props = {
-  onSignUp: (values: SignUpFormData) => void;
+  onSignUp: (values: SignUpFormData | CreateUserTypes) => void;
   isLoading: boolean;
 }
 

@@ -13,8 +13,8 @@ const DashBoardSideMenuBar = () => {
 
     const logout = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Logged out");
-
+        localStorage.removeItem("admin");
+        window.location.replace("/admin/auth");
     }
 
     return (

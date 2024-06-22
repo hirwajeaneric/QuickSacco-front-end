@@ -138,3 +138,12 @@ export const updateformSchema = z.object({
     loanStatus: z.enum(["Pending", "Update required", "Approved", "Rejected"]),
     _id: z.string()
 });
+
+export const addManagerFormSchema = z.object({
+    firstName: z.string().min(2).max(50),
+    lastName: z.string().min(2).max(50),
+    phone: z.string().min(10).max(10),
+    email: z.string().email('Invalid email'),
+    role: z.string()
+});
+
