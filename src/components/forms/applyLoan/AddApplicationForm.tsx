@@ -4,8 +4,7 @@ import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { calculatePaymentPeriod } from '@/utils/helperFunctions';
-// import { Button } from '@/components/ui/button';
+import { calculateMonthlyRepayment, calculatePaymentPeriod } from '@/utils/helperFunctions';
 
 const formSchema = z.object({
     firstName: z.string({ required_error: "FirstName is required" })
@@ -51,8 +50,8 @@ const formSchema = z.object({
     amountRequested: z.number({
         coerce: true,
         required_error: "The requested amount is required"
-    })
-        .positive('Amount requested must be a positive number'),
+    }),
+    repaymentPerMonth: z.number(),
     repaymentPeriod: z.number(),
     suggestedRepaymentPeriod: z.number({
         coerce: true,
@@ -127,6 +126,7 @@ export default function AddApplicationForm({ onSave }: Props) {
             monthlySalary: 0,
             amountRequested: 0,
             repaymentPeriod: 0,
+            repaymentPerMonth: 0,
             suggestedRepaymentPeriod: 0,
             bankAccountNumber: '',
             proofOfEmployment: '',
@@ -138,11 +138,8 @@ export default function AddApplicationForm({ onSave }: Props) {
     const onSubmit = async (data: ApplicationFormData) => {
         const paymentPeriod = calculatePaymentPeriod(data.amountRequested, data.monthlySalary);
         data.repaymentPeriod = paymentPeriod;
-        // data.dateOfBirth = new Date(data.dateOfBirth).toDateString();
+        data.repaymentPerMonth = calculateMonthlyRepayment(data.amountRequested, data.suggestedRepaymentPeriod);
         
-        console.log(data);
-        console.log(methods.formState.errors);
-
         onSave(data);
     }
 

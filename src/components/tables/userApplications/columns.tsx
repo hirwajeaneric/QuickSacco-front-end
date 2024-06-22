@@ -75,10 +75,10 @@ export const columns: ColumnDef<Application>[] = [
         },
     },
     {
-        accessorKey: "amountToPayPerMonth",
+        accessorKey: "repaymentPerMonth",
         header: () => <div className="text-right">Payment per month</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amountToPayPerMonth"))
+            const amount = parseFloat(row.getValue("repaymentPerMonth"))
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "RWF",
@@ -92,7 +92,7 @@ export const columns: ColumnDef<Application>[] = [
         header: "Position",
     },
     {
-        accessorKey: "repaymentReriod",
+        accessorKey: "repaymentPeriod",
         header: "Repayment Period (months)",
     },
     {

@@ -43,7 +43,7 @@ export const useSubmitApplication = () => {
 export const useGetUserApplications = () => {
     const accessToken = Cookies.get('access-token');
     
-    const getAllUserApplicationsRequest = async (): Promise<Application> => {
+    const getAllUserApplicationsRequest = async (): Promise<Application[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findByUser`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -56,7 +56,7 @@ export const useGetUserApplications = () => {
             throw new Error(responseData.message);
         }
 
-        return responseData;
+        return responseData.applications;
     };
 
     const { data: userApplications, isLoading } = useQuery("applicationInfo", () => getAllUserApplicationsRequest());

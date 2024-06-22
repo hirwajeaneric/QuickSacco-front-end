@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
-import { applications as data } from "@/fakes/applications";
-import { Application } from "@/types";
+// import { Application } from "@/types";
 import UserApplicationPage from "@/components/tables/userApplications/pages";
+import { useGetUserApplications } from "@/api/application";
 
 const Applications = () => {
-  const [applications, setApplications] = useState<Application[]>([]);
-
-  useEffect(() => {
-    setApplications(data);
-  },[])
+  const { userApplications, isLoading } = useGetUserApplications();  
 
   return (
     <section className="flex flex-col gap-4 w-full">
@@ -17,7 +12,8 @@ const Applications = () => {
           <h2 className='text-2xl font-bold'>Applications</h2>
           <p className="text-sm text-gray-600">View updates about your loan requests here</p>
         </div>
-        <UserApplicationPage data={applications ? applications : []} />
+        {isLoading && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
+        {userApplications && <UserApplicationPage data={userApplications} />}
       </div>
     </section>
   )
