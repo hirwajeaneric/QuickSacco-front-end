@@ -51,6 +51,7 @@ import ManagerDashboard from './pages/manager/ManagerDashboard';
 import Responses from './pages/manager/dashboard/Responses';
 import LoanDetailsUpdate from './pages/manager/dashboard/LoanDetailsUpdate';
 import BeforeApplicationBreefing from './pages/teacher/BeforeApplicationBreefing';
+import Submitting from './components/forms/applyLoan/Submitting';
 
 const App = () => {
 
@@ -83,6 +84,7 @@ const App = () => {
           <Route path="step-2" element={<PersonalInformationForm />} />
           <Route path="step-3" element={<WorkDetailsForm />} />
           <Route path="step-4" element={<LoanDetailsForm />} />
+          <Route path="submitting" element={<Submitting />} />
         </Route>
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
         <Route

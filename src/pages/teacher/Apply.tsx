@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const Apply = () => {
   const { submitApplication, isLoading, isSuccess } = useSubmitApplication();
-  // const { updateApplication, isLoading: isUpdateLoading } = useUpdateApplication();
-  // const { currentApplication, isLoading: isGetLoading } = useGetApplicationsData();
   const navigate = useNavigate();
   
   if (isSuccess) {

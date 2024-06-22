@@ -2,9 +2,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { calculatePaymentPeriod } from '@/utils/helperFunctions';
+// import { Button } from '@/components/ui/button';
 
 const formSchema = z.object({
     firstName: z.string({ required_error: "FirstName is required" })
@@ -47,15 +48,12 @@ const formSchema = z.object({
         required_error: "Monthly salary is required"
     })
         .positive('Monthly salary must be a positive number'),
-    amountToPayPerMonth: z.number()
-        .positive('Monthly payment must be a positive number'),
     amountRequested: z.number({
         coerce: true,
         required_error: "The requested amount is required"
     })
         .positive('Amount requested must be a positive number'),
-    repaymentPeriod: z.number()
-        .positive('Repayment period must be a positive number'),
+    repaymentPeriod: z.number(),
     suggestedRepaymentPeriod: z.number({
         coerce: true,
         required_error: "You must provide the time you estimate to pay back is required"
@@ -97,39 +95,29 @@ type TeacherLocalData = {
     _id: string;
 }
 
-const AddApplicationForm = ({ onSave, isLoading }: Props) => {
-    const [userInfo, setUserInfo] = useState<TeacherLocalData>({
-        createdAt: new Date(),
-        email: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        role: '',
-        updatedAt: new Date(),
-        __v: 0,
-        _id: '',
-    });
+export default function AddApplicationForm({ onSave }: Props) {
+
+    const teacher: string | null = localStorage.getItem("teacher");
+    let parsedTeacherInfo: TeacherLocalData | null = null;
+    if (teacher !== null) {
+        parsedTeacherInfo = JSON.parse(teacher);
+    }
 
     useEffect(() => {
         if (localStorage.getItem("teacher") === null) {
             window.location.href = "/signin";
-        }
-        const teacher: string | null = localStorage.getItem("teacher");
-        if (teacher !== null) {
-            const parsedTeacher = JSON.parse(teacher);
-            setUserInfo(parsedTeacher);
         }
     }, []);
 
     const methods = useForm<ApplicationFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
+            firstName: parsedTeacherInfo?.firstName,
+            lastName: parsedTeacherInfo?.lastName,
             nationalId: '',
-            email: userInfo.email,
-            teacherId: userInfo._id,
-            phone: userInfo.phone,
+            email: parsedTeacherInfo?.email,
+            teacherId: parsedTeacherInfo?._id,
+            phone: parsedTeacherInfo?.phone,
             dateOfBirth: new Date(),
             gender: 'Male',
             maritalStatus: 'Single',
@@ -138,22 +126,24 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
             position: '',
             monthlySalary: 0,
             amountRequested: 0,
-            amountToPayPerMonth: 0,
-            repaymentPeriod: 2,
-            suggestedRepaymentPeriod: 2,
+            repaymentPeriod: 0,
+            suggestedRepaymentPeriod: 0,
             bankAccountNumber: '',
             proofOfEmployment: '',
             copyOfNationalId: '',
-            comment: ''
+            comment: "",
         },
     });
 
     const onSubmit = async (data: ApplicationFormData) => {
         const paymentPeriod = calculatePaymentPeriod(data.amountRequested, data.monthlySalary);
         data.repaymentPeriod = paymentPeriod;
+        // data.dateOfBirth = new Date(data.dateOfBirth).toDateString();
         
         console.log(data);
         console.log(methods.formState.errors);
+
+        onSave(data);
     }
 
     return (
@@ -166,5 +156,3 @@ const AddApplicationForm = ({ onSave, isLoading }: Props) => {
         </FormProvider>
     )
 }
-
-export default AddApplicationForm

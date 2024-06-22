@@ -2,18 +2,20 @@ import { useMutation, useQuery } from 'react-query';
 import { UpdateApplicationTypes, Application } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
-import { ApplicationFormData } from '@/components/forms/AddApplicationForm';
+import { ApplicationFormData } from '@/components/forms/AddApplicationFormDraft';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useSubmitApplication = () => {
+    const accessToken = Cookies.get('access-token');
+
     const submitApplicationRequest = async (application: ApplicationFormData) => {
-        console.log(application);
-        
+        // console.log(application);
         const response = await fetch(`${API_BASE_URL}/api/v1/application/add`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
             },
             body: JSON.stringify(application),
         });
