@@ -9,7 +9,6 @@ export const useSubmitApplication = () => {
     const accessToken = Cookies.get('access-token');
 
     const submitApplicationRequest = async (application: ApplicationFormData) => {
-        // console.log(application);
         const response = await fetch(`${API_BASE_URL}/api/v1/application/add`, {
             method: 'POST',
             headers: {
@@ -66,7 +65,7 @@ export const useGetUserApplications = () => {
 export const useGetLoanApplicationData = (loanId: string) => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationRequest = async (loanId:string): Promise<ApplicationFormData> => {
+    const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,

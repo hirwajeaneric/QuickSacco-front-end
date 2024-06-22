@@ -68,6 +68,7 @@ export const formSchema = z.object({
         .trim(),
 });
 
+
 export const updateformSchema = z.object({
     firstName: z.string({ required_error: "FirstName is required" })
         .trim()
@@ -134,5 +135,6 @@ export const updateformSchema = z.object({
         .trim(),
     comment: z.string()
         .trim(),
+    loanStatus: z.enum(["Pending", "Update required", "Approved", "Rejected"]),
     _id: z.string()
 });

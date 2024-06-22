@@ -4,7 +4,7 @@ import { Form } from '@/components/ui/form';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { calculateMonthlyRepayment, calculatePaymentPeriod } from '@/utils/helperFunctions';
-import { formSchema } from '@/utils/validationSchamas';
+import { formSchema } from '@/utils/validationSchemas';
 import { ApplicationFormData } from '@/types';
 
 type Props = {

@@ -11,7 +11,7 @@ import { Calendar } from '../ui/calendar';
 import { CalendarIcon } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { formSchema } from '@/utils/validationSchamas';
+import { formSchema } from '@/utils/validationSchemas';
 import { UpdateApplicationFormData } from '@/types';
 
 type Props = {

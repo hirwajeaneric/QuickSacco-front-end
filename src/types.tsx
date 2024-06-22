@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { formSchema, updateformSchema } from "./utils/validationSchamas";
+import { formSchema, updateformSchema } from "./utils/validationSchemas";
 
 export type User = {
     _id: string;
