@@ -2,6 +2,7 @@ import LoansTable from "@/components/tables/loanApplications/pages";
 import { applications } from "@/fakes/applications";
 
 const Loans = () => {
+  const {} = useGet
   return (
     <div className="flex flex-col gap-5">
       <div>

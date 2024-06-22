@@ -107,14 +107,14 @@ export const useForgotPassword = () => {
 };
 
 export const useResetPassword = () => {
-    const accessToken = Cookies.get("reset-token");
-
+    const token = window.location.search.split('=')[1];
+    
     const ResetPasswordRequest = async (user: { password: string }) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/resetPassword`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`,
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(user),
         });
