@@ -65,32 +65,8 @@ export const useGetUserApplications = () => {
 export const useGetLoanApplicationData = (loanId: string) => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData> => {
+    const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-            }
-        });
-
-        const responseData = await response.json();
-        
-        if (!response.ok) {
-            throw new Error(responseData.message);
-        }
-
-        return responseData.application;
-    };
-
-    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));
-
-    return { currentApplication, isLoading }
-};
-
-export const useGetManagerAssignedLoans = () => {
-    const accessToken = Cookies.get('access-token');
-    
-    const getManagerApplicationsRequest = async (): Promise<UpdateApplicationFormData[]> => {
-        const response = await fetch(`${API_BASE_URL}/api/v1/application/findByManager`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
             }
@@ -105,7 +81,32 @@ export const useGetManagerAssignedLoans = () => {
         return responseData.applications;
     };
 
-    const { data: managerApplications, isLoading } = useQuery("applications", () => getManagerApplicationsRequest());
+    const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));
+
+    return { currentApplication, isLoading }
+};
+
+export const useGetManagerAssignedLoans = () => {
+    const accessToken = Cookies.get('access-token');
+    const managerId = JSON.parse(localStorage.getItem("manager") as string)._id;
+
+    const getManagerApplicationsRequest = async (managerId: string): Promise<UpdateApplicationFormData[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/findByManager?managerId=${managerId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        } 
+
+        return responseData.applications;
+    };
+
+    const { data: managerApplications, isLoading } = useQuery("applications", () => getManagerApplicationsRequest(managerId));
 
     return { managerApplications, isLoading }
 };

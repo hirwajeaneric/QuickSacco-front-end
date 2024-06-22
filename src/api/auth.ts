@@ -58,7 +58,9 @@ export const useSignIn = () => {
             expires: 1/24
         });
 
-        // localStorage.setItem(response.user.role, JSON.stringify(response.user));
+        console.log(responseData.user);
+        
+        localStorage.setItem((responseData.user.role).toLowerCase(), JSON.stringify(responseData.user));
     };
 
     const { mutateAsync: signIn, isLoading, isError, isSuccess, error } = useMutation(SignInRequest);
