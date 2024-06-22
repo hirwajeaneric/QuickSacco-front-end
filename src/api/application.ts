@@ -57,7 +57,7 @@ export const useGetUserApplications = () => {
         return responseData.applications;
     };
 
-    const { data: userApplications, isLoading } = useQuery("applicationInfo", () => getAllUserApplicationsRequest());
+    const { data: userApplications, isLoading } = useQuery("loans", () => getAllUserApplicationsRequest());
 
     return { userApplications, isLoading }
 };
@@ -84,6 +84,30 @@ export const useGetLoanApplicationData = (loanId: string) => {
     const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));
 
     return { currentApplication, isLoading }
+};
+
+export const useGetManagerAssignedLoans = () => {
+    const accessToken = Cookies.get('access-token');
+    
+    const getManagerApplicationsRequest = async (): Promise<UpdateApplicationFormData[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/findByManager`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        return responseData.applications;
+    };
+
+    const { data: managerApplications, isLoading } = useQuery("applications", () => getManagerApplicationsRequest());
+
+    return { managerApplications, isLoading }
 };
 
 export const useUpdateApplication = () => {

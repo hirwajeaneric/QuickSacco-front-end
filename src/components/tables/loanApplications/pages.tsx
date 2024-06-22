@@ -1,9 +1,9 @@
-import { Application } from "@/types"
+import { UpdateApplicationFormData } from "@/types"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
 type Props = {
-    data: Application[];
+    data: UpdateApplicationFormData[];
 }
 export default function UserApplicationPage({ data }: Props) {
     return (
