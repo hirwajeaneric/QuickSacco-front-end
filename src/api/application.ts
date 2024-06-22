@@ -1,8 +1,7 @@
 import { useMutation, useQuery } from 'react-query';
-import { UpdateApplicationTypes, Application } from "@/types";
+import { ApplicationFormData, UpdateApplicationFormData } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
-import { ApplicationFormData } from '@/components/forms/AddApplicationFormDraft';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -43,7 +42,7 @@ export const useSubmitApplication = () => {
 export const useGetUserApplications = () => {
     const accessToken = Cookies.get('access-token');
     
-    const getAllUserApplicationsRequest = async (): Promise<Application[]> => {
+    const getAllUserApplicationsRequest = async (): Promise<ApplicationFormData[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findByUser`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -67,7 +66,7 @@ export const useGetUserApplications = () => {
 export const useGetLoanApplicationData = (loanId: string) => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationRequest = async (loanId:string): Promise<Application> => {
+    const getApplicationRequest = async (loanId:string): Promise<ApplicationFormData> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -80,7 +79,7 @@ export const useGetLoanApplicationData = (loanId: string) => {
             throw new Error(responseData.message);
         }
 
-        return responseData;
+        return responseData.application;
     };
 
     const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));
@@ -89,7 +88,7 @@ export const useGetLoanApplicationData = (loanId: string) => {
 };
 
 export const useUpdateApplication = () => {
-    const updateApplicationRequest = async (application: UpdateApplicationTypes) => {
+    const updateApplicationRequest = async (application: UpdateApplicationFormData) => {
         const accessToken = Cookies.get('access-token');
         const response = await fetch(`${API_BASE_URL}/api/v1/application/update?id=${application._id}`, {
             method: 'PUT',

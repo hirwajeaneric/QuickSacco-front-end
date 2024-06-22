@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -12,70 +11,29 @@ import { Calendar } from '../ui/calendar';
 import { CalendarIcon } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Application, UpdateApplicationTypes } from '@/types';
-
-const formSchema =  z.object({
-    firstName: z.string({
-        required_error: "FirstName is required"
-    }).trim().min(1, 'First name is required').max(255, 'First name is too long'),
-    lastName: z.string().trim().min(1, 'Last name is required').max(255, 'Last name is too long'),
-    nationalId: z.string().trim().min(16, 'National ID must be 16 characters long').max(16, 'National ID must be 16 characters long'),
-    email: z.string({
-        required_error: "Email address is required"
-    }).email('Invalid email format').trim(),
-    teacherId: z.string().trim(),
-    phone: z.string().trim().min(10, 'Phone number must be 10 digits long'),
-    dateOfBirth: z.date({
-        required_error: "Date of birth is required"
-    }),
-    gender: z.enum(['Male', 'Female', 'Other']), // Use enum for valid gender options
-    maritalStatus: z.enum(['Single', 'Married', 'Divorced', 'Widowed']), // Use enum for valid marital status options
-    numberOfDependencies: z.number({
-        required_error: "Number of dependencies is required"
-    }).nonnegative('Number of dependencies must be a whole number'),
-    workSchool: z.string({
-        required_error: "Work school is required"
-    }).trim(),
-    position: z.string({
-        required_error: "Position is required"
-    }).trim(),
-    monthlySalary: z.number().positive('Monthly salary must be a positive number'),
-    amountToPayPerMonth: z.number().positive('Monthly payment must be a positive number'),
-    amountRequested: z.number().positive('Amount requested must be a positive number'),
-    repaymentPeriod: z.number().positive('Repayment period must be a positive number'),
-    bankAccountNumber: z.string({
-        required_error: "Bank account number is required"
-    }).trim(),
-    proofOfEmployment: z.string({
-        required_error: "Proof of employment is required"
-    }).trim(),
-    copyOfNationalId: z.string({
-        required_error: "Copy of national ID is required"
-    }).trim(),
-    createdAt: z.date({
-        required_error: "Date of creation is required"
-    })
-});
-
-// Determining the type of our form data by infering it from the zod schema 
-// export type ApplicationFormData = z.infer<typeof formSchema>;
-export type ApplicationFormData = UpdateApplicationTypes;
+import { formSchema } from '@/utils/validationSchamas';
+import { UpdateApplicationFormData } from '@/types';
 
 type Props = {
-    currentApplication: Application;
-    onSave: (ApplicationData: ApplicationFormData) => void;
+    currentApplication: UpdateApplicationFormData;
+    onSave: (ApplicationData: UpdateApplicationFormData) => void;
     isLoading: boolean;
 };
 
 const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props) => {
-    const form = useForm<ApplicationFormData>({
+    const form = useForm<UpdateApplicationFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: currentApplication,
     });
 
+    const onSubmit = async (data: UpdateApplicationFormData) => {
+        // data.dateOfBirth = new Date(data.dateOfBirth);
+        onSave(data);
+    }
+
     return (
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSave)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-5'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2 bg-gray-50 rounded-lg p-5 md:p-5'>
             <div className='flex flex-wrap w-full justify-between items-start gap-3'>
                 <FormField
                     control={form.control}
@@ -146,7 +104,7 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                         </FormItem>
                     )}
                 />
-
+                
                 <FormField
                     control={form.control}
                     name='dateOfBirth'
@@ -330,19 +288,6 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                         </FormItem>
                     )}
                 />
-                {/* <FormField
-                    control={form.control}
-                    name='position'
-                    render={({ field }) => (
-                        <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
-                            <FormLabel>Position</FormLabel>
-                            <FormControl>
-                                <Input {...field} className='bg-white' />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                /> */}
             </div>
 
             <div className='flex flex-wrap w-full justify-between items-start gap-3'>
@@ -376,7 +321,7 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
 
                 <FormField
                     control={form.control}
-                    name='repaymentReriod'
+                    name='repaymentPeriod'
                     render={({ field }) => (
                         <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
                             <FormLabel>Repayment Period</FormLabel>
@@ -388,12 +333,12 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                     )}
                 />
             </div>
-            <div className='flex flex-wrap w-full justify-between items-start gap-3'>
+            <div className='flex flex-wrap w-full justify-start items-start gap-3'>
                 <FormField
                     control={form.control}
                     name='bankAccountNumber'
                     render={({ field }) => (
-                        <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
+                        <FormItem className='w-full sm:w-[49%] md:w-[49%]'>
                             <FormLabel>Bank account number</FormLabel>
                             <FormControl>
                                 <Input {...field} className='bg-white' />
@@ -402,12 +347,26 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                         </FormItem>
                     )}
                 />
-
+                <FormField
+                    control={form.control}
+                    name='repaymentPerMonth'
+                    render={({ field }) => (
+                        <FormItem className='w-full sm:w-[49%] md:w-[49%]'>
+                            <FormLabel>Repayment Per Month</FormLabel>
+                            <FormControl>
+                                <Input type='number' {...field} className='bg-white' />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            </div>
+            <div className='flex flex-wrap w-full justify-start items-start gap-3'>
                 <FormField
                     control={form.control}
                     name='proofOfEmployment'
                     render={({ field }) => (
-                        <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
+                        <FormItem className='w-full sm:w-[49%] md:w-[49%]'>
                             <FormLabel>Proof of employment</FormLabel>
                             <FormControl>
                                 <Input
@@ -428,7 +387,7 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                     control={form.control}
                     name='copyOfNationalId'
                     render={({ field }) => (
-                        <FormItem className='w-full sm:w-[49%] md:w-[31%]'>
+                        <FormItem className='w-full sm:w-[49%] md:w-[49%]'>
                             <FormLabel>Copy of national Id</FormLabel>
                             <FormControl>
                                 <Input
