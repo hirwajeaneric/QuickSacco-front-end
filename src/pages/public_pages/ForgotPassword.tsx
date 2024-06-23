@@ -1,5 +1,5 @@
 import { useForgotPassword } from "@/api/auth";
-import HelmetComponent from "@/components/HelmetComponent";
+import HelmetComponent from "@/components/others/HelmetComponent";
 import ForgotPasswordForm from "@/components/forms/teacher-auth/ForgotPasswordForm";
 
 const ForgotPassword = () => {

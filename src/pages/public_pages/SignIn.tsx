@@ -1,5 +1,5 @@
 import { useSignIn } from "@/api/auth";
-import HelmetComponent from "@/components/HelmetComponent";
+import HelmetComponent from "@/components/others/HelmetComponent";
 import SignInForm from "@/components/forms/teacher-auth/SignInForm";
 
 const SignIn = () => {

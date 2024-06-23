@@ -18,7 +18,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import LoadingButton from "../../LoadingButton"
+import LoadingButton from "../../others/LoadingButton"
 
 const formSchema = z.object({
   otp: z.string().min(6, {

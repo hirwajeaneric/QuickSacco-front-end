@@ -1,5 +1,5 @@
-import DashBoardSideMenuBar from "@/components/DashBoardSideMenuBar"
-import DashboardTopBar from "@/components/DashboardTopBar"
+import DashBoardSideMenuBar from "@/components/sections/DashBoardSideMenuBar"
+import DashboardTopBar from "@/components/sections/DashboardTopBar"
 import { Outlet } from "react-router-dom"
 
 const AdminDashboard = () => {

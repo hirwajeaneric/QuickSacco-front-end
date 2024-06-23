@@ -1,5 +1,5 @@
 import { useResetPassword } from "@/api/auth";
-import HelmetComponent from "@/components/HelmetComponent";
+import HelmetComponent from "@/components/others/HelmetComponent";
 import ManagerResetPasswordForm from "@/components/forms/manager-auth/ManagerResetPasswordForm";
 import { useEffect } from "react";
 import Cookies from "js-cookie";

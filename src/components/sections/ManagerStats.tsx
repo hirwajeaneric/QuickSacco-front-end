@@ -1,5 +1,5 @@
 import { UpdateApplicationFormData, User } from "@/types"
-import StatCard from "../StatCard"
+import StatCard from "../others/StatCard"
 import { useEffect, useState } from "react"
 import { DataFilterTypes } from "@/pages/manager/dashboard/Home"
 import { loanFilterPerPeriod } from "@/utils/helperFunctions"

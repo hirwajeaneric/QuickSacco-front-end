@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import LoadingButton from '@/components/LoadingButton';
+import LoadingButton from '@/components/others/LoadingButton';
 
 type Props = {
     onSave: (ApplicationData: UpdateApplicationFormData) => void;

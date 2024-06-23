@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import PrimaryMenu from "@/components/PrimaryMenu";
-import SecondaryMenu from "@/components/SecondaryMenu";
-import MobileMenu from "@/components/MobileMenu";
+import PrimaryMenu from "@/components/sections/PrimaryMenu";
+import SecondaryMenu from "@/components/sections/SecondaryMenu";
+import MobileMenu from "@/components/sections/MobileMenu";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 

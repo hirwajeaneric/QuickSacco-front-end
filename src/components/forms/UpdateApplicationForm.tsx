@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import LoadingButton from '../LoadingButton';
+import LoadingButton from '../others/LoadingButton';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";

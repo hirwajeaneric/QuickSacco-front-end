@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import LoadingButton from '../LoadingButton';
+import LoadingButton from '../others/LoadingButton';
 import { AddManagerTypes } from '@/types';
 import { addManagerFormSchema } from '@/utils/validationSchemas';
 

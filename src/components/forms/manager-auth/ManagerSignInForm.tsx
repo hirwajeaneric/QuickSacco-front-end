@@ -6,7 +6,7 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
-import LoadingButton from '../../LoadingButton';
+import LoadingButton from '../../others/LoadingButton';
 
 const formSchema = z.object({
   email: z.string().email(),

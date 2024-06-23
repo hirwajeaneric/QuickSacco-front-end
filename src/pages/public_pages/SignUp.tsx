@@ -1,5 +1,5 @@
 import { useSignUp } from "@/api/auth";
-import HelmetComponent from "@/components/HelmetComponent";
+import HelmetComponent from "@/components/others/HelmetComponent";
 import SignUpForm from "@/components/forms/teacher-auth/SignUpForm";
 import { useNavigate } from "react-router-dom";
 

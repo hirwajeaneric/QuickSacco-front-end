@@ -1,4 +1,4 @@
-import StatCard from "@/components/StatCard";
+import StatCard from "@/components/others/StatCard";
 import { UpdateApplicationFormData, User } from "@/types";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
-import ManagerDashBoardSideMenuBar from "@/components/ManagerDashBoardSideMenuBar"
-import DashboardTopBar from "@/components/DashboardTopBar"
+import ManagerDashBoardSideMenuBar from "@/components/sections/ManagerDashBoardSideMenuBar"
+import DashboardTopBar from "@/components/sections/DashboardTopBar"
 import { Outlet } from "react-router-dom"
 
 const ManagerDashboard = () => {

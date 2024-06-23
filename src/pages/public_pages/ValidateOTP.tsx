@@ -1,5 +1,5 @@
 import { useValidateOTP } from "@/api/auth";
-import HelmetComponent from "@/components/HelmetComponent";
+import HelmetComponent from "@/components/others/HelmetComponent";
 import { ValidateOTPForm } from "@/components/forms/teacher-auth/ValidateOTPForm";
 import { useNavigate } from "react-router-dom";
 

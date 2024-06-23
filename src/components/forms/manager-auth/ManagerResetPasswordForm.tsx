@@ -6,7 +6,7 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { useState } from 'react';
 import { Checkbox } from '../../ui/checkbox';
-import LoadingButton from '../../LoadingButton';
+import LoadingButton from '../../others/LoadingButton';
 
 const formSchema = z.object({
   password: z.string().min(2, 'Invalid password')

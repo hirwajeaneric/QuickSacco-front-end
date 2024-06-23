@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { File, LucideCircleUser } from "lucide-react";
 import { useGetProfileData } from "@/api/auth";
 import { useEffect, useState } from "react";
