@@ -111,10 +111,10 @@ export const useGetManagerAssignedLoans = () => {
     return { managerApplications, isLoading }
 };
 
-export const useUpdateApplication = () => {
+export const useUpdateApplication = (loanId: string) => {
     const updateApplicationRequest = async (application: UpdateApplicationFormData) => {
         const accessToken = Cookies.get('access-token');
-        const response = await fetch(`${API_BASE_URL}/api/v1/application/update?id=${application._id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/update?id=${loanId}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -134,7 +134,7 @@ export const useUpdateApplication = () => {
 
     if (isSuccess) {
         toast.success("Application updated!");
-        window.location.reload();
+        // window.location.reload();
     }
 
     if (error) {

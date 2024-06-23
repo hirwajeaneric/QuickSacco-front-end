@@ -44,8 +44,19 @@ export type Response = {
 
 };
 
+export type ManagerInfoTypes = {
+    firstName: string,
+    lastName: string,
+    _id: string,
+    id: string,
+    email: string
+}
+
 export type ApplicationFormData = z.infer<typeof formSchema>;
 
-export type UpdateApplicationFormData = z.infer<typeof updateformSchema>;
+type UpdateApplicationFormTypes = z.infer<typeof updateformSchema>;
+export interface UpdateApplicationFormData extends UpdateApplicationFormTypes {
+    managerId: ManagerInfoTypes
+}
 
 export type AddManagerTypes = z.infer<typeof addManagerFormSchema>;

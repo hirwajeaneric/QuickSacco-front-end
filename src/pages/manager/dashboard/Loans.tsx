@@ -4,8 +4,6 @@ import LoansTable from "@/components/tables/loanApplications/pages";
 const Loans = () => {
   const { isLoading, managerApplications } = useGetManagerAssignedLoans();
   
-  console.log(managerApplications);
-
   return (
     <div className="flex flex-col gap-5">
       <div>
