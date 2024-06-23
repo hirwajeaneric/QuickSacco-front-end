@@ -108,6 +108,10 @@ const ApplicationDetails = () => {
                 <span className="w-1/2">Bank calculated payment period (months): </span>
                 <span>{currentApplication?.repaymentPeriod}</span>
               </div>
+              {currentApplication?.comment && <div className="flex justify-start items-center gap-5 w-full text-sm">
+                <span className="w-1/2">Your comment: </span>
+                <span>{currentApplication?.comment}</span>
+              </div>}
               <div className="flex justify-start items-center gap-5 w-full text-sm">
                 <span className="w-1/2">Loan Status: </span>
                 {currentApplication?.loanStatus === 'Pending' && <span className={`rounded-md bg-slate-400 px-3 text-white font-bold`}>{currentApplication?.loanStatus}</span>}
@@ -115,6 +119,10 @@ const ApplicationDetails = () => {
                 {currentApplication?.loanStatus === 'Rejected' && <span className={`rounded-md bg-red-400 px-3 text-white font-bold`}>{currentApplication?.loanStatus}</span>}
                 {currentApplication?.loanStatus === 'Update required' && <span className={`rounded-md bg-blue-400 px-3 text-white font-bold`}>{currentApplication?.loanStatus}</span>}
               </div>
+              {currentApplication?.managerComment && <div className="flex justify-start items-center gap-5 w-full text-sm">
+                <span className="w-1/2">Manager comment: </span>
+                <span>{currentApplication?.managerComment}</span>
+              </div>}
 
               <h2 className="text-base font-bold mt-4">Manager info</h2>
               <div className="flex justify-start items-center gap-5 w-full text-sm">

@@ -134,7 +134,9 @@ export const useUpdateApplication = (loanId: string) => {
 
     if (isSuccess) {
         toast.success("Application updated!");
-        // window.location.reload();
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     }
 
     if (error) {

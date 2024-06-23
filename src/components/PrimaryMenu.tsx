@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
     Popover,
     PopoverContent,
@@ -42,7 +42,7 @@ const PrimaryMenu = () => {
                     <Popover>
                         <PopoverTrigger className="flex items-center gap-2">
                             <Avatar>
-                                <AvatarImage src="avatar.svg" />
+                                {/* <AvatarImage src="avatar.svg" /> */}
                                 <AvatarFallback>{iconTextGenerator(userInfo.firstName, userInfo.lastName)}</AvatarFallback>
                             </Avatar>
                             <p className="text-white">{userInfo.firstName}</p>

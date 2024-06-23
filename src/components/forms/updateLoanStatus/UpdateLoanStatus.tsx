@@ -48,10 +48,10 @@ export default function UpdateLoanStatus({ onSave, loan, isLoading }: Props) {
         },
     });
 
-    // const onSubmit = async (data: UpdateApplicationFormData) => {
-    //     console.log(data);
-    //     onSave(data);
-    // }
+    const onSubmit = async (data: UpdateApplicationFormData) => {
+        // console.log(data);
+        onSave(data);
+    }
 
     return (
         <FormProvider {...methods}>
@@ -108,7 +108,9 @@ export default function UpdateLoanStatus({ onSave, loan, isLoading }: Props) {
                         : <Button
                             className='w-fit'
                             type="submit"
-                            onClick={() => console.log(methods.getValues())}
+                            onClick={() => {
+                                onSubmit(methods.getValues());
+                            }}
                         >
                             Confirm update
                         </Button>

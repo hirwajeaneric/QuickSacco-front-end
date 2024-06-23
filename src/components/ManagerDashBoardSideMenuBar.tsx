@@ -1,4 +1,4 @@
-import { LogOut, Mail, Menu, Users } from "lucide-react"
+import { LogOut, Menu, Users } from "lucide-react"
 import GeneralIcon from "./icons/GeneralIcon"
 import ManagersIcon from "./icons/Managers"
 import { Link } from "react-router-dom"
@@ -49,14 +49,14 @@ const ManagerDashBoardSideMenuBar = () => {
                                     </Link>
                                 </li>
 
-                                <li>
+                                {/* <li>
                                     <Link to="/manager/responses" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                                         <Mail size={18} />
                                         <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                             Responses
                                         </span>
                                     </Link>
-                                </li>
+                                </li> */}
 
                                 <li>
                                     <Link to="/manager/teachers" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
@@ -125,11 +125,11 @@ const ManagerDashBoardSideMenuBar = () => {
                                 </Link>
                             </li>
                             
-                            <li>
+                            {/* <li>
                                 <Link to="/manager/responses" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
                                     Responses
                                 </Link>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <Link to="/manager/teachers" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
