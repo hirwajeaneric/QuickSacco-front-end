@@ -1,34 +1,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
 import LoadingButton from '../../others/LoadingButton';
-import { CreateUserTypes } from '@/types';
-
-const formSchema = z.object({
-  firstName: z.string().min(2).max(50),
-  lastName: z.string().min(2).max(50),
-  phone: z.string().min(10).max(10),
-  email: z.string().email('Invalid email'),
-  password: z.string().min(2, 'Too short'),
-});
-
-type SignUpFormData = z.infer<typeof formSchema>;
+import { AddManagerTypes, SignUpFormTypes } from '@/types';
+import { teacherSignupFormSchema } from '@/utils/validationSchemas';
 
 type Props = {
-  onSignUp: (values: SignUpFormData | CreateUserTypes) => void;
+  onSignUp: (values: SignUpFormTypes | AddManagerTypes) => void;
   isLoading: boolean;
 }
 
 const SignUpForm = ({ onSignUp, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const form = useForm<SignUpFormData>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<SignUpFormTypes>({
+    resolver: zodResolver(teacherSignupFormSchema),
     defaultValues: {
       firstName: '',
       lastName: '',

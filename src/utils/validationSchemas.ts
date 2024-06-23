@@ -150,3 +150,10 @@ export const addManagerFormSchema = z.object({
     role: z.string()
 });
 
+export const teacherSignupFormSchema = z.object({
+    firstName: z.string().min(2).max(50),
+    lastName: z.string().min(2).max(50),
+    phone: z.string().min(10).max(10),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(2, 'Too short'),
+});

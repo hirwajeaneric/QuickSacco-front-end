@@ -1,4 +1,4 @@
-import { Application } from "@/types"
+import { UpdateApplicationFormData } from "@/types"
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
-export const columns: ColumnDef<Application>[] = [
+export const columns: ColumnDef<UpdateApplicationFormData>[] = [
     {
         id: "select",
         header: ({ table }) => (

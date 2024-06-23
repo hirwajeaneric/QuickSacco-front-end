@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from 'react-query';
-import { AddManagerTypes, CreateUserTypes, OPTTypes, SignInTypes, UpdateUserTypes, User } from "@/types";
+import { AddManagerTypes, OPTTypes, SignInTypes, SignUpFormTypes, UpdateUserTypes, User } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
 
@@ -7,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const environment = import.meta.env. VITE_ENVIRONMENT;
 
 export const useSignUp = () => {
-    const SignUpRequest = async (user: AddManagerTypes | CreateUserTypes) => {
+    const SignUpRequest = async (user: AddManagerTypes | SignUpFormTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/signup`, {
             method: 'POST',
             headers: {
