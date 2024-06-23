@@ -65,7 +65,7 @@ export const useGetUserApplications = () => {
 export const useGetLoanApplicationData = (loanId: string) => {
     const accessToken = Cookies.get('access-token');
     
-    const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData[]> => {
+    const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -78,7 +78,7 @@ export const useGetLoanApplicationData = (loanId: string) => {
             throw new Error(responseData.message);
         }
 
-        return responseData.applications;
+        return responseData.application;
     };
 
     const { data: currentApplication, isLoading } = useQuery("applicationInfo", () => getApplicationRequest(loanId));

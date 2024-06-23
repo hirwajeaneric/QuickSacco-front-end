@@ -117,6 +117,7 @@ export const updateformSchema = z.object({
     }),
     repaymentPerMonth: z.number(),
     repaymentPeriod: z.number(),
+    suggestedRepaymentPerMonth: z.number(),
     suggestedRepaymentPeriod: z.number({
         coerce: true,
         required_error: "You must provide the time you estimate to pay back is required"
