@@ -1,12 +1,16 @@
 import { useMutation, useQuery } from 'react-query';
 import { ApplicationFormData, UpdateApplicationFormData } from "@/types";
 import { toast } from 'sonner';
-import Cookies from "js-cookie";
+import { getAccessToken } from '@/utils/helperFunctions';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+/**
+ * UseSubmitApplication hook for submitting an application.
+ * @returns An object containing submitApplication function, isLoading, isSuccess, and error.
+ */
 export const useSubmitApplication = () => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = getAccessToken();
 
     const submitApplicationRequest = async (application: ApplicationFormData) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/add`, {
@@ -19,7 +23,13 @@ export const useSubmitApplication = () => {
         });
 
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         const responseData = await response.json();
@@ -42,8 +52,12 @@ export const useSubmitApplication = () => {
     }
 };
 
+/**
+ * UseGetUserApplications hook for fetching user's applications.
+ * @returns An object containing userApplications and isLoading.
+ */
 export const useGetUserApplications = () => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = getAccessToken();
     
     const getAllUserApplicationsRequest = async (): Promise<ApplicationFormData[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findByUser`, {
@@ -55,7 +69,13 @@ export const useGetUserApplications = () => {
         const responseData = await response.json();
 
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
         
         if (!response.ok) {
@@ -70,8 +90,13 @@ export const useGetUserApplications = () => {
     return { userApplications, isLoading }
 };
 
+/**
+ * UseGetLoanApplicationData hook for fetching a specific loan application data.
+ * @param loanId The ID of the loan application to fetch.
+ * @returns An object containing currentApplication and isLoading.
+ */
 export const useGetLoanApplicationData = (loanId: string) => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = getAccessToken();
     
     const getApplicationRequest = async (loanId:string): Promise<UpdateApplicationFormData> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/findById?id=${loanId}`, {
@@ -83,7 +108,13 @@ export const useGetLoanApplicationData = (loanId: string) => {
         const responseData = await response.json();
 
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
         
         if (!response.ok) {
@@ -98,8 +129,13 @@ export const useGetLoanApplicationData = (loanId: string) => {
     return { currentApplication, isLoading }
 };
 
+/**
+ * UseGetManagerAssignedLoans hook for fetching loans assigned to a manager.
+ * @param managerId The ID of the manager whose loans to fetch.
+ * @returns An object containing managerApplications and isLoading.
+ */
 export const useGetManagerAssignedLoans = () => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = getAccessToken();
     const managerId = JSON.parse(localStorage.getItem("manager") as string)._id;
 
     const getManagerApplicationsRequest = async (managerId: string): Promise<UpdateApplicationFormData[]> => {
@@ -112,7 +148,13 @@ export const useGetManagerAssignedLoans = () => {
         const responseData = await response.json();
 
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
         
         if (!response.ok) {
@@ -127,8 +169,12 @@ export const useGetManagerAssignedLoans = () => {
     return { managerApplications, isLoading }
 };
 
+/**
+ * UseGetAllLoans hook for fetching all loans.
+ * @returns An object containing loans and isLoading.
+ */
 export const useGetAllLoans = () => {
-    const accessToken = Cookies.get('access-token');
+    const accessToken = getAccessToken();
     
     const getAllLoansRequest = async (): Promise<UpdateApplicationFormData[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/application/list`, {
@@ -140,7 +186,13 @@ export const useGetAllLoans = () => {
         const responseData = await response.json();
         
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
@@ -155,9 +207,14 @@ export const useGetAllLoans = () => {
     return { loans, isLoading }
 };
 
+/**
+ * UseUpdateApplication hook for updating an application.
+ * @param loanId The ID of the loan application to update.
+ * @returns An object containing updateApplication and isLoading.
+ */
 export const useUpdateApplication = (loanId: string) => {
     const updateApplicationRequest = async (application: UpdateApplicationFormData) => {
-        const accessToken = Cookies.get('access-token');
+        const accessToken = getAccessToken();
         const response = await fetch(`${API_BASE_URL}/api/v1/application/update?id=${loanId}`, {
             method: 'PUT',
             headers: {
@@ -170,7 +227,13 @@ export const useUpdateApplication = (loanId: string) => {
         const responseData = await response.json();
 
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
@@ -198,9 +261,13 @@ export const useUpdateApplication = (loanId: string) => {
     }
 };
 
+/**
+ * UseDeleteApplication hook for deleting an application.
+ * @returns An object containing isLoading.
+ */
 export const useDeleteApplication = () => {
     const updateApplicationApplicationRequest = async (applicationId: string) => {
-        const accessToken = Cookies.get('access-token');
+        const accessToken = getAccessToken();
         const response = await fetch(`${API_BASE_URL}/api/v1/application/delete?id=${applicationId}`, {
             method: 'PUT',
             headers: {

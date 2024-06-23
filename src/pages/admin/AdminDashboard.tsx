@@ -3,6 +3,11 @@ import DashboardTopBar from "@/components/sections/DashboardTopBar"
 import { Outlet } from "react-router-dom"
 
 const AdminDashboard = () => {
+  const unParsedUserInfo: string = localStorage.getItem('admin') as string;
+  if (unParsedUserInfo) {
+    window.location.replace('/admin/auth');
+  }
+
   return (
     <div className="flex min-h-screen w-full">
       <DashBoardSideMenuBar />

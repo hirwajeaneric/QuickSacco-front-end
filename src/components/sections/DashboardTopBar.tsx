@@ -3,8 +3,8 @@ import { Calendar, LogOut } from "lucide-react"
 const DashboardTopBar = () => {
   const logout = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.removeItem("manager");
-    window.location.replace("/manager/auth");
+    localStorage.removeItem(window.location.pathname.includes(`/admin`) ? `admin` : `manager`);
+    window.location.replace("/admin/auth");
   }
 
   return (

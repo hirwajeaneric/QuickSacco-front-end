@@ -2,10 +2,18 @@ import { useMutation, useQuery } from 'react-query';
 import { AddManagerTypes, OPTTypes, SignInTypes, SignUpFormTypes, UpdateUserTypes, User } from "@/types";
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
+import { getAccessToken } from '@/utils/helperFunctions';
 
+/**
+ * Constants
+ */
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const environment = import.meta.env. VITE_ENVIRONMENT;
+const environment = import.meta.env.VITE_ENVIRONMENT;
 
+/**
+ * Function to handle user sign up
+ * @returns {Object} - An object containing the signUp function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useSignUp = () => {
     const SignUpRequest = async (user: AddManagerTypes | SignUpFormTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/signup`, {
@@ -37,6 +45,10 @@ export const useSignUp = () => {
     }
 };
 
+/**
+ * Function to handle user sign in
+ * @returns {Object} - An object containing the signIn function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useSignIn = () => {
     const SignInRequest = async (user: SignInTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/signin`, {
@@ -53,13 +65,23 @@ export const useSignIn = () => {
             throw new Error(responseData.message);
         }
 
-        Cookies.set('access-token', responseData.token, {
-            secure: environment === "production" ? true : false,
-            expires: 1/24
-        });
+        if (responseData.user.role.toLowerCase() === 'admin') {
+            Cookies.set('admin-access-token', responseData.token, {
+                secure: environment === "production" ? true : false,
+                expires: 1 / 24
+            });
+        } else if (responseData.user.role.toLowerCase() === 'manager') {
+            Cookies.set('manager-access-token', responseData.token, {
+                secure: environment === "production" ? true : false,
+                expires: 1 / 24
+            });
+        } else {
+            Cookies.set('teacher-access-token', responseData.token, {
+                secure: environment === "production" ? true : false,
+                expires: 1 / 24
+            });
+        }
 
-        console.log(responseData.user);
-        
         localStorage.setItem((responseData.user.role).toLowerCase(), JSON.stringify(responseData.user));
     };
 
@@ -77,6 +99,10 @@ export const useSignIn = () => {
     }
 };
 
+/**
+ * Function to handle user password reset
+ * @returns {Object} - An object containing the forgotPassword function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useForgotPassword = () => {
     const ForgotPasswordRequest = async (user: { email: string }) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/forgotPassword`, {
@@ -108,9 +134,13 @@ export const useForgotPassword = () => {
     }
 };
 
+/**
+ * Function to handle user password reset
+ * @returns {Object} - An object containing the resetPassword function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useResetPassword = () => {
     const token = window.location.search.split('=')[1];
-    
+
     const ResetPasswordRequest = async (user: { password: string }) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/resetPassword`, {
             method: 'POST',
@@ -142,6 +172,10 @@ export const useResetPassword = () => {
     }
 };
 
+/**
+ * Function to handle user OTP validation
+ * @returns {Object} - An object containing the validateOTP function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useValidateOTP = () => {
     const SignInRequest = async (data: OPTTypes) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/verify`, {
@@ -173,6 +207,10 @@ export const useValidateOTP = () => {
     }
 };
 
+/**
+ * Function to handle user OTP regeneration
+ * @returns {Object} - An object containing the validateOTP function, isLoading, isError, isSuccess, and error properties.
+ */
 export const useRegenerateOTP = () => {
     const SignInRequest = async (data: { id: string }) => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/regenerateOtp`, {
@@ -204,9 +242,13 @@ export const useRegenerateOTP = () => {
     }
 };
 
+/**
+ * Function to get user profile data
+ * @returns {Object} - An object containing the currentUser property and isLoading property.
+ */
 export const useGetProfileData = () => {
-    const accessToken = Cookies.get('access-token');
-    
+    const accessToken = getAccessToken();
+
     const getUserProfileRequest = async (): Promise<User> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/user`, {
             headers: {
@@ -215,9 +257,15 @@ export const useGetProfileData = () => {
         });
 
         const responseData = await response.json();
-        
+
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
@@ -227,14 +275,18 @@ export const useGetProfileData = () => {
         return responseData;
     };
 
-    const { data: currentUser, isLoading } = useQuery("userInfo", () => getUserProfileRequest());
+    const { data: currentUser, isLoading } = useQuery("userInfo", () => getUserProfileRequest);
 
     return { currentUser, isLoading }
 };
 
+/**
+ * Function to get managers data
+ * @returns {Object} - An object containing the managers property and isLoading property.
+ */
 export const useGetManagers = () => {
-    const accessToken = Cookies.get('access-token');
-    
+    const accessToken = getAccessToken();
+
     const getManagersRequest = async (): Promise<User[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/managers`, {
             headers: {
@@ -243,9 +295,15 @@ export const useGetManagers = () => {
         });
 
         const responseData = await response.json();
-        
+
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
@@ -255,14 +313,18 @@ export const useGetManagers = () => {
         return responseData.managers;
     };
 
-    const { data: managers, isLoading } = useQuery("managers", () => getManagersRequest());
+    const { data: managers, isLoading } = useQuery("managers", () => getManagersRequest);
 
     return { managers, isLoading }
 };
 
+/**
+ * Function to get teachers data
+ * @returns {Object} - An object containing the teachers property and isLoading property.
+ */
 export const useGetTeachers = () => {
-    const accessToken = Cookies.get('access-token');
-    
+    const accessToken = getAccessToken();
+
     const getManagersRequest = async (): Promise<User[]> => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/teachers`, {
             headers: {
@@ -271,9 +333,15 @@ export const useGetTeachers = () => {
         });
 
         const responseData = await response.json();
-        
+
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
@@ -283,14 +351,18 @@ export const useGetTeachers = () => {
         return responseData.teachers;
     };
 
-    const { data: teachers, isLoading } = useQuery("teachers", () => getManagersRequest());
+    const { data: teachers, isLoading } = useQuery("teachers", () => getManagersRequest);
 
     return { teachers, isLoading }
 };
 
+/**
+ * Function to update user account data
+ * @returns {Object} - An object containing the updateAccount function, isLoading property, and error property.
+ */
 export const useUpdateUserAccount = () => {
     const updateUserAccountRequest = async (user: UpdateUserTypes) => {
-        const accessToken = Cookies.get('access-token');
+        const accessToken = getAccessToken();
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/update`, {
             method: 'PUT',
             headers: {
@@ -302,25 +374,35 @@ export const useUpdateUserAccount = () => {
 
         const responseData = await response.json();
 
+        if (!response.ok) {
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
+        }
+
         if (response.status === 401) {
-            window.location.replace('/sign-in');
+            if (window.location.pathname.includes('/admin')) {
+                window.location.replace('/admin/auth');
+            } else if (window.location.pathname.includes('/manager')) {
+                window.location.replace('/manager/auth');
+            } else {
+                window.location.replace('/signin');
+            }
         }
 
         if (!response.ok) {
             throw new Error(responseData.message);
         }
-    }
+    };
 
-    const { mutateAsync: updateAccount, isLoading, isSuccess, error, reset } = useMutation(updateUserAccountRequest);
-
-    if (isSuccess) {
-        toast.success("User profile updated!");
-        window.location.reload();
-    }
+    const { mutateAsync: updateAccount, isLoading, error } = useMutation(updateUserAccountRequest);
 
     if (error) {
         toast.error(error.toString());
-        reset();
     }
 
     return {

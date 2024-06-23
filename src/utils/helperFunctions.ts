@@ -1,5 +1,6 @@
 import { DataFilterTypes } from "@/pages/manager/dashboard/Home";
 import { UpdateApplicationFormData } from "@/types";
+import Cookies from "js-cookie";
 
 /**
  * Calculates the payment period for a loan based on the requested amount and monthly salary.
@@ -102,3 +103,36 @@ export function loanFilterPerPeriod(loans: UpdateApplicationFormData[], filter: 
   }
   return filteredLoans;
 }
+
+
+/**
+ * Retrieves the access token based on the current page's pathname.
+ *
+ * @returns The access token corresponding to the current page's role.
+ */
+export const getAccessToken = (): string => {
+  let accessToken = "";
+  if (window.location.pathname.includes('/admin')) {
+    /**
+     * Retrieves the 'admin-access-token' cookie if the current page's pathname includes '/admin'.
+     *
+     * @returns The 'admin-access-token' cookie value.
+     */
+    accessToken = Cookies.get('admin-access-token') as string;
+  } else if (window.location.pathname.includes('/manager')) {
+    /**
+     * Retrieves the 'manager-access-token' cookie if the current page's pathname includes '/manager'.
+     *
+     * @returns The 'manager-access-token' cookie value.
+     */
+    accessToken = Cookies.get('manager-access-token') as string;
+  } else {
+    /**
+     * Retrieves the 'teacher-access-token' cookie if the current page's pathname does not include '/admin' or '/manager'.
+     *
+     * @returns The 'teacher-access-token' cookie value.
+     */
+    accessToken = Cookies.get('teacher-access-token') as string;
+  }
+  return accessToken;
+};

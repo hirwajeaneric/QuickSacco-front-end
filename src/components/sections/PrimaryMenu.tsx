@@ -7,22 +7,12 @@ import {
 } from "@/components/ui/popover"
 import { Button } from "../ui/button";
 import { File, LucideCircleUser } from "lucide-react";
-import { useGetProfileData } from "@/api/auth";
-import { useEffect, useState } from "react";
-import { User } from "@/types";
 import Cookies from "js-cookie";
 import { iconTextGenerator } from "@/lib/iconTextGenerator";
 
 const PrimaryMenu = () => {
-    const [userInfo, setUserInfo] = useState<User>();
-    const { currentUser } = useGetProfileData();
-
-    useEffect(() => {
-        if (currentUser) {
-            setUserInfo(currentUser);
-            localStorage.setItem("teacher", JSON.stringify(currentUser));
-        }
-    }, [currentUser])
+    const localUserInfo = localStorage.getItem("teacher");
+    const userInfo = JSON.parse(localUserInfo as string);
 
     return (
         <>
