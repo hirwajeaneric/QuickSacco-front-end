@@ -64,7 +64,8 @@ export type ApplicationFormData = z.infer<typeof formSchema>;
 
 type UpdateApplicationFormTypes = z.infer<typeof updateformSchema>;
 export interface UpdateApplicationFormData extends UpdateApplicationFormTypes {
-    managerId: ManagerInfoTypes
+    managerId: ManagerInfoTypes,
+    createdAt: Date
 }
 
 export type AddManagerTypes = z.infer<typeof addManagerFormSchema>;

@@ -5,6 +5,7 @@ import { useGetManagerAssignedLoans } from "@/api/application";
 import LoansTable from '@/components/tables/loanApplications/pages';
 import { useState } from "react";
 import Filter from "@/components/others/Filter";
+import { loanFilterPerPeriod } from "@/utils/helperFunctions";
 
 export type DataFilterTypes = {
   type: string,
@@ -29,14 +30,21 @@ const Home = () => {
       </div>
 
       {isLoadingLoans || isLoadingTeachers && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
-      <ManagerStats loans={managerApplications || []} teachers={teachers || []} />
+      <ManagerStats
+        loans={managerApplications || []}
+        teachers={teachers || []}
+        filter={dataFilter}
+      />
 
       <div className="flex justify-between flex-wrap">
         <div className="flex flex-col w-full md:w-[49%] bg-white rounded-md">
-          <ApplicationsPerMonth loans={managerApplications || []} />
+          <ApplicationsPerMonth
+            loans={managerApplications || []}
+            filter={dataFilter}
+          />
         </div>
         <div className="flex flex-col w-full md:w-[49%]">
-          {managerApplications && <LoansTable data={managerApplications} />}
+          {managerApplications && <LoansTable data={loanFilterPerPeriod(managerApplications, dataFilter)} />}
         </div>
       </div>
 

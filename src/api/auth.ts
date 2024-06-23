@@ -216,6 +216,10 @@ export const useGetProfileData = () => {
 
         const responseData = await response.json();
         
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
+
         if (!response.ok) {
             throw new Error(responseData.message);
         }
@@ -240,6 +244,10 @@ export const useGetManagers = () => {
 
         const responseData = await response.json();
         
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
+
         if (!response.ok) {
             throw new Error(responseData.message);
         }
@@ -264,6 +272,10 @@ export const useGetTeachers = () => {
 
         const responseData = await response.json();
         
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
+
         if (!response.ok) {
             throw new Error(responseData.message);
         }
@@ -289,6 +301,10 @@ export const useUpdateUserAccount = () => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
 
         if (!response.ok) {
             throw new Error(responseData.message);

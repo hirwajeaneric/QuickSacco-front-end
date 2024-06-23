@@ -18,6 +18,10 @@ export const useSubmitApplication = () => {
             body: JSON.stringify(application),
         });
 
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
+
         const responseData = await response.json();
 
         if (!response.ok) {
@@ -49,6 +53,10 @@ export const useGetUserApplications = () => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
         
         if (!response.ok) {
             throw new Error(responseData.message);
@@ -73,6 +81,10 @@ export const useGetLoanApplicationData = (loanId: string) => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
         
         if (!response.ok) {
             throw new Error(responseData.message);
@@ -98,6 +110,10 @@ export const useGetManagerAssignedLoans = () => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
         
         if (!response.ok) {
             throw new Error(responseData.message);
@@ -123,6 +139,10 @@ export const useGetAllLoans = () => {
 
         const responseData = await response.json();
         
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
+
         if (!response.ok) {
             throw new Error(responseData.message);
         } 
@@ -148,6 +168,10 @@ export const useUpdateApplication = (loanId: string) => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
 
         if (!response.ok) {
             throw new Error(responseData.message);
@@ -186,6 +210,10 @@ export const useDeleteApplication = () => {
         });
 
         const responseData = await response.json();
+
+        if (response.status === 401) {
+            window.location.replace('/sign-in');
+        }
 
         if (!response.ok) {
             throw new Error(responseData.message);

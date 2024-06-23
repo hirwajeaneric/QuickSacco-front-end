@@ -1,4 +1,6 @@
+import { DataFilterTypes } from '@/pages/manager/dashboard/Home';
 import { UpdateApplicationFormData } from '@/types';
+import { loanFilterPerPeriod } from '@/utils/helperFunctions';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
@@ -7,15 +9,17 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 type Props = {
   loans: UpdateApplicationFormData[];
+  filter: DataFilterTypes
 };
 
-export default function ApplicationsPerMonth({ loans }: Props) {
+export default function ApplicationsPerMonth({ loans, filter }: Props) {
   const [loanStatuses, setLoanStatuses] = useState([0, 0, 0, 0]);
 
   useEffect(() => {
     const updatedLoanStatuses = [0, 0, 0, 0];
-
-    loans.forEach((loan) => {
+    const filteredLoans: UpdateApplicationFormData[] = loanFilterPerPeriod(loans, filter);
+  
+    filteredLoans.forEach((loan: UpdateApplicationFormData) => {
       switch (loan.loanStatus) {
         case 'Approved':
           updatedLoanStatuses[2]++;
@@ -33,9 +37,10 @@ export default function ApplicationsPerMonth({ loans }: Props) {
           break;
       }
     });
-
+  
     setLoanStatuses(updatedLoanStatuses);
-  }, [loans]);
+  }, [loans, filter]);
+  
 
   const data = {
     labels: ['Rejected', 'Pending', 'Approved', 'Update required'],

@@ -1,6 +1,8 @@
 import { UpdateApplicationFormData, User } from "@/types"
 import StatCard from "../StatCard"
 import { useEffect, useState } from "react"
+import { DataFilterTypes } from "@/pages/manager/dashboard/Home"
+import { loanFilterPerPeriod } from "@/utils/helperFunctions"
 
 const defaultStatistics = [
     {
@@ -23,17 +25,19 @@ const defaultStatistics = [
 type Props = {
     loans: UpdateApplicationFormData[],
     teachers: User[],
+    filter: DataFilterTypes
 }
 
-const ManagerStats = ({ loans, teachers }: Props) => {
+const ManagerStats = ({ loans, teachers, filter }: Props) => {
     const [stats, setStats] = useState(defaultStatistics);
-    
+
     useEffect(() => {
-        const totalLoans = loans.length;
+        const filteredLoans: UpdateApplicationFormData[] = loanFilterPerPeriod(loans, filter);
+        const totalLoans = filteredLoans.length;
         const totalTeachers = teachers.length;
-        const pendingLoans = loans.filter(loan => loan.loanStatus === "Pending").length;
+        const pendingLoans = filteredLoans.filter(loan => loan.loanStatus === "Pending").length;
         setStats(prevStats => prevStats.map((stat, index) => {
-            switch(index) {
+            switch (index) {
                 case 0:
                     return { ...stat, number: totalLoans };
                 case 1:
@@ -44,7 +48,7 @@ const ManagerStats = ({ loans, teachers }: Props) => {
                     return stat;
             }
         }));
-    }, [loans, teachers]);
+    }, [filter, filter.type, filter.value, loans, teachers]);
 
     return (
         <div className="flex w-full justify-between flex-wrap">
