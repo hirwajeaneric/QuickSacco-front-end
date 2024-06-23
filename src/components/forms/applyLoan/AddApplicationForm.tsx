@@ -58,6 +58,7 @@ export default function AddApplicationForm({ onSave }: Props) {
             repaymentPeriod: 0,
             repaymentPerMonth: 0,
             suggestedRepaymentPeriod: 0,
+            suggestedRepaymentPerMonth: 0,
             bankAccountNumber: '',
             proofOfEmployment: '',
             copyOfNationalId: '',
@@ -68,7 +69,7 @@ export default function AddApplicationForm({ onSave }: Props) {
     const onSubmit = async (data: ApplicationFormData) => {
         const paymentPeriod = calculatePaymentPeriod(data.amountRequested, data.monthlySalary);
         data.repaymentPeriod = paymentPeriod;
-        data.repaymentPerMonth = calculateMonthlyRepayment(data.amountRequested, data.suggestedRepaymentPeriod);
+        data.repaymentPerMonth = calculateMonthlyRepayment(data.amountRequested, paymentPeriod);
         
         onSave(data);
     }

@@ -87,14 +87,14 @@ const DashBoardSideMenuBar = () => {
                 </div>
 
                 <div className="sticky inset-x-0 bottom-0 bg-black p-2">
-                    <form onSubmit={logout}>
+                    <div>
                         <button type="button" className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-slate-200 hover:bg-gray-50 hover:text-gray-700">
-                            <LogOut />
+                            <LogOut onClick={logout} />
                             <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                                 Logout
                             </span>
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
 

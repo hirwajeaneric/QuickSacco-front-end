@@ -5,10 +5,13 @@ import { Input } from "@/components/ui/input";
 import MultiStepFormControls from "@/components/others/MultiStepFormControls";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+import { calculateMonthlyRepayment } from "@/utils/helperFunctions";
+import { Button } from "@/components/ui/button";
 
 const LoanDetails = () => {
     const formMethods = useFormContext();
     const currentPage = window.location.pathname.split('/apply/step-')[1];
+    const [monthlyRepaymentEstimate, setMonthlyRepaymentEstimate] = useState(0);
 
     const [valid, setValid] = useState(false);
     const { getValues } = formMethods;
@@ -71,7 +74,16 @@ const LoanDetails = () => {
                         control={formMethods.control}
                         name="suggestedRepaymentPeriod"
                         render={({ field }) => (
-                            <FormItem onChange={areAllInputFilled}>
+                            <FormItem
+                                onChange={() => {
+                                    const suggestedRepaymentPeriod = formMethods.getValues("suggestedRepaymentPeriod");
+                                    const amountRequested = formMethods.getValues("amountRequested");
+                                    const suggestedRepaymentPerMonth = calculateMonthlyRepayment(amountRequested, suggestedRepaymentPeriod);
+                                    // console.log(repaymentPerMonth);
+                                    formMethods.setValue("suggestedRepaymentPerMonth", suggestedRepaymentPerMonth);
+
+                                    areAllInputFilled()
+                                }}>
                                 <FormLabel>Suggested repayment period (Months)</FormLabel>
                                 <FormControl>
                                     <Input type="number" min={1} max={150} {...field} />
@@ -83,6 +95,20 @@ const LoanDetails = () => {
                             </FormItem>
                         )}
                     />
+                    <div className="flex flex-col gap-2">
+                        <FormLabel>Suggested monthly payment</FormLabel>
+                        <div className="flex justify-between bg-slate-300 rounded-sm p-1 items-center">
+                            <Button
+                                onClick={() => { setMonthlyRepaymentEstimate(formMethods.getValues("suggestedRepaymentPerMonth")) }}
+                                type="button"
+                                variant={'outline'}
+                            >Calculate monthly payment</Button>
+                            <span className="px-9 text-white bg-slate-500 rounded-sm py-1 mr-1">{monthlyRepaymentEstimate}</span>
+                        </div>
+                        <FormDescription>
+                            View your estimated payment per month
+                        </FormDescription>
+                    </div>
                 </div>
                 <div className="flex flex-col w-full md:w-[49%] space-y-4">
                     <FormField

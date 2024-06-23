@@ -1,4 +1,4 @@
-import { Application } from "@/types"
+import { UpdateApplicationFormData } from "@/types"
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
-export const columns: ColumnDef<Application>[] = [
+export const columns: ColumnDef<UpdateApplicationFormData>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -42,12 +42,6 @@ export const columns: ColumnDef<Application>[] = [
             <DataTableColumnHeader column={column} title="Loan Status" />
         )
     },
-    // {
-    //     accessorKey: "email",
-    //     header: ({ column }) => (
-    //         <DataTableColumnHeader column={column} title="Email" />
-    //     )
-    // },
     {
         accessorKey: "amountRequested",
         header: () => <div className="text-right">Amount Requested</div>,
@@ -76,7 +70,7 @@ export const columns: ColumnDef<Application>[] = [
     },
     {
         accessorKey: "repaymentPerMonth",
-        header: () => <div className="text-right">Payment per month</div>,
+        header: () => <div className="text-right">Bank calculated payment per month</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("repaymentPerMonth"))
             const formatted = new Intl.NumberFormat("en-US", {
@@ -88,16 +82,25 @@ export const columns: ColumnDef<Application>[] = [
         },
     },
     {
-        accessorKey: "position",
-        header: "Position",
-    },
-    {
         accessorKey: "repaymentPeriod",
-        header: "Repayment Period (months)",
+        header: "Bank calculated repayment Period (months)",
     },
     {
-        accessorKey: "bankAccountNumber",
-        header: "Bank Account Number",
+        accessorKey: "suggestedRepaymentPerMonth",
+        header: () => <div className="text-right">Suggested payment per month</div>,
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("suggestedRepaymentPerMonth"))
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "RWF",
+            }).format(amount)
+
+            return <div className="text-right font-medium">{formatted}</div>
+        },
+    },
+    {
+        accessorKey: "suggestedRepaymentPeriod",
+        header: "Suggested repayment period (months)",
     },
     {
         id: "actions",

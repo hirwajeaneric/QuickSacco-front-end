@@ -76,7 +76,7 @@ const App = () => {
           element={
             Cookies.get('access-token')
               ? <HomeLayout><Apply /></HomeLayout>
-              : <Navigate replace to='/' />
+              : <Navigate replace to='/signin' />
           } 
         >
           <Route path="overview" element={<BeforeApplicationBreefing />} />

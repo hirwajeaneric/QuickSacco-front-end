@@ -45,6 +45,7 @@ export const formSchema = z.object({
         coerce: true,
         required_error: "The requested amount is required"
     }),
+    suggestedRepaymentPerMonth: z.number(),
     repaymentPerMonth: z.number(),
     repaymentPeriod: z.number(),
     suggestedRepaymentPeriod: z.number({

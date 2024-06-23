@@ -1,4 +1,4 @@
-import { Application } from "@/types"
+import { UpdateApplicationFormData } from "@/types"
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
-export const columns: ColumnDef<Application>[] = [
+export const columns: ColumnDef<UpdateApplicationFormData>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -78,10 +78,10 @@ export const columns: ColumnDef<Application>[] = [
         },
     },
     {
-        accessorKey: "amountToPayPerMonth",
+        accessorKey: "repaymentPerMonth",
         header: () => <div className="text-right">Payment per month</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amountToPayPerMonth"))
+            const amount = parseFloat(row.getValue("repaymentPerMonth"))
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "RWF",
@@ -102,7 +102,7 @@ export const columns: ColumnDef<Application>[] = [
         },
     },
     {
-        accessorKey: "repaymentReriod",
+        accessorKey: "repaymentPeriod",
         header: "Repayment Period (months)",
     },
     {
