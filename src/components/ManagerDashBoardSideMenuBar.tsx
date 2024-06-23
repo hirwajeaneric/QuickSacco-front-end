@@ -1,4 +1,4 @@
-import { LogOut, Menu, Users } from "lucide-react"
+import { Menu, Users } from "lucide-react"
 import GeneralIcon from "./icons/GeneralIcon"
 import ManagersIcon from "./icons/Managers"
 import { Link } from "react-router-dom"
@@ -94,17 +94,6 @@ const ManagerDashBoardSideMenuBar = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
-
-                <div className="sticky inset-x-0 bottom-0 bg-blue-950 p-2">
-                    <form onSubmit={logout}>
-                        <button type="button" className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-slate-200 hover:bg-gray-50 hover:text-gray-700">
-                            <LogOut />
-                            <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
-                                Logout
-                            </span>
-                        </button>
-                    </form>
                 </div>
             </div>
 
