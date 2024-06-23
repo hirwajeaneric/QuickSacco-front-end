@@ -111,6 +111,30 @@ export const useGetManagerAssignedLoans = () => {
     return { managerApplications, isLoading }
 };
 
+export const useGetAllLoans = () => {
+    const accessToken = Cookies.get('access-token');
+    
+    const getAllLoansRequest = async (): Promise<UpdateApplicationFormData[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/application/list`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+
+        const responseData = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        } 
+
+        return responseData.applications;
+    };
+
+    const { data: loans, isLoading } = useQuery("applications", () => getAllLoansRequest());
+
+    return { loans, isLoading }
+};
+
 export const useUpdateApplication = (loanId: string) => {
     const updateApplicationRequest = async (application: UpdateApplicationFormData) => {
         const accessToken = Cookies.get('access-token');

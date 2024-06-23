@@ -1,4 +1,4 @@
-import { FileText, UsersIcon, FileClock } from "lucide-react"
+import { FileText, UsersIcon, FileClock, UserCog, PersonStanding } from "lucide-react"
 
 type Props = {
     title: string,
@@ -20,6 +20,8 @@ const StatCard = ({ title, number, icon }: Props) => {
                     {icon==='FileText' && <FileText />}
                     {icon==='UsersIcon' && <UsersIcon />} 
                     {icon==='FileClock' && <FileClock />}
+                    {icon==='UserCog' && <UserCog />}
+                    {icon==='PersonStanding' && <PersonStanding />}
                 </span>
             </div>
 
