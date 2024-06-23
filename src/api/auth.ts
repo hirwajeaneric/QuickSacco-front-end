@@ -325,7 +325,7 @@ export const useGetManagers = () => {
 export const useGetTeachers = () => {
     const accessToken = getAccessToken();
 
-    const getManagersRequest = async (): Promise<User[]> => {
+    const getTeachersRequest = async (): User[] => {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/teachers`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -351,7 +351,7 @@ export const useGetTeachers = () => {
         return responseData.teachers;
     };
 
-    const { data: teachers, isLoading } = useQuery("teachers", () => getManagersRequest);
+    const { data: teachers, isLoading } = useQuery("teachers", () => getTeachersRequest);
 
     return { teachers, isLoading }
 };
