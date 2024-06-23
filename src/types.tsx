@@ -3,10 +3,18 @@ import { addManagerFormSchema, formSchema, updateformSchema } from "./utils/vali
 
 export type User = {
     _id: string;
-    email: string;
+    id: string;
     firstName: string;
     lastName: string;
+    email: string;
     phone: string;
+    password: string;
+    verified: boolean;
+    salt: string;
+    role: "Teacher" | "Manager" | "Admin";
+    otp: number;
+    accountStatus: "Active" | "Inactive";
+    otpExpiryTime: Date;
 };
 
 export type CreateUserTypes = {

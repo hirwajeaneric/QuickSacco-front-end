@@ -1,32 +1,58 @@
+import { UpdateApplicationFormData, User } from "@/types"
 import StatCard from "../StatCard"
+import { useEffect, useState } from "react"
 
-const stats = [
+const defaultStatistics = [
     {
         title: "Loans",
-        number: 45,
+        number: 0,
         icon: "FileText"
     },
     {
         title: "Teachers",
-        number: 40,
+        number: 0,
         icon: "UsersIcon"
     },
     {
         title: "Pending Loans",
-        number: 10,
+        number: 0,
         icon: "FileClock"
     }
 ]
 
-const ManagerStats = () => {
+type Props = {
+    loans: UpdateApplicationFormData[],
+    teachers: User[],
+}
+
+const ManagerStats = ({ loans, teachers }: Props) => {
+    const [stats, setStats] = useState(defaultStatistics);
     
+    useEffect(() => {
+        const totalLoans = loans.length;
+        const totalTeachers = teachers.length;
+        const pendingLoans = loans.filter(loan => loan.loanStatus === "Pending").length;
+        setStats(prevStats => prevStats.map((stat, index) => {
+            switch(index) {
+                case 0:
+                    return { ...stat, number: totalLoans };
+                case 1:
+                    return { ...stat, number: totalTeachers };
+                case 2:
+                    return { ...stat, number: pendingLoans };
+                default:
+                    return stat;
+            }
+        }));
+    }, [loans, teachers]);
+
     return (
         <div className="flex w-full justify-between flex-wrap">
-            {stats.map((stat, index) => (
+            {stats && stats.map((stat) => (
                 <StatCard
-                    key={index} 
-                    title={stat.title} 
-                    number={stat.number} 
+                    key={stat.title}
+                    title={stat.title}
+                    number={stat.number}
                     icon={stat.icon}
                 />
             ))}
