@@ -6,6 +6,7 @@ import LoansTable from '@/components/tables/loanApplications/pages';
 import { useState } from "react";
 import Filter from "@/components/others/Filter";
 import { loanFilterPerPeriod } from "@/utils/helperFunctions";
+import ReportChoice from "@/components/others/ReportChoice";
 
 export type DataFilterTypes = {
   type: string,
@@ -16,6 +17,9 @@ const Home = () => {
   const { isLoading: isLoadingLoans, managerApplications } = useGetManagerAssignedLoans();
   const { teachers, isLoading: isLoadingTeachers } = useGetTeachers();
   const [dataFilter, setDataFilter] = useState({ type: 'This week', value: '' });
+  const [reportType, setReportType] = useState('Loans');
+
+  console.log(reportType);
 
   return (
     <div className="flex flex-col gap-5">
@@ -24,8 +28,9 @@ const Home = () => {
           <h1 className="font-bold text-2xl">Welcome to QuickSACCO manager dashboard</h1>
           <p>Manage accounts of user in your organization</p>
         </div>
-        <div>
+        <div className="flex gap-3 items-center flex-wrap">
           <Filter dataFilter={dataFilter} setDataFilter={setDataFilter} />
+          <ReportChoice setReportType={setReportType} />  
         </div>
       </div>
 
