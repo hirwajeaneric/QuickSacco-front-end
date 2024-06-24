@@ -70,7 +70,7 @@ const App = () => {
         <Route path='/forgotpassword' element={<HomeLayout><ForgotPassword /></HomeLayout>} />
         <Route path='/resetpassword' element={<HomeLayout><ResetPassword /></HomeLayout>} />
         <Route path='/verifyotp' element={<HomeLayout><ValidateOTP /></HomeLayout>} />
-        <Route path='/apply' element={Cookies.get('access-token') ? <HomeLayout><Apply /></HomeLayout> : <Navigate replace to='/signin' />}>
+        <Route path='/apply' element={Cookies.get('teacher-access-token') ? <HomeLayout><Apply /></HomeLayout> : <Navigate replace to='/signin' />}>
           <Route path="overview" element={<BeforeApplicationBreefing />} />
           <Route path="step-1" element={<UserContactForm />} />
           <Route path="step-2" element={<PersonalInformationForm />} />
@@ -79,7 +79,7 @@ const App = () => {
           <Route path="submitting" element={<Submitting />} />
         </Route>
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
-        <Route path='/account' element={Cookies.get('access-token') ? <HomeLayout><AccountHome /></HomeLayout> : <Navigate replace to='/' />}>
+        <Route path='/account' element={Cookies.get('teacher-access-token') ? <HomeLayout><AccountHome /></HomeLayout> : <Navigate replace to='/' />}>
           <Route path='' element={<Profile />} />
           <Route path='applications' element={<Applications />} />
           <Route path='application/:id' element={<ApplicationDetails />} />

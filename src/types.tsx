@@ -8,14 +8,16 @@ export type User = {
     lastName: string;
     email: string;
     phone: string;
-    password: string;
+    password?: string;
     verified: boolean;
-    salt: string;
+    salt?: string;
     role: "Teacher" | "Manager" | "Admin";
     otp: number;
     accountStatus: "Active" | "Inactive";
     otpExpiryTime: Date;
 };
+
+
 
 export type UpdateUserTypes = {
     email?: string;

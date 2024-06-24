@@ -47,9 +47,9 @@ const PrimaryMenu = () => {
                                 <File />
                             </Link>
                             <Button variant={'secondary'} size={'sm'} onClick={() => {
-                                Cookies.remove('access-token');
+                                Cookies.remove('teacher-access-token');
                                 localStorage.removeItem('teacher');
-                                window.location.reload();
+                                window.location.replace('/');
                                 // setUser(false);
                             }}>Sign out</Button>
                         </PopoverContent>

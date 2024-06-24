@@ -1,12 +1,13 @@
-import { useGetProfileData, useUpdateUserAccount } from "@/api/auth";
+import { useUpdateUserAccount } from "@/api/auth";
 import UserProfileForm from "@/components/forms/UserProfileForm";
 // import { Store } from "@/context/user";
 // import { useContext } from "react";
 
 const Profile = () => {
-  // const userContext = useContext(Store);
+  const unParsedUserInfo = localStorage.getItem('teacher') as string;
+  const currentUser = JSON.parse(unParsedUserInfo);
   const { updateAccount, isLoading } = useUpdateUserAccount();
-  const { currentUser } = useGetProfileData();
+  
 
   if (currentUser) {
     return (
