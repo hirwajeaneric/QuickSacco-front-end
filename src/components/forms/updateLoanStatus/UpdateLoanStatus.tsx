@@ -24,7 +24,7 @@ export default function UpdateLoanStatus({ onSave, loan, isLoading }: Props) {
             lastName: loan.lastName,
             nationalId: loan.nationalId,
             email: loan.email,
-            teacherId: loan.teacherId,
+            applicantId: loan.applicantId,
             phone: loan.phone,
             dateOfBirth: new Date(loan.dateOfBirth),
             gender: loan.gender,

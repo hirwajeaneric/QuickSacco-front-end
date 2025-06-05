@@ -7,7 +7,7 @@ import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
 import LoadingButton from '../../others/LoadingButton';
 import { AddManagerTypes, SignUpFormTypes } from '@/types';
-import { teacherSignupFormSchema } from '@/utils/validationSchemas';
+import { applicantSignupFormSchema } from '@/utils/validationSchemas';
 
 type Props = {
   onSignUp: (values: SignUpFormTypes | AddManagerTypes) => void;
@@ -18,7 +18,7 @@ const SignUpForm = ({ onSignUp, isLoading }: Props) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const form = useForm<SignUpFormTypes>({
-    resolver: zodResolver(teacherSignupFormSchema),
+    resolver: zodResolver(applicantSignupFormSchema),
     defaultValues: {
       firstName: '',
       lastName: '',

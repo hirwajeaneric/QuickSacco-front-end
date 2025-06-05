@@ -83,25 +83,19 @@ const Work = () => {
             </div>
             <Separator />
             <div className='flex gap-2 w-full justify-between items-start space-y-4 flex-wrap'>
-                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                <div className="flex flex-col align-top justify-start w-full md:w-[49%] space-y-4">
                     <FormField
                         control={formMethods.control}
                         name="position"
                         render={({ field }) => (
                             <FormItem onChange={areAllInputFilled}>
                                 <FormLabel>Position</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select your current position" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Teacher">Teacher</SelectItem>
-                                        <SelectItem value="School Director">School Director</SelectItem>
-                                        <SelectItem value="Other">Other</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <FormControl>
+                                    <Input type="text" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    Your position on the contract.
+                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -123,16 +117,19 @@ const Work = () => {
                         )}
                     />
                 </div>
-                <div className="flex flex-col w-full md:w-[49%] space-y-4">
+                <div className="flex flex-col align-top justify-start w-full md:w-[49%] space-y-4">
                     <FormField
                         control={formMethods.control}
                         name="workSchool"
                         render={({ field }) => (
                             <FormItem onChange={areAllInputFilled}>
-                                <FormLabel>Work school</FormLabel>
+                                <FormLabel>Company/Organization</FormLabel>
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
+                                <FormDescription>
+                                    The name of the company/organization you work for.
+                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}

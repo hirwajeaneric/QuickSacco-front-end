@@ -19,3 +19,16 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
+
+
+
+// rules_version = '2'; 
+// service firebase.storage { 
+//   match /b/{bucket}/o { 
+//     // Allow uploads for images, Word documents, and PDFs 
+//     match /{folder}/{documentId} { 
+//       allow read;
+//       allow write: if request.resource.size < 5 * 1024 * 1024 && ( request.resource.contentType.matches('image/.*') || request.resource.contentType.matches('application/pdf') || request.resource.contentType.matches('application/msword') || request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.wordprocessingml.document')); 
+//     } 
+//   } 
+// }

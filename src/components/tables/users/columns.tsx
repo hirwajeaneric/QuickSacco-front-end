@@ -76,7 +76,7 @@ export const columns: ColumnDef<User>[] = [
                             Copy payment ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View teacher</DropdownMenuItem>
+                        <DropdownMenuItem>View applicant</DropdownMenuItem>
                         <DropdownMenuItem>
                             <a href={`/account/application/${application._id}`}>View payment details</a>
                         </DropdownMenuItem>

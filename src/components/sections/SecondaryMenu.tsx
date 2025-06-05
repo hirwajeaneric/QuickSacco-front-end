@@ -12,7 +12,7 @@ const SecondaryMenu = () => {
               <Mail className="text-sm"/> info@quicksacco.com
             </Link>
             <span className="flex gap-3 items-center">
-              <Phone /> +(250) 780 599 859
+              <Phone /> +(250) 780 678 889
             </span>
           </div>
           <div className="flex gap-3 text-xl">

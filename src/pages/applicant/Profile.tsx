@@ -4,7 +4,7 @@ import UserProfileForm from "@/components/forms/UserProfileForm";
 // import { useContext } from "react";
 
 const Profile = () => {
-  const unParsedUserInfo = localStorage.getItem('teacher') as string;
+  const unParsedUserInfo = localStorage.getItem('applicant') as string;
   const currentUser = JSON.parse(unParsedUserInfo);
   const { updateAccount, isLoading } = useUpdateUserAccount();
   

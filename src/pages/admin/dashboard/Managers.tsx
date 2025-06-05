@@ -1,4 +1,4 @@
-import ManagersTable from "@/components/tables/teacherApplications/pages"
+import ManagersTable from "@/components/tables/applicantApplications/pages"
 import { useGetManagers } from "@/api/auth";
 
 const Managers = () => {

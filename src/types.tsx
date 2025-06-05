@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { addManagerFormSchema, formSchema, teacherSignupFormSchema, updateformSchema } from "./utils/validationSchemas";
+import { addManagerFormSchema, formSchema, applicantSignupFormSchema, updateformSchema } from "./utils/validationSchemas";
 
 export type User = {
     _id: string;
@@ -11,7 +11,7 @@ export type User = {
     password?: string;
     verified: boolean;
     salt?: string;
-    role: "Teacher" | "Manager" | "Admin";
+    role: "Applicant" | "Manager" | "Admin";
     otp: number;
     accountStatus: "Active" | "Inactive";
     otpExpiryTime: Date;
@@ -63,4 +63,4 @@ export interface UpdateApplicationFormData extends UpdateApplicationFormTypes {
 
 export type AddManagerTypes = z.infer<typeof addManagerFormSchema>;
 
-export type SignUpFormTypes = z.infer<typeof teacherSignupFormSchema>;
+export type SignUpFormTypes = z.infer<typeof applicantSignupFormSchema>;

@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { iconTextGenerator } from "@/lib/iconTextGenerator";
 
 const PrimaryMenu = () => {
-    const localUserInfo = localStorage.getItem("teacher");
+    const localUserInfo = localStorage.getItem("applicant");
     const userInfo = JSON.parse(localUserInfo as string);
 
     return (
@@ -47,8 +47,8 @@ const PrimaryMenu = () => {
                                 <File />
                             </Link>
                             <Button variant={'secondary'} size={'sm'} onClick={() => {
-                                Cookies.remove('teacher-access-token');
-                                localStorage.removeItem('teacher');
+                                Cookies.remove('applicant-access-token');
+                                localStorage.removeItem('applicant');
                                 window.location.replace('/');
                                 // setUser(false);
                             }}>Sign out</Button>

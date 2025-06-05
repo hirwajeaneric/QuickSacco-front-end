@@ -14,13 +14,13 @@ const BeforeApplicationBreefing = () => {
                 </li>
                 <li className="list-decimal">
                     How much money shall I be paying per month?
-                    <p className="text-sm text-gray-800">In order to facilitate and improve the well-being of teachers, MWARIMU SACCO charges 50% of your salary every month.</p>
+                    <p className="text-sm text-gray-800">In order to facilitate the loan payment and improve the changes of consistent payments, QuickSacco charges 50% of your salary every month.</p>
                 </li>
                 <li className="list-decimal">
                     Required documents?
                     <ol className="text-sm text-gray-800">
                         <li className="list-disc">Copy of national id</li>
-                        <li className="list-disc">Work contract</li>
+                        <li className="list-disc">Work contract (if any) or Collateral</li>
                     </ol>
                 </li>
             </ol>

@@ -1,12 +1,12 @@
 import { useGetAllLoans } from "@/api/application"
-import { useGetManagers, useGetTeachers } from "@/api/auth"
+import { useGetManagers, useGetApplicants } from "@/api/auth"
 import AdminStats from "@/components/sections/AdminStats"
-import ManagersTable from "@/components/tables/teacherApplications/pages"
+import ManagersTable from "@/components/tables/applicantApplications/pages"
 import { Link } from "react-router-dom"
 
 const Home = () => {
   const { managers, isLoading: isLoadingManagers } = useGetManagers();
-  const { teachers, isLoading: isLoadingTeachers } = useGetTeachers();
+  const { applicants, isLoading: isLoadingApplicants } = useGetApplicants();
   const { loans, isLoading: isLoadingLoans } = useGetAllLoans();  
 
   return (
@@ -16,8 +16,8 @@ const Home = () => {
         <p>Manage accounts of user in your organization</p>
       </div>
 
-      {isLoadingLoans || isLoadingTeachers || isLoadingManagers && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
-      <AdminStats loans={loans || []} managers={managers || []} teachers={teachers || []} />
+      {isLoadingLoans || isLoadingApplicants || isLoadingManagers && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
+      <AdminStats loans={loans || []} managers={managers || []} applicants={applicants || []} />
 
       <div className="flex flex-wrap justify-between items-center p-5 bg-[url('istockphoto-1413313627-170667a.jpg')] bg-no-repeat bg-cover">
         <div>

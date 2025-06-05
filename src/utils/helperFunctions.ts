@@ -128,11 +128,11 @@ export const getAccessToken = (): string => {
     accessToken = Cookies.get('manager-access-token') as string;
   } else {
     /**
-     * Retrieves the 'teacher-access-token' cookie if the current page's pathname does not include '/admin' or '/manager'.
+     * Retrieves the 'applicant-access-token' cookie if the current page's pathname does not include '/admin' or '/manager'.
      *
-     * @returns The 'teacher-access-token' cookie value.
+     * @returns The 'applicant-access-token' cookie value.
      */
-    accessToken = Cookies.get('teacher-access-token') as string;
+    accessToken = Cookies.get('applicant-access-token') as string;
   }
   return accessToken;
 };

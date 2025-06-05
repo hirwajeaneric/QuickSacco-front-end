@@ -16,7 +16,7 @@ export const formSchema = z.object({
     email: z.string({ required_error: "Email address is required" })
         .email('Invalid email format')
         .trim(),
-    teacherId: z.string()
+    applicantId: z.string()
         .trim(),
     phone: z.string()
         .trim()
@@ -85,7 +85,7 @@ export const updateformSchema = z.object({
     email: z.string({ required_error: "Email address is required" })
         .email('Invalid email format')
         .trim(),
-    teacherId: z.string()
+    applicantId: z.string()
         .trim(),
     phone: z.string()
         .trim()
@@ -150,7 +150,7 @@ export const addManagerFormSchema = z.object({
     role: z.string()
 });
 
-export const teacherSignupFormSchema = z.object({
+export const applicantSignupFormSchema = z.object({
     firstName: z.string().min(2).max(50),
     lastName: z.string().min(2).max(50),
     phone: z.string().min(10).max(10),

@@ -273,7 +273,7 @@ const UpdateApplicationForm = ({ onSave, isLoading, currentApplication }: Props)
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="Teacher">Teacher</SelectItem>
+                                        <SelectItem value="Applicant">Applicant</SelectItem>
                                         <SelectItem value="School Director">School Director</SelectItem>
                                         <SelectItem value="Other">Other</SelectItem>
                                     </SelectContent>

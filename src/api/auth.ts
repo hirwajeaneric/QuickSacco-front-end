@@ -76,7 +76,7 @@ export const useSignIn = () => {
                 expires: 1 / 24
             });
         } else {
-            Cookies.set('teacher-access-token', responseData.token, {
+            Cookies.set('applicant-access-token', responseData.token, {
                 secure: environment === "production" ? true : false,
                 expires: 1 / 24
             });
@@ -319,14 +319,14 @@ export const useGetManagers = () => {
 };
 
 /**
- * Function to get teachers data
- * @returns {Object} - An object containing the teachers property and isLoading property.
+ * Function to get applicants data
+ * @returns {Object} - An object containing the applicants property and isLoading property.
  */
-export const useGetTeachers = () => {
+export const useGetApplicants = () => {
     const accessToken = getAccessToken();
 
-    const getTeachersRequest = async (): Promise<User[]> => {
-        const response = await fetch(`${API_BASE_URL}/api/v1/auth/teachers`, {
+    const getApplicantsRequest = async (): Promise<User[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/applicants`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
             }
@@ -348,12 +348,12 @@ export const useGetTeachers = () => {
             throw new Error(responseData.message);
         }
 
-        return responseData.teachers;
+        return responseData.applicants;
     };
 
-    const { data: teachers, isLoading } = useQuery("teachers", () => getTeachersRequest());
+    const { data: applicants, isLoading } = useQuery("applicants", () => getApplicantsRequest());
 
-    return { teachers, isLoading }
+    return { applicants, isLoading }
 };
 
 /**

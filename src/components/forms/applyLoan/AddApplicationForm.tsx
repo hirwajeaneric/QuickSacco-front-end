@@ -12,7 +12,7 @@ type Props = {
     isLoading: boolean;
 };
 
-type TeacherLocalData = {
+type ApplicantLocalData = {
     createdAt: Date;
     email: string;
     firstName: string;
@@ -26,14 +26,14 @@ type TeacherLocalData = {
 
 export default function AddApplicationForm({ onSave }: Props) {
 
-    const teacher: string | null = localStorage.getItem("teacher");
-    let parsedTeacherInfo: TeacherLocalData | null = null;
-    if (teacher !== null) {
-        parsedTeacherInfo = JSON.parse(teacher);
+    const applicant: string | null = localStorage.getItem("applicant");
+    let parsedApplicantInfo: ApplicantLocalData | null = null;
+    if (applicant !== null) {
+        parsedApplicantInfo = JSON.parse(applicant);
     }
 
     useEffect(() => {
-        if (localStorage.getItem("teacher") === null) {
+        if (localStorage.getItem("applicant") === null) {
             window.location.href = "/signin";
         }
     }, []);
@@ -41,12 +41,12 @@ export default function AddApplicationForm({ onSave }: Props) {
     const methods = useForm<ApplicationFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: parsedTeacherInfo?.firstName,
-            lastName: parsedTeacherInfo?.lastName,
+            firstName: parsedApplicantInfo?.firstName,
+            lastName: parsedApplicantInfo?.lastName,
             nationalId: '',
-            email: parsedTeacherInfo?.email,
-            teacherId: parsedTeacherInfo?._id,
-            phone: parsedTeacherInfo?.phone,
+            email: parsedApplicantInfo?.email,
+            applicantId: parsedApplicantInfo?._id,
+            phone: parsedApplicantInfo?.phone,
             dateOfBirth: new Date(),
             gender: 'Male',
             maritalStatus: 'Single',

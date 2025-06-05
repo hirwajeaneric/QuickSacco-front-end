@@ -2,20 +2,20 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from './pages/public_pages/Home';
 import HomeLayout from './layouts/HomeLayout';
 import SignUp from './pages/public_pages/SignUp';
-import Apply from './pages/teacher/Apply';
+import Apply from './pages/applicant/Apply';
 import SignIn from './pages/public_pages/SignIn';
 import ResetPassword from './pages/public_pages/ResetPassword';
 import ForgotPassword from './pages/public_pages/ForgotPassword';
 import ValidateOTP from './pages/public_pages/ValidateOTP';
-import AccountHome from './pages/teacher/AccountHome';
-import Profile from './pages/teacher/Profile';
-import Applications from './pages/teacher/Applications';
-import ApplicationDetails from './pages/teacher/ApplicationDetails';
+import AccountHome from './pages/applicant/AccountHome';
+import Profile from './pages/applicant/Profile';
+import Applications from './pages/applicant/Applications';
+import ApplicationDetails from './pages/applicant/ApplicationDetails';
 import Success from './pages/public_pages/Success';
 import NotFound from './pages/public_pages/NotFound';
 import { Toaster } from 'sonner';
 import Cookies from 'js-cookie';
-import UpdateApplication from './pages/teacher/UpdateApplication';
+import UpdateApplication from './pages/applicant/UpdateApplication';
 import UserContactForm from './components/forms/applyLoan/UserContact';
 import PersonalInformationForm from './components/forms/applyLoan/PersonalInformation';
 import LoanDetailsForm from './components/forms/applyLoan/LoanDetails';
@@ -27,7 +27,7 @@ import Admin from './pages/admin/Admin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Managers from './pages/admin/dashboard/Managers';
 import ManagerDetails from './pages/admin/dashboard/ManagerDetails';
-import Teachers from './pages/admin/dashboard/Teachers';
+import Applicants from './pages/admin/dashboard/Applicants';
 import AddManager from './pages/admin/dashboard/AddManager';
 import AdminSignIn from './pages/admin/auth/SignIn';
 import AdminSignUp from './pages/admin/auth/SignUp';
@@ -49,7 +49,7 @@ import ManagerDashboardHome from './pages/manager/dashboard/Home';
 import ManagerProfile from './pages/manager/dashboard/Profile';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import Responses from './pages/manager/dashboard/Responses';
-import BeforeApplicationBreefing from './pages/teacher/BeforeApplicationBreefing';
+import BeforeApplicationBreefing from './pages/applicant/BeforeApplicationBreefing';
 import Submitting from './components/forms/applyLoan/Submitting';
 
 const App = () => {
@@ -60,7 +60,7 @@ const App = () => {
 
       {/**
        * 
-       *  Teacher  
+       *  Applicant  
        * 
        * */}
       <Routes>
@@ -70,7 +70,7 @@ const App = () => {
         <Route path='/forgotpassword' element={<HomeLayout><ForgotPassword /></HomeLayout>} />
         <Route path='/resetpassword' element={<HomeLayout><ResetPassword /></HomeLayout>} />
         <Route path='/verifyotp' element={<HomeLayout><ValidateOTP /></HomeLayout>} />
-        <Route path='/apply' element={Cookies.get('teacher-access-token') ? <HomeLayout><Apply /></HomeLayout> : <Navigate replace to='/signin' />}>
+        <Route path='/apply' element={Cookies.get('applicant-access-token') ? <HomeLayout><Apply /></HomeLayout> : <Navigate replace to='/signin' />}>
           <Route path="overview" element={<BeforeApplicationBreefing />} />
           <Route path="step-1" element={<UserContactForm />} />
           <Route path="step-2" element={<PersonalInformationForm />} />
@@ -79,7 +79,7 @@ const App = () => {
           <Route path="submitting" element={<Submitting />} />
         </Route>
         <Route path='/success' element={<HomeLayout><Success /></HomeLayout>} />
-        <Route path='/account' element={Cookies.get('teacher-access-token') ? <HomeLayout><AccountHome /></HomeLayout> : <Navigate replace to='/' />}>
+        <Route path='/account' element={Cookies.get('applicant-access-token') ? <HomeLayout><AccountHome /></HomeLayout> : <Navigate replace to='/' />}>
           <Route path='' element={<Profile />} />
           <Route path='applications' element={<Applications />} />
           <Route path='application/:id' element={<ApplicationDetails />} />
@@ -101,7 +101,7 @@ const App = () => {
           <Route path='' element={Cookies.get('manager-access-token') ? <ManagerDashboard /> : <Navigate replace to="/manager/auth" />}>
             <Route path='' element={<ManagerDashboardHome />} />
             <Route path='home' element={<ManagerDashboardHome />} />
-            <Route path='teachers' element={<Teachers />} />
+            <Route path='applicants' element={<Applicants />} />
             <Route path='reports' element={<Responses />} />
             <Route path='loans' element={<Loans />} />
             <Route path='loan/:id' element={<LoanDetails />} />
@@ -126,7 +126,7 @@ const App = () => {
           <Route path='' element={Cookies.get("admin-access-token") ? <AdminDashboard /> : <Navigate replace to={"/admin/auth"} />}>
             <Route path='' element={<AdminDashboardHome />} />
             <Route path='home' element={<AdminDashboardHome />} />
-            <Route path='teachers' element={<Teachers />} />
+            <Route path='applicants' element={<Applicants />} />
             <Route path='managers' element={<Managers />} />
             <Route path='managers/add' element={<AddManager />} />
             <Route path='managers/:managerId' element={<ManagerDetails />} />

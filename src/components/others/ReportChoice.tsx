@@ -16,7 +16,7 @@ const ReportChoice = ({ setReportType }:Props) => {
             <select onChange={handleChangeOfReportChoice} name="reportType" className="text-sm px-3 py-1 border-1 rounded-sm border-slate-400">
                 <option value="">Choose Report</option>
                 <option value="Loans">Print Loans</option>
-                <option value="Teachers">Print Teachers</option>
+                <option value="Applicants">Print Applicants</option>
             </select>
         </div>
     )

@@ -11,7 +11,7 @@ const defaultStatistics = [
         icon: "FileText"
     },
     {
-        title: "Teachers",
+        title: "Applicants",
         number: 0,
         icon: "UsersIcon"
     },
@@ -24,31 +24,31 @@ const defaultStatistics = [
 
 type Props = {
     loans: UpdateApplicationFormData[],
-    teachers: User[],
+    applicants: User[],
     filter: DataFilterTypes
 }
 
-const ManagerStats = ({ loans, teachers, filter }: Props) => {
+const ManagerStats = ({ loans, applicants, filter }: Props) => {
     const [stats, setStats] = useState(defaultStatistics);
 
     useEffect(() => {
         const filteredLoans: UpdateApplicationFormData[] = loanFilterPerPeriod(loans, filter);
         const totalLoans = filteredLoans.length;
-        const totalTeachers = teachers.length;
+        const totalApplicants = applicants.length;
         const pendingLoans = filteredLoans.filter(loan => loan.loanStatus === "Pending").length;
         setStats(prevStats => prevStats.map((stat, index) => {
             switch (index) {
                 case 0:
                     return { ...stat, number: totalLoans };
                 case 1:
-                    return { ...stat, number: totalTeachers };
+                    return { ...stat, number: totalApplicants };
                 case 2:
                     return { ...stat, number: pendingLoans };
                 default:
                     return stat;
             }
         }));
-    }, [filter, filter.type, filter.value, loans, teachers]);
+    }, [filter, filter.type, filter.value, loans, applicants]);
 
     return (
         <div className="flex w-full justify-between flex-wrap">

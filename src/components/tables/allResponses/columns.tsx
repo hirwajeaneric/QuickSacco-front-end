@@ -44,8 +44,8 @@ export const columns: ColumnDef<Response>[] = [
         )
     },
     {
-        accessorKey: "nameOfTeacher",
-        header: "Teacher",
+        accessorKey: "nameOfApplicant",
+        header: "Applicant",
     },
     // {
     //     accessorKey: "email",

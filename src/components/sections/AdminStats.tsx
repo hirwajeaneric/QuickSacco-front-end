@@ -9,7 +9,7 @@ const defaultStatistics = [
         icon: "UsersIcon"
     },
     {
-        title: "Teachers",
+        title: "Applicants",
         number: 0,
         icon: "PersonStanding"
     },
@@ -22,23 +22,23 @@ const defaultStatistics = [
 
 type Props = {
     managers: User[],
-    teachers: User[],
+    applicants: User[],
     loans: UpdateApplicationFormData[],
 }
 
-const AdminStats = ({ managers, teachers, loans }: Props) => {
+const AdminStats = ({ managers, applicants, loans }: Props) => {
     const [stats, setStats] = useState(defaultStatistics);
 
     useEffect(() => {
         const totalManagers = managers.length;
-        const totalTeachers = teachers.length;
+        const totalApplicants = applicants.length;
         const totalLoans = loans.length;
         setStats(prevStats => prevStats.map((stat, index) => {
             switch (index) {
                 case 0:
                     return { ...stat, number: totalManagers };
                 case 1:
-                    return { ...stat, number: totalTeachers };
+                    return { ...stat, number: totalApplicants };
                 case 2:
                     return { ...stat, number: totalLoans };
                 default:
@@ -46,7 +46,7 @@ const AdminStats = ({ managers, teachers, loans }: Props) => {
                     break;
             }
         }));
-    }, [loans.length, managers.length, teachers.length]);
+    }, [loans.length, managers.length, applicants.length]);
 
     return (
         <div className="flex w-full justify-between flex-wrap">

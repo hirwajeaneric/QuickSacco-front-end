@@ -49,10 +49,10 @@ const DashBoardSideMenuBar = () => {
                                 </li>
 
                                 <li>
-                                    <Link to="/admin/teachers" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
+                                    <Link to="/admin/applicants" className="group relative flex justify-center rounded px-2 py-1.5 text-slate-200 hover:bg-gray-50 hover:text-gray-700">
                                         <Users size={18} />
                                         <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
-                                            Teachers
+                                            Applicants
                                         </span>
                                     </Link>
                                 </li>
@@ -138,8 +138,8 @@ const DashBoardSideMenuBar = () => {
                             </li>
 
                             <li>
-                                <Link to="/admin/teachers" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
-                                    Teachers
+                                <Link to="/admin/applicants" className="block rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-gray-100 hover:text-gray-700">
+                                    Applicants
                                 </Link>
                             </li>
 

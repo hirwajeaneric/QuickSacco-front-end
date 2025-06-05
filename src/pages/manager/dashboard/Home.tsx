@@ -1,6 +1,6 @@
 import ManagerStats from "@/components/sections/ManagerStats";
 import ApplicationsPerMonth from "@/components/charts/Applications";
-import { useGetTeachers } from "@/api/auth";
+import { useGetApplicants } from "@/api/auth";
 import { useGetManagerAssignedLoans } from "@/api/application";
 import LoansTable from '@/components/tables/loanApplications/pages';
 import { useState } from "react";
@@ -15,7 +15,7 @@ export type DataFilterTypes = {
 
 const Home = () => {
   const { isLoading: isLoadingLoans, managerApplications } = useGetManagerAssignedLoans();
-  const { teachers, isLoading: isLoadingTeachers } = useGetTeachers();
+  const { applicants, isLoading: isLoadingApplicants } = useGetApplicants();
   const [dataFilter, setDataFilter] = useState({ type: 'This week', value: '' });
   const [reportType, setReportType] = useState('Loans');
 
@@ -34,10 +34,10 @@ const Home = () => {
         </div>
       </div>
 
-      {isLoadingLoans || isLoadingTeachers && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
+      {isLoadingLoans || isLoadingApplicants && <div className="w-full rounded-md mt-5 h-80 bg-gray-200 animate-pulse"></div>}
       <ManagerStats
         loans={managerApplications || []}
-        teachers={teachers || []}
+        applicants={applicants || []}
         filter={dataFilter}
       />
 
