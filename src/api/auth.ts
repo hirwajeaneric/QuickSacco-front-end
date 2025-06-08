@@ -27,7 +27,7 @@ export const useSignUp = () => {
         const responseData = await response.json();
 
         if (!response.ok) {
-            throw new Error(responseData.message);
+            throw new Error(responseData.errors || responseData.error || responseData.message);
         }
     };
 
@@ -62,7 +62,7 @@ export const useSignIn = () => {
         const responseData = await response.json();
 
         if (!response.ok) {
-            throw new Error(responseData.message);
+            throw new Error(responseData.errors || responseData.error || responseData.message);
         }
 
         if (responseData.user.role.toLowerCase() === 'admin') {
@@ -116,7 +116,7 @@ export const useForgotPassword = () => {
         const responseData = await response.json();
 
         if (!response.ok) {
-            throw new Error(responseData.message);
+            throw new Error(responseData.errors || responseData.error || responseData.message);
         }
     };
 
@@ -154,7 +154,7 @@ export const useResetPassword = () => {
         const responseData = await response.json();
 
         if (!response.ok) {
-            throw new Error(responseData.message);
+            throw new Error(responseData.errors || responseData.error || responseData.message);
         }
     };
 
@@ -189,7 +189,7 @@ export const useValidateOTP = () => {
         const responseData = await response.json();
 
         if (!response.ok) {
-            throw new Error(responseData.message);
+            throw new Error(responseData.errors || responseData.error || responseData.message);
         }
     };
 

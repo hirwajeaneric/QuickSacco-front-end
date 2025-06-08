@@ -6,11 +6,11 @@ import { Button } from '../../ui/button';
 import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
 import LoadingButton from '../../others/LoadingButton';
-import { AddManagerTypes, SignUpFormTypes } from '@/types';
+import { SignUpFormTypes } from '@/types';
 import { applicantSignupFormSchema } from '@/utils/validationSchemas';
 
 type Props = {
-  onSignUp: (values: SignUpFormTypes | AddManagerTypes) => void;
+  onSignUp: (values: SignUpFormTypes) => void;
   isLoading: boolean;
 }
 
