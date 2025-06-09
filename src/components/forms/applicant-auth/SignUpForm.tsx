@@ -7,7 +7,21 @@ import { Checkbox } from '../../ui/checkbox';
 import { useState } from 'react';
 import LoadingButton from '../../others/LoadingButton';
 import { SignUpFormTypes } from '@/types';
-import { applicantSignupFormSchema } from '@/utils/validationSchemas';
+import { z } from 'zod';
+
+const applicantSignupFormSchema = z.object({
+  firstName: z.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must be less than 50 characters')
+    .regex(/^[A-Za-z\s-']+$/, 'First name can only contain letters, spaces, hyphens, and apostrophes'),
+  lastName: z.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must be less than 50 characters')
+    .regex(/^[A-Za-z\s-']+$/, 'Last name can only contain letters, spaces, hyphens, and apostrophes'),
+  phone: z.string().min(10).max(10),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(2, 'Too short'),
+});
 
 type Props = {
   onSignUp: (values: SignUpFormTypes) => void;
